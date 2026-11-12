@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Danh mục khăn lụa Mã Châu - Vè Dệt Vân Khăn. 100% tơ tằm tự nhiên, dệt thủ công kết tinh cùng câu vè và di sản danh lam xứ Quảng."
+    />
+    <title>Sản phẩm | Vè Dệt Vân Khăn</title>
+
+    <!-- CSS Cốt lõi -->
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/variables.css" />
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/layout.css" />
+
+    <!-- Components dùng chung -->
+    <link rel="stylesheet" href="../css/components/header.css" />
+    <link rel="stylesheet" href="../css/components/footer.css" />
+    <link rel="stylesheet" href="../css/components/buttons.css" />
+    <link rel="stylesheet" href="../css/components/product-card.css" />
+    <link rel="stylesheet" href="../css/components/form.css" />
+    <link rel="stylesheet" href="../css/components/chatbot.css" />
+
+    <!-- CSS riêng trang Sản phẩm -->
+    <link rel="stylesheet" href="../css/pages/products.css" />
+  </head>
+
+  <body>
+    <!-- HEADER -->
+    <header class="header">
+      <nav class="navbar">
+        <div class="navbar-container">
+          <!-- LOGO -->
+          <div class="navbar-brand">
+            <a href="index.html">
+              <img
+                src="../assets/images/logo.png"
+                alt="Vè Dệt Vân Khăn"
+                class="logo"
+              />
+            </a>
+          </div>
+
+          <!-- MENU -->
+          <div class="navbar-menu">
+            <a href="index.html" class="navbar-item"> Trang chủ </a>
+            <a href="products.html" class="navbar-item active"> Sản phẩm </a>
+            <a href="story.html" class="navbar-item"> Câu chuyện </a>
+            <a href="index.html#about" class="navbar-item"> Giới thiệu </a>
+          </div>
+
+          <!-- NAVBAR END -->
+          <div class="navbar-end">
+            <!-- SEARCH -->
+            <form class="search" action="products.html" method="GET">
+              <input
+                type="search"
+                name="q"
+                placeholder="Tìm kiếm..."
+                aria-label="Tìm kiếm sản phẩm"
+              />
+              <button type="submit" aria-label="Tìm kiếm">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                  />
+                </svg>
+              </button>
+            </form>
+
+            <!-- CART -->
+            <div class="buy">
+              <button class="buy-button" type="button" aria-label="Giỏ hàng">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
+                  />
+                </svg>
+                <span class="cart-badge">0</span>
+              </button>
+            </div>
+
+            <!-- LOGIN -->
+            <div class="login">
+              <a href="login.html" class="login-button">Đăng nhập</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- PAGE HERO -->
+      <section class="page-hero">
+        <div class="page-hero-container">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html">Trang chủ</a>
+            <span class="breadcrumb-separator">/</span>
+            <span>Sản phẩm</span>
+          </nav>
+          <h1 class="page-title">Bộ Sưu Tập Khăn Lụa Mã Châu</h1>
+          <p class="page-subtitle">
+            Dệt tơ thành lụa, dệt vè thành duyên. 6 tuyệt tác khăn lụa tơ tằm tự nhiên
+            tôn vinh văn hóa xứ Quảng và 6 danh lam thắng cảnh miền di sản.
+          </p>
+        </div>
+      </section>
+
+      <!-- CATALOG SECTION -->
+      <section class="catalog-section">
+        <div class="container">
+          <!-- TOOLBAR -->
+          <div class="catalog-toolbar">
+            <!-- Tabs Lọc -->
+            <div class="filter-tabs" role="tablist">
+              <button type="button" class="filter-tab active" data-category="all" role="tab">
+                Tất cả khăn (6)
+              </button>
+              <button type="button" class="filter-tab" data-category="vuông" role="tab">
+                Khăn vuông di sản (3)
+              </button>
+              <button type="button" class="filter-tab" data-category="dài" role="tab">
+                Khăn choàng dài cao cấp (3)
+              </button>
+            </div>
+
+            <!-- Điều khiển Toolbar -->
+            <div class="toolbar-controls">
+              <!-- Ô tìm kiếm nhỏ -->
+              <div class="catalog-search">
+                <input
+                  type="text"
+                  id="catalog-search-input"
+                  placeholder="Lọc tên khăn, danh lam..."
+                  aria-label="Lọc khăn"
+                />
+                <span class="catalog-search-icon">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  </svg>
+                </span>
+              </div>
+
+              <!-- Sắp xếp -->
+              <div class="sort-select-wrapper">
+                <label for="sort-select" class="sort-label">Sắp xếp:</label>
+                <select id="sort-select" class="sort-select">
+                  <option value="default">Mặc định</option>
+                  <option value="popular">Yêu thích nhất</option>
+                  <option value="price-asc">Giá: Thấp đến cao</option>
+                  <option value="price-desc">Giá: Cao đến thấp</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- ĐẾM KẾT QUẢ -->
+          <div class="products-result-count" id="results-count">
+            Đang tải bộ sưu tập khăn lụa...
+          </div>
+
+          <!-- LƯỚI SẢN PHẨM -->
+          <div class="product-grid" id="products-grid">
+            <!-- Render qua products.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- GIÁ TRỊ CAM KẾT -->
+      <section class="craft-trust-section">
+        <div class="container">
+          <div class="trust-grid">
+            <div class="trust-item">
+              <div class="trust-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+              </div>
+              <div class="trust-info">
+                <h4>100% Lụa Mã Châu Tự Nhiên</h4>
+                <p>Ươm tơ dệt thoi bãi dâu sông Thu Bồn, không pha sợi nhân tạo.</p>
+              </div>
+            </div>
+
+            <div class="trust-item">
+              <div class="trust-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
+                  <path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path>
+                </svg>
+              </div>
+              <div class="trust-info">
+                <h4>Hồn Vè Dân Gian Xứ Quảng</h4>
+                <p>Mỗi chiếc khăn lưu giữ một câu vè và di sản văn hóa sâu nặng.</p>
+              </div>
+            </div>
+
+            <div class="trust-item">
+              <div class="trust-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                  <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                  <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                </svg>
+              </div>
+              <div class="trust-info">
+                <h4>Hộp Quà Di Sản Trang Nhã</h4>
+                <p>Đóng gói tinh tế kèm thẻ kể chuyện văn hóa và hướng dẫn bảo quản.</p>
+              </div>
+            </div>
+
+            <div class="trust-item">
+              <div class="trust-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+              </div>
+              <div class="trust-info">
+                <h4>Giao Hàng & Đổi Trả Dễ Dàng</h4>
+                <p>Được kiểm tra lụa trước khi thanh toán, đổi trả trong 7 ngày.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <!-- BRAND -->
+          <div class="footer-brand">
+            <img src="../assets/images/logo.png" alt="Vè Dệt Vân Khăn" />
+            <p>
+              Dệt tơ thành lụa, dệt vè thành duyên. Gìn giữ nét đẹp văn hóa xứ
+              Quảng qua chất liệu lụa Mã Châu truyền thống.
+            </p>
+          </div>
+
+          <!-- LINKS -->
+          <div class="footer-links">
+            <h3>Khám phá</h3>
+            <a href="index.html">Trang chủ</a>
+            <a href="products.html">Sản phẩm</a>
+            <a href="story.html">Câu chuyện</a>
+            <a href="order-form.html">Đặt hàng</a>
+          </div>
+
+          <!-- CONTACT -->
+          <div class="footer-contact">
+            <h3>Liên hệ</h3>
+            <p>Email: vedetvankhan@gmail.com</p>
+            <p>Điện thoại: 0905 123 456</p>
+            <p>Địa chỉ: Làng lụa Mã Châu, Duy Xuyên, Quảng Nam</p>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2026 Vè Dệt Vân Khăn. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- CHATBOT ROOT -->
+    <div id="chatbot-root"></div>
+
+    <!-- JAVASCRIPT MODULES -->
+    <script type="module" src="../js/main.js"></script>
+    <script type="module" src="../js/products.js"></script>
+  </body>
+</html>

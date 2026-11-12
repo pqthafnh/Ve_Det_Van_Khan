@@ -1,0 +1,374 @@
+/* =========================================================
+   TRANG THANH TOÁN (PAYMENT.CSS)
+   VÈ DỆT VÂN KHĂN
+   ========================================================= */
+
+.payment-page {
+  padding-top: 110px;
+  padding-bottom: 80px;
+  background: var(--color-background);
+}
+
+.payment-header {
+  margin-bottom: 30px;
+}
+
+.payment-title {
+  font-family: var(--font-display, Georgia, serif);
+  font-size: clamp(26px, 3.5vw, 34px);
+  color: var(--color-green-deep);
+  margin: 0 0 10px;
+  font-weight: 700;
+}
+
+/* Layout 2 cột */
+.payment-grid {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 36px;
+  align-items: flex-start;
+}
+
+.payment-methods-card {
+  padding: 32px;
+  border-radius: var(--radius-large, 24px);
+  background: #ffffff;
+  border: 1px solid var(--color-border-green);
+  box-shadow: var(--shadow-small);
+}
+
+.payment-section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display, Georgia, serif);
+  font-size: 19px;
+  color: var(--color-green-deep);
+  margin: 0 0 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Tùy chọn phương thức thanh toán */
+.payment-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.payment-option-item {
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-control, 12px);
+  overflow: hidden;
+  transition: all var(--transition);
+}
+
+.payment-option-item.selected {
+  border-color: var(--color-secondary-dark);
+  box-shadow: 0 4px 12px rgba(123, 150, 61, 0.16);
+}
+
+.payment-option-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  cursor: pointer;
+  background: #ffffff;
+  user-select: none;
+}
+
+.payment-option-item.selected .payment-option-header {
+  background: var(--color-section-green);
+}
+
+.payment-option-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.payment-method-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.badge-recommended {
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--gradient-pink);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+/* Chi tiết cho từng phương thức */
+.payment-option-body {
+  padding: 20px;
+  border-top: 1px solid var(--color-border-green);
+  background: #ffffff;
+  display: none;
+}
+
+.payment-option-item.selected .payment-option-body {
+  display: block;
+}
+
+/* Khối quét QR Ngân Hàng */
+.qr-transfer-box {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  padding: 18px;
+  border-radius: 16px;
+  background: var(--color-section);
+  border: 1px solid var(--color-border);
+}
+
+.qr-image-wrapper {
+  width: 150px;
+  height: 150px;
+  padding: 8px;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid var(--color-border-green);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  flex-shrink: 0;
+}
+
+.qr-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.bank-details-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.bank-detail-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.bank-label {
+  color: var(--color-text-soft);
+  min-width: 100px;
+}
+
+.bank-val {
+  font-weight: 700;
+  color: var(--color-green-deep);
+}
+
+.btn-copy-code {
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--color-border-green);
+  background: #ffffff;
+  font-size: 11px;
+  color: var(--color-secondary-dark);
+  cursor: pointer;
+}
+
+.btn-copy-code:hover {
+  background: var(--color-secondary-soft);
+}
+
+/* Tóm tắt hóa đơn */
+.order-review-card {
+  padding: 28px 24px;
+  border-radius: var(--radius-large, 24px);
+  background: #ffffff;
+  border: 1px solid var(--color-border-green);
+  box-shadow: var(--shadow-small);
+  position: sticky;
+  top: 96px;
+}
+
+.customer-info-preview {
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: var(--color-section-green);
+  border: 1px solid var(--color-border-green);
+  margin-bottom: 20px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.customer-info-preview strong {
+  color: var(--color-green-deep);
+}
+
+.items-preview-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.item-preview-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed var(--color-border);
+}
+
+.item-preview-name {
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+.item-preview-price {
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+/* Nút hoàn tất đơn */
+.btn-finish-order {
+  width: 100%;
+  height: 50px;
+  font-size: 15px;
+  font-weight: 700;
+  margin-top: 24px;
+  border-radius: var(--radius-pill);
+}
+
+/* =========================================================
+   MODAL ĐẶT HÀNG THÀNH CÔNG
+   ========================================================= */
+
+.order-success-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.order-success-modal.show {
+  display: flex;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(36, 40, 33, 0.65);
+  backdrop-filter: blur(6px);
+}
+
+.modal-content-box {
+  position: relative;
+  z-index: 2;
+  width: 520px;
+  max-width: 100%;
+  padding: 40px 32px;
+  border-radius: var(--radius-large, 24px);
+  background: #ffffff;
+  text-align: center;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+  border: 1.5px solid var(--color-border-green);
+  animation: modal-pop 300ms ease;
+}
+
+@keyframes modal-pop {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.success-icon-badge {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: var(--gradient-green);
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 20px;
+  box-shadow: 0 8px 24px rgba(53, 91, 53, 0.3);
+}
+
+.modal-title {
+  font-family: var(--font-display, Georgia, serif);
+  font-size: 26px;
+  color: var(--color-green-deep);
+  margin: 0 0 10px;
+}
+
+.modal-order-code {
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: var(--radius-pill);
+  background: var(--color-section-green);
+  color: var(--color-green-dark);
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.modal-poem-quote {
+  font-family: var(--font-display, Georgia, serif);
+  font-style: italic;
+  font-size: 14.5px;
+  color: var(--color-text-soft);
+  margin: 16px 0;
+  padding: 12px;
+  background: var(--color-primary-light);
+  border-radius: 8px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 26px;
+}
+
+@media (max-width: 950px) {
+  .payment-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .qr-transfer-box {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .bank-detail-row {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .payment-page {
+    padding-top: 90px;
+  }
+
+  .payment-methods-card,
+  .order-review-card {
+    padding: 24px 16px;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+  }
+}

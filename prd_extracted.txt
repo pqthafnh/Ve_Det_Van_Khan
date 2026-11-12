@@ -1,0 +1,839 @@
+=== PRD.docx ===
+1. Danh sách trang website bán hàng tích hợp AI
+Mình đề xuất chia thành 4 nhóm theo quyền truy cập, với quy mô ban đầu 20 trang. Đây là danh sách để chốt phạm vi đồ án môn Lập trình Web.
+Nhóm A — Trang công khai (Guest)
+A. Trang công khai
+6 trangư\
+
+A01
+Trang chủ
+/
+A02
+Danh sách sản phẩm
+/products
+A03
+Chi tiết sản phẩm
+/products/:id
+A04
+Tìm kiếm sản phẩm
+/search
+A05
+Đăng nhập
+/login
+A06
+Đăng ký
+/register
+Nhóm B — Trang khách hàng (Customer)
+B. Trang khách hàng
+7 trang
+B01
+Hồ sơ cá nhân
+/account
+B02
+Giỏ hàng
+/cart
+B03
+Thanh toán
+/checkout
+B04
+Lịch sử đơn hàng
+/orders
+B05
+Chi tiết đơn hàng
+/orders/:id
+B06
+Danh sách yêu thích
+/wishlist
+B07
+Sản phẩm đã đánh giá / đánh giá sản phẩm
+/reviews
+Nhóm C — Trang AI
+C. Chức năng AI
+2 trang
+C01
+Trợ lý AI tư vấn mua sắm
+/ai-assistant
+C02
+Lịch sử tư vấn AI
+/ai-history
+Nhóm D — Trang quản trị (Admin)
+D. Quản trị hệ thống
+5 trang
+D01
+Dashboard quản trị
+/admin
+D02
+Quản lý sản phẩm
+/admin/products
+D03
+Quản lý danh mục
+/admin/categories
+D04
+Quản lý đơn hàng
+/admin/orders
+D05
+Quản lý người dùng và phân quyền
+/admin/users
+2. Tổng kết
+Nhóm
+Số trang
+A. Công khai
+6
+B. Khách hàng
+7
+C. AI
+2
+D. Admin
+5
+Tổng cộng
+20
+Đây là 20 loại trang logic, không phải 20 file code. Ví dụ /products/:id là một mẫu trang chi tiết dùng chung cho nhiều sản phẩm.
+Chưa tính các trang tùy chọn như quên mật khẩu, đặt lại mật khẩu, liên hệ, chính sách bảo mật, trang lỗi 404 và trang dành riêng cho nhân viên.
+
+=== Theme_Design_System.docx ===
+Design System v1.0 — Refined Green Glass
+Bộ Design System chính thức cho website bán hàng tích hợp AI của bạn sẽ theo phong cách Modern Minimalism × Refined Glassmorphism, sử dụng ba màu nhận diện chính: đen, trắng và xanh lá.
+Mục tiêu là tạo ra giao diện hiện đại, tinh tế, có chiều sâu, đồng nhất trên 20 trang đã xác định, đồng thời dễ triển khai bằng React, Next.js, Tailwind CSS hoặc CSS thuần.
+VISUAL IDENTITY · V1.0
+Green Glass
+Minimal · Premium · Calm · Intelligent
+Discover products
+Mua sắm thông minh, đơn giản và phù hợp với nhu cầu.
+Mua sắm ngay
+AI Assistant
+Moodboard định hướng: kính trắng, xanh lá rừng, nền trung tính và điểm nhấn tiết chế.
+1. Quy chuẩn màu sắc — Color System
+1.1. Brand palette
+Đây là bảng màu nhận diện bắt buộc. Không tự ý đổi mã màu giữa các trang.
+Green 800 · Primary
+#166534 · CTA, hành động chính, thương hiệu
+Green 900 · Hover
+#14532D · Hover và trạng thái nhấn
+Green 950 · Active
+#052E16 · Trạng thái nhấn sâu
+Green 500 · Accent
+#22C55E · Chỉ báo, icon, điểm nhấn nhỏ
+Green 50 · Soft
+#F0FDF4 · Nền AI, trạng thái được chọn
+Green 100 · Subtle
+#DCFCE7 · Badge, nền trạng thái nhẹ
+1.2. Neutral palette
+Token
+HEX
+Quy tắc sử dụng
+neutral-950
+#111827
+Tiêu đề, chữ chính
+neutral-800
+#1F2937
+Sidebar tối, heading phụ
+neutral-700
+#374151
+Nội dung đậm
+neutral-600
+#4B5563
+Chữ phụ
+neutral-500
+#6B7280
+Chú thích
+neutral-300
+#D1D5DB
+Viền đậm
+neutral-200
+#E5E7EB
+Đường phân cách
+neutral-100
+#F3F4F6
+Nền phụ
+neutral-50
+#F8FAF8
+Nền toàn trang
+white
+#FFFFFF
+Bề mặt card, form
+1.3. Semantic colors — màu trạng thái
+Dù giao diện thương hiệu dùng đen, trắng, xanh lá, các thông báo lỗi hoặc cảnh báo vẫn được phép sử dụng màu riêng để người dùng không nhầm lẫn.
+Trạng thái
+Màu chữ / icon
+Màu nền
+Success
+#166534
+#F0FDF4
+Warning
+#92400E
+#FEF3C7
+Error
+#B42318
+#FEE2E2
+Information
+#1D4ED8
+#DBEAFE
+Quy tắc màu:
+Nút hành động chính sử dụng xanh lá đậm #166534 với chữ trắng.
+Không dùng xanh tươi #22C55E làm nền cho chữ trắng ở kích thước thông thường, vì độ tương phản không đủ.
+Không dùng tím, xanh neon hoặc gradient nhiều màu làm màu nhận diện.
+Tỷ lệ thị giác tham khảo: 70% trung tính, 20% xanh lá thương hiệu, 10% màu trạng thái và điểm nhấn. Đây không phải tỷ lệ bắt buộc cho mọi trang.
+2. Font chữ — Typography System
+2.1. Font chính
+Inter
+Primary typeface · UI Sans-serif
+Primary
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+abcdefghijklmnopqrstuvwxyz 0123456789
+Dùng thống nhất cho giao diện, giá sản phẩm, biểu mẫu, dashboard và AI Assistant.
+Font stack:
+font-family: "Inter", -apple-system, BlinkMacSystemFont,
+             "Segoe UI", sans-serif;
+Quy tắc sử dụng:
+Chỉ dùng một font chính trên toàn website.
+Không sử dụng quá ba mức font-weight trong cùng một khu vực nếu không có lý do.
+Hạn chế chữ in hoa toàn bộ; chỉ dành cho nhãn nhỏ hoặc metadata.
+Giá tiền sử dụng chữ số có độ rộng đồng đều để bảng giá và tổng tiền dễ căn chỉnh.
+2.2. Thang kích thước chữ
+Tất cả giá trị dưới đây dùng đơn vị px; line-height nằm sau dấu /.
+Token
+Desktop
+Mobile
+Weight
+Ứng dụng
+Display
+48 / 56
+36 / 44
+700
+Hero trang chủ
+H1
+36 / 44
+30 / 38
+700
+Tiêu đề trang
+H2
+30 / 38
+26 / 34
+700
+Tiêu đề khu vực
+H3
+24 / 32
+22 / 30
+600
+Tiêu đề nhóm
+H4
+20 / 28
+18 / 26
+600
+Tiêu đề card lớn
+H5
+18 / 26
+18 / 26
+600
+Tiêu đề card
+Body Large
+18 / 28
+16 / 24
+400
+Mô tả nổi bật
+Body
+16 / 24
+16 / 24
+400
+Nội dung chính
+Body Small
+14 / 22
+14 / 22
+400
+Mô tả, nội dung phụ
+Caption
+12 / 18
+12 / 18
+400
+Chú thích, metadata
+Price
+20 / 28
+18 / 26
+700
+Giá sản phẩm
+Label
+14 / 20
+14 / 20
+500–600
+Label biểu mẫu
+Quy tắc phân cấp heading: mỗi trang có tối đa một H1 đại diện cho nội dung chính. Các khu vực tiếp theo lần lượt sử dụng H2, H3 và các cấp thấp hơn theo thứ tự ngữ nghĩa.
+Không giảm Caption xuống dưới 12px cho nội dung quan trọng.
+3. Spacing System — hệ thống khoảng cách
+Chọn đơn vị cơ sở 4px. Mọi padding, margin và gap nên dùng token có sẵn thay vì đặt số ngẫu nhiên.
+Token
+Giá trị
+Mục đích thường dùng
+space-1
+4px
+Khoảng cách icon – chữ
+space-2
+8px
+Khoảng cách trong nhóm nhỏ
+space-3
+12px
+Gap giữa control nhỏ
+space-4
+16px
+Padding card nhỏ
+space-5
+20px
+Padding card trung bình
+space-6
+24px
+Padding card lớn
+space-8
+32px
+Khoảng cách giữa các nhóm
+space-10
+40px
+Khoảng cách section
+space-12
+48px
+Khoảng cách section lớn
+space-16
+64px
+Khoảng trắng giữa các khu vực
+space-20
+80px
+Khoảng cách hero lớn
+space-24
+96px
+Khoảng cách đặc biệt
+Quy tắc:
+Khoảng cách nội bộ card: thường 12–24px.
+Khoảng cách giữa các section desktop: 40–64px.
+Khoảng cách section mobile: 24–40px.
+Không sử dụng khoảng cách quá lớn để bù cho bố cục thiếu cấu trúc.
+4. Border Radius — quy chuẩn bo góc
+Radius XS
+4px · Chi tiết nhỏ, phần tử đặc biệt
+Radius SM
+8px · Badge vuông, thumbnail phụ
+Radius Control
+12px · Button, input, select
+Radius Card
+16px · Card sản phẩm, card nội dung
+Radius Glass
+20px · Panel kính, hero panel
+Radius Modal
+24px · Modal, dialog lớn
+Radius Pill
+999px · Badge pill, avatar tròn
+Rule quan trọng: một component giữ nguyên radius ở tất cả trạng thái. Không dùng card 12px ở trang này và 24px ở trang khác nếu chúng cùng cấp chức năng.
+5. Button System — quy chuẩn nút bấm
+5.1. Kích thước
+Variant
+Chiều cao
+Padding ngang
+Radius
+Small
+36px
+12px
+10px
+Medium
+44px
+16px
+12px
+Large
+48px
+20px
+12px
+Extra Large
+52px
+24px
+14px
+Icon button
+40–44px
+—
+12px
+Chiều cao mặc định của button là 44px.
+Dùng 48px cho CTA lớn ở trang chủ hoặc bước thanh toán.
+Không thu nhỏ vùng tương tác trên mobile dưới mức dễ thao tác; mục tiêu vùng chạm tối thiểu là 44 × 44px.
+Chữ button: 14–16px, weight 600.
+5.2. Các biến thể button
+Primary
+Thêm vào giỏ hàng
+Dùng cho hành động chính, mua hàng và thanh toán.
+Secondary
+Xem chi tiết
+Dùng cho hành động phụ cần hiển thị rõ.
+Tertiary / Ghost
+Tiếp tục mua sắm
+Không cần viền đậm; dùng cho các hành động ít ưu tiên.
+Destructive
+Xóa sản phẩm
+Chỉ dùng cho hành động xóa hoặc tác vụ nguy hiểm.
+5.3. Trạng thái button
+Mọi button tương tác cần định nghĩa đủ trạng thái:
+Trạng thái
+Quy định
+Default
+Màu theo variant
+Hover
+Đổi màu nhẹ, không nhảy kích thước
+Focus-visible
+Viền focus dễ nhìn
+Active
+Tối màu nhẹ
+Disabled
+Giảm độ nổi bật, không còn con trỏ hành động
+Loading
+Giữ chiều rộng, hiển thị trạng thái đang xử lý
+Không dùng hiệu ứng hover chỉ bằng cách đổi opacity khiến chữ trắng trở nên khó đọc.
+6. Input System — trường nhập liệu
+Thuộc tính
+Quy chuẩn
+Chiều cao mặc định
+44px
+Input lớn
+48px
+Radius
+12px
+Padding ngang
+12–16px
+Font-size
+14–16px
+Border mặc định
+1px solid #E5E7EB
+Background
+#FFFFFF
+Focus border
+#166534
+Focus ring
+0 0 0 3px rgba(22,101,52,0.16)
+Error border
+#B42318
+Quy tắc:
+Label đặt phía trên input, không chỉ dựa vào placeholder để mô tả.
+Trạng thái lỗi phải có thông báo bằng chữ, không chỉ đổi màu viền.
+Input mật khẩu, tìm kiếm, email và số tiền phải giữ cách trình bày nhất quán.
+Textarea thường có chiều cao ban đầu 100–120px.
+Dropdown, date picker và bộ lọc phải cùng hệ radius với input.
+7. Card System — thẻ giao diện
+7.1. Product card
+Thuộc tính
+Quy chuẩn
+Background
+#FFFFFF
+Border
+1px solid #E5E7EB
+Radius
+16px
+Padding
+12–16px
+Shadow
+shadow-sm hoặc shadow-card
+Ảnh sản phẩm
+Tỷ lệ thống nhất trong cùng danh sách
+Tên sản phẩm
+14–16px, weight 500–600
+Giá
+18–20px, weight 700
+Hover
+Bóng tăng nhẹ, viền có thể chuyển sang xanh nhạt
+Không nên làm toàn bộ product card trong suốt. Nền trắng giúp màu sắc và hình ảnh sản phẩm trung thực hơn.
+7.2. Content card
+Radius: 16px.
+Padding: 20–24px.
+Border: #E5E7EB.
+Shadow: nhẹ hoặc không có nếu nền đã phân biệt được card.
+Heading và nội dung sử dụng hệ typography đã định nghĩa.
+7.3. Glass panel
+Radius: 20px.
+Padding: 24px desktop, 16px mobile.
+Background: rgba(255,255,255,0.72).
+Border: 1px solid rgba(255,255,255,0.90).
+Backdrop blur: 16–20px.
+Shadow: 0 8px 32px rgba(17,24,39,0.07).
+Dùng glass panel cho hero, AI Assistant, thanh điều hướng nổi hoặc modal chọn lọc. Tránh áp dụng blur lên bảng dữ liệu và nội dung dài.
+8. Glassmorphism Rules — bộ quy tắc hiệu ứng
+Phong cách này cần có thứ bậc rõ ràng, thay vì để tất cả thành phần cùng độ trong suốt.
+Rule G01 — Layering
+Tối đa 1–2 lớp kính nổi bật trong một khu vực; nền gradient chỉ dùng xanh lá rất nhạt.
+Rule G02 — Readability
+Nội dung chính phải dễ đọc. Form, giá tiền và tổng thanh toán dùng nền trắng rõ ràng.
+Rule G03 — Commerce first
+Ảnh sản phẩm, giá và CTA luôn nổi bật hơn hiệu ứng trang trí.
+Rule G04 — AI Identity
+AI dùng cùng màu xanh thương hiệu, có biểu tượng và nhãn nhận diện riêng, không tạo thêm màu tím.
+9. Shadow & Elevation — chiều sâu
+Token
+CSS
+Nơi sử dụng
+shadow-none
+none
+Card phẳng
+shadow-sm
+0 1px 2px rgba(17,24,39,.04)
+Control, badge có nền
+shadow-card
+0 4px 16px rgba(17,24,39,.05)
+Card sản phẩm
+shadow-glass
+0 8px 32px rgba(17,24,39,.07)
+Kính mờ
+shadow-dropdown
+0 8px 24px rgba(17,24,39,.10)
+Dropdown, popover
+shadow-modal
+0 20px 60px rgba(17,24,39,.14)
+Modal
+Rule: tăng độ nổi theo thứ bậc. Không kết hợp viền dày, bóng mạnh, blur cao và gradient mạnh trên cùng một component.
+10. Layout System — bố cục
+10.1. Breakpoints
+Token
+Viewport
+Quy tắc
+mobile
+< 640px
+1–2 cột tùy nội dung
+tablet
+640–767px
+2 cột sản phẩm
+tablet-lg
+768–1023px
+2–3 cột
+desktop
+1024–1279px
+Sidebar và layout nhiều cột
+desktop-xl
+1280–1535px
+Layout chính
+wide
+≥ 1536px
+Giới hạn chiều rộng nội dung
+Các ngưỡng breakpoint là giá trị chuẩn dự án; điều chỉnh nếu nội dung thực tế yêu cầu.
+10.2. Container và grid
+container-max: 1280px.
+Padding ngang desktop: 32px.
+Padding ngang tablet: 24px.
+Padding ngang mobile: 16px.
+Grid desktop: 12 cột, gap 24px.
+Grid tablet: 8 cột hoặc bố cục đơn giản theo nội dung.
+Grid mobile: 4 cột logic, gap 12–16px.
+Danh sách sản phẩm tham khảo: 2 cột mobile, 3 cột tablet và 4 cột desktop. Chỉ tăng lên 5 cột trên màn hình lớn khi kích thước card vẫn đủ để đọc tên và giá.
+10.3. Quy tắc cấu trúc trang
+Header desktop cao khoảng 72px; mobile khoảng 60–64px.
+Sidebar Admin rộng khoảng 240–256px.
+Content Admin có padding 24–32px desktop, 16px mobile.
+Nội dung dài phải duy trì độ rộng đọc phù hợp.
+Không tạo khoảng cách ngang quá rộng giữa tên sản phẩm, giá và nút thao tác.
+11. Navigation, Badge, Icon và Modal
+Component
+Quy chuẩn
+Header
+Trắng hoặc kính trắng, cao 64–72px
+Navbar link
+14px, weight 500
+Active nav
+Xanh lá, nền xanh rất nhạt hoặc chỉ báo nhỏ
+Sidebar Admin
+Nền #111827 hoặc nền sáng theo cùng token
+Badge
+12px, weight 500–600, padding 4px 8px
+Avatar
+32px, 40px hoặc 48px
+Icon
+16px, 20px hoặc 24px
+Modal
+Radius 24px, padding 24px
+Dropdown
+Radius 12px, shadow-dropdown
+Tooltip
+12px, nền tối, chữ trắng
+Toast
+Radius 12–16px, màu theo trạng thái
+Icon style
+Chọn một hệ icon outline thống nhất, ví dụ Lucide. Dùng stroke khoảng 1.75–2px.
+Không trộn icon outline, icon 3D và emoji trong cùng một hệ thống điều hướng. Icon chỉ dùng để hỗ trợ nhận diện, không thay thế label ở các chức năng quan trọng.
+12. Data Display — bảng, giá, trạng thái và dữ liệu
+Phần Admin cần đồng nhất đặc biệt vì chứa nhiều dữ liệu.
+Bảng dữ liệu
+Header: 12–14px, weight 600, màu chữ phụ.
+Nội dung hàng: 14px, line-height 20–22px.
+Chiều cao hàng mặc định: 52–60px.
+Viền phân cách: #E5E7EB.
+Hover row: nền xanh lá cực nhạt.
+Giá tiền và số lượng căn phải.
+Trạng thái sử dụng semantic badge.
+Giá sản phẩm
+Giá hiện tại: 18–20px, weight 700.
+Giá gốc: 13–14px, màu phụ, gạch ngang.
+Đơn vị tiền thống nhất toàn bộ hệ thống.
+Dùng chữ số có độ rộng đồng đều để tránh giá nhảy vị trí.
+Trạng thái đơn hàng
+Không dựa hoàn toàn vào màu.
+Mỗi badge nên có nhãn cụ thể, chẳng hạn “Chờ xác nhận”, “Đang giao”, “Đã giao”, “Đã hủy”.
+Cùng một trạng thái phải dùng cùng token màu trên trang khách hàng và Admin.
+13. Interaction & Motion — chuyển động
+Token
+Giá trị
+Quy tắc
+duration-fast
+150ms
+Hover, icon
+duration-normal
+200ms
+Button, input
+duration-slow
+280ms
+Modal, panel
+ease-standard
+ease
+Chuyển trạng thái thông thường
+Quy tắc chuyển động:
+Chuyển màu và bóng nhẹ khi hover.
+Không thay đổi kích thước button làm bố cục bị dịch chuyển.
+Modal, popover có thể dùng fade kết hợp dịch chuyển nhẹ.
+Tránh parallax, animation liên tục hoặc hiệu ứng nền gây xao nhãng.
+Tôn trọng tùy chọn prefers-reduced-motion của hệ điều hành.
+14. Accessibility — khả năng tiếp cận
+Đây là quy chuẩn bắt buộc, không phải tùy chọn trang trí.
+Chữ thường cần đạt tỷ lệ tương phản tối thiểu 4.5:1 với nền.
+Chữ lớn cần đạt tối thiểu 3:1.
+Đường viền hoặc chỉ báo cần thiết để nhận biết control phải đủ tương phản.
+Mọi thành phần tương tác dùng được bằng bàn phím.
+Focus state phải rõ ràng và không bị xóa bỏ.
+Lỗi biểu mẫu phải có thông báo chữ.
+Hình ảnh sản phẩm có alt text phù hợp.
+Không dùng màu làm tín hiệu duy nhất.
+Hiệu ứng kính phải giữ độ tương phản khi nền phía sau thay đổi.
+15. File CSS Variables chuẩn
+Đây là bộ token kết hợp cho màu, typography, spacing, radius, bóng đổ và tương tác. Các trang nên tham chiếu token này thay vì ghi mã màu trực tiếp.
+:root {
+  /* 01. BRAND */
+  --color-primary: #166534;
+  --color-primary-hover: #14532D;
+  --color-primary-active: #052E16;
+  --color-accent: #22C55E;
+  --color-primary-soft: #F0FDF4;
+  /* 02. NEUTRAL */
+  --color-black: #111827;
+  --color-neutral-800: #1F2937;
+  --color-neutral-700: #374151;
+  --color-neutral-600: #4B5563;
+  --color-neutral-500: #6B7280;
+  --color-neutral-300: #D1D5DB;
+  --color-neutral-200: #E5E7EB;
+  --color-neutral-100: #F3F4F6;
+  --color-neutral-50: #F8FAF8;
+  --color-white: #FFFFFF;
+  --bg-page: var(--color-neutral-50);
+  --bg-surface: var(--color-white);
+  --bg-surface-subtle: var(--color-neutral-100);
+  --text-primary: var(--color-black);
+  --text-secondary: var(--color-neutral-600);
+  --text-muted: var(--color-neutral-500);
+  --border-default: var(--color-neutral-200);
+  --border-strong: var(--color-neutral-300);
+  /* 03. SEMANTIC */
+  --color-success: #166534;
+  --bg-success: #F0FDF4;
+  --color-warning: #92400E;
+  --bg-warning: #FEF3C7;
+  --color-error: #B42318;
+  --bg-error: #FEE2E2;
+  --color-info: #1D4ED8;
+  --bg-info: #DBEAFE;
+  /* 04. GLASS */
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  --glass-bg-strong: rgba(255, 255, 255, 0.86);
+  --glass-border: rgba(255, 255, 255, 0.90);
+  --glass-blur: 18px;
+  /* 05. TYPOGRAPHY */
+  --font-sans: "Inter", -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-base: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 24px;
+  --font-size-3xl: 30px;
+  --font-size-4xl: 36px;
+  --font-size-display: 48px;
+  --line-height-tight: 1.2;
+  --line-height-heading: 1.3;
+  --line-height-body: 1.5;
+  --line-height-relaxed: 1.7;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  /* 06. RADIUS */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-control: 12px;
+  --radius-card: 16px;
+  --radius-glass: 20px;
+  --radius-modal: 24px;
+  --radius-pill: 999px;
+  /* 07. SPACING */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  /* 08. BUTTONS & INPUTS */
+  --button-height-sm: 36px;
+  --button-height-md: 44px;
+  --button-height-lg: 48px;
+  --input-height: 44px;
+  --input-height-lg: 48px;
+  /* 09. SHADOW */
+  --shadow-sm: 0 1px 2px rgba(17, 24, 39, 0.04);
+  --shadow-card: 0 4px 16px rgba(17, 24, 39, 0.05);
+  --shadow-glass: 0 8px 32px rgba(17, 24, 39, 0.07);
+  --shadow-dropdown: 0 8px 24px rgba(17, 24, 39, 0.10);
+  --shadow-modal: 0 20px 60px rgba(17, 24, 39, 0.14);
+  /* 10. INTERACTION */
+  --focus-ring: 0 0 0 3px rgba(22, 101, 52, 0.20);
+  --duration-fast: 150ms;
+  --duration-normal: 200ms;
+  --duration-slow: 280ms;
+  --ease-standard: ease;
+  /* 11. LAYOUT */
+  --container-max: 1280px;
+  --header-height: 72px;
+  --sidebar-width: 248px;
+}
+16. Quy trình áp dụng Design System cho 20 trang
+Để không bị lệch chuẩn khi triển khai, nên đi theo trình tự:
+Foundation: thiết lập màu, font, spacing, radius, shadow và breakpoint.
+Base components: xây button, input, checkbox, select, badge, tooltip, modal và toast.
+Commerce components: xây product card, price display, cart item, order status và pagination.
+Layout components: xây header, footer, sidebar Admin, container, grid và page header.
+Page templates: triển khai các trang theo nhóm công khai, khách hàng, AI và Admin.
+Validation: kiểm tra desktop/mobile, contrast, trạng thái lỗi, loading, empty state và quyền truy cập.
+Những quy tắc không được tùy tiện thay đổi
+Hạng mục
+Chuẩn chính thức
+Phong cách
+Refined Glassmorphism
+Font
+Inter
+Màu thương hiệu
+#166534
+Màu chữ chính
+#111827
+Nền trang
+#F8FAF8
+Button mặc định
+Cao 44px, radius 12px
+Product card
+Radius 16px
+Glass panel
+Radius 20px, blur 18px
+Spacing
+Hệ số 4px
+Container desktop
+Tối đa 1280px
+AI identity
+Xanh lá, không dùng tím
+Accessibility
+Đạt các ngưỡng tương phản WCAG AA áp dụng
+
+=== Noi dung Web dlx.docx ===
+Nội dung web:
+Tên sản phẩm: Vè Dệt Vân Khăn
+Slogan: Dệt tơ thành lụa, dệt vè thành duyên
+Vì sao nhóm chúng mình tạo nên “ Vè Dệt Vân Khăn” ?
+Từ tình yêu dành cho những giá trị văn hóa quê hương, chúng mình mong muốn tìm một cách mới mẻ để đưa những câu vè dân gian xứ Quảng đến gần hơn với đời sống hiện đại. Bởi mỗi câu vè không chỉ là lời kể mộc mạc mà còn lưu giữ ký ức, phong tục và nét duyên của một vùng đất.
+Đó là lý do Vè Dệt Vân Khăn ra đời – sự kết hợp giữa lụa Mã Châu truyền thống, câu vè dân gian và hình ảnh các địa danh du lịch Đà Nẵng – Quảng Nam. Chúng mình lựa chọn lụa có nguồn gốc tự nhiên làm chất liệu chủ đạo, hướng đến việc trân trọng giá trị nghề dệt truyền thống và khuyến khích lựa chọn chất liệu thân thiện hơn với môi trường.
+Không chỉ dừng lại ở một sản phẩm lưu niệm, mỗi chiếc khăn còn là sự kết nối giữa bảo tồn văn hóa và tinh thần du lịch xanh: gìn giữ những câu vè xưa, tôn vinh nghề thủ công truyền thống, đồng thời lan tỏa lối sống trân trọng thiên nhiên và các giá trị bản địa.
+Chúng mình tin rằng, khi văn hóa được tiếp nối bằng những cách sáng tạo và bền vững, nét đẹp quê hương sẽ không chỉ được lưu giữ mà còn có cơ hội lan tỏa đến nhiều thế hệ.
+Vè Dệt Vân Khăn – Dệt tơ thành lụa, dệt vè thành duyên.
+Tại sao tên sản phẩm lại là “Vè Dệt Vân Khăn” ?
+“Vè” là nét mộc mạc của văn hóa dân gian, “Dệt” là sự kết tinh từ nghề thủ công truyền thống, còn “Vân Khăn” gợi những đường nét, hoa văn mềm mại trên nền lụa. Tên gọi Vè Dệt Vân Khăn là sự giao hòa giữa lời vè xứ Quảng và sợi tơ Mã Châu, nơi văn hóa được gửi gắm qua từng thớ lụa, để mỗi chiếc khăn không chỉ mang vẻ đẹp thẩm mỹ mà còn kể một câu chuyện về quê hương.
+Vè
+Hồn vè xứ Quảng – Nhịp kể của miền đất thân thương
+Mỗi vùng đất đều có một cách riêng để kể câu chuyện về mình. Nếu cảnh sắc được lưu giữ qua những bức ảnh, lịch sử được ghi lại qua trang sách thì văn hóa dân gian lại được truyền tải qua những lời ăn tiếng nói thân thuộc của người dân. Trong đó, câu vè là một hình thức diễn xướng dân gian gần gũi, mang nhịp điệu linh hoạt, phản ánh đời sống, con người và những nét đặc trưng của từng vùng miền.
+Đến với Đà Nẵng và không gian văn hóa xứ Quảng, những câu vè mộc mạc đưa chúng ta đến gần hơn với quê hương, từ cảnh sắc địa phương, những địa danh quen thuộc đến phong tục, tập quán và sinh hoạt thường ngày. Không cầu kỳ trong cách diễn đạt, không hoa mỹ trong ngôn từ, chính sự giản dị đã tạo nên sức hấp dẫn riêng, giúp câu vè dễ nhớ, dễ thuộc và được lưu truyền qua nhiều thế hệ.
+Mỗi câu vè – Một mảnh ghép văn hóa
+Ẩn sau những lời vè tưởng chừng bình dị là cả một thế giới văn hóa đầy màu sắc. Đó có thể là câu chuyện về một vùng quê, một địa danh, một nghề truyền thống hay những nét sinh hoạt đã gắn bó với người dân qua bao thế hệ.
+Và khi câu vè được kể bằng chất liệu lụa thì liệu nó sẽ nói lên được ý nghĩa của nó không?
+Nếu câu vè lưu giữ văn hóa bằng ngôn từ thì lụa Mã Châu là nơi giữ gìn giá trị truyền thống qua những từng sợi tơ mềm mại. Từ sự gặp gỡ ấy “Vè Dệt Vân Khăn” ra đời mong muốn đưa những câu Vè xứ Quảng bước ra khỏi sách hiện diện trên một sản phẩm gần gũi với đời sống hiện tại
+6 câu vè – 6 câu chuyện văn hóa ( tương đương với 6 khăn )
+     Khăn lụa Mã Châu là câu chuyện về tình cảm gia đình:
+                  Ngó lên Hòn Kẽm Đá Dừng
+                 Thương cha nhớ mẹ quá chừng bạn ơi. 
+                 Thương cha nhớ mẹ ngậm ngùi
+                  Mồng mồng một lá biết nuôi răng chừ
+Ẩn sau lời vè mộc mạc là nỗi nhớ thương cha mẹ da diết và tình yêu sâu nặng dành cho quê hương, nguồn cội.  Hình ảnh Hòn Kẽm Đá Dừng không chỉ gợi nhắc cảnh sắc xứ Quảng mà còn khơi dậy những cảm xúc thân thương về gia đình. Câu vè như lời nhắn gửi rằng về tình thân và cội nguồn vẫn luôn là miền ký ức thiêng liêng, neo giữ mỗi người trong hành trình cuộc sống 
+  Khăn lụa Mã Châu là nơi thể hiện niềm tự hào về quê hương Quảng Nam – Đà Nẵng:
+                    Mảnh đất quê ta
+                   Quảng Nam, Đà Nẵng
+                    Hết ngày cay đắng
+                    Nay đã nở hoa
+Bằng lời vè giản dị mà giàu cảm xúc, câu vè khắc họa hành trình đổi thay của quê hương Quảng Nam – Đà Nẵng, từ những tháng ngày gian khó đến diện mạo tươi đẹp hôm nay. Qua đó, câu vè tôn vinh sức sống bền bỉ của con người xứ Quảng và tình yêu dành cho mảnh đất quê hương.
+Khăn lụa Mã Châu mang trong mình câu chuyện về tình yêu :      
+                       Ngồi buồn trách phận giận mình
+                   Số chi ta sớm thành đôi bạn, số chi mình lửng lơ...
+Vè cũng là nơi truyền tải những cảm xúc trong tình yêu: Câu vè thể hiện những day dứt, tiếc nuối trong tình yêu khi duyên phận không trọn vẹn. Qua lời kể chân thành, mộc mạc, câu vè gợi lên những cung bậc cảm xúc của con người trước một mối tình dang dở, khi thương yêu vẫn còn nhưng duyên đôi lứa lại chẳng thể vẹn toàn. Qua đó, câu vè phản ánh nét chân thật, sâu lắng trong đời sống tình cảm của người dân xứ Quảng.
+ Khăn lụa Mã Châu mang niềm vui của đổi mới và tinh thần dân tộc:
+                        Ngày xưa măng lụi, tre tàn 
+                        Ngày nay nô nức, xóm làng vui ca 
+                        Hôm nay xán lạn sơn hà 
+                        Hoan hô nước VNDCCH muôn năm.
+Câu vè tái hiện sự chuyển mình của quê hương từ những năm tháng khó khăn đến cuộc sống mới tràn đầy niềm vui và hy vọng. Hình ảnh “xóm làng vui ca” gợi lên không khí hân hoan, phấn khởi trước sự đổi thay của đất nước. Qua đó, câu vè thể hiện niềm tự hào dân tộc, tình yêu quê hương và niềm tin vào một tương lai tươi sáng, bình yên, thịnh vượng.
+Khăn lụa Mã Châu là nơi thể hiện tinh thần đấu tranh và sức mạnh tình thương:
+                           Căm thù ấy càng thêm nung nấu
+                        Vác xác con lên thấu tỉnh đường
+                        Súng nào ngăn nổi tình thương
+                        Gươm nào gom nổi con đường đấu tranh
+Câu vè thể hiện nỗi đau, lòng căm phẫn trước bất công và tinh thần đấu tranh kiên cường của người dân. Qua những lời lẽ giàu cảm xúc, câu vè khắc họa sức mạnh của tình thương, lòng yêu nước và ý chí đoàn kết – những giá trị không dễ bị khuất phục trước bất kỳ trở ngại nào
+Khăn lụa Mã Châu nơi để cất lên tình cảm kính yêu dành cho Bác Hồ:
+                       Được gần Bác những chiều hôm,
+                       Được dâng lên Bác chén cơm gạo mùa...
+Câu vè gửi gắm lòng kính yêu và biết ơn sâu sắc đối với Bác Hồ. Hình ảnh chén cơm gạo mùa bình dị thể hiện tấm lòng chân thành, mộc mạc của người dân, đồng thời gợi lên tình cảm thiêng liêng giữa vị lãnh tụ và nhân dân – một tình cảm giản dị mà bền sâu trong ký ức dân tộc.
+6 bức tranh trên khăn – khi danh lam thắng cảnh biết kể chuyện:
+Hội An – Câu chuyện phố cổ bên dòng Hoài
+Bên dòng sông Hoài thơ mộng, Hội An lưu giữ vẻ đẹp của những mái ngói rêu phong, những bức tường vàng và con phố nhỏ nhuốm màu thời gian. Từng là thương cảng sầm uất, Hội An mang trong mình câu chuyện giao thoa văn hóa và nhịp sống bình dị qua bao thế hệ. Trên từng thớ lụa, hình ảnh Hội An được tái hiện như một lời kể về miền di sản, nơi vẻ đẹp kiến trúc hòa quyện cùng ký ức và bản sắc quê hương.
+Thánh địa Mỹ Sơn – Dấu ấn văn hóa Chăm Pa
+Giữa thung lũng xanh của Quảng Nam, Thánh địa Mỹ Sơn lưu giữ những đền tháp cổ kính, minh chứng cho một nền văn minh Chăm Pa rực rỡ. Qua hình ảnh trên khăn lụa, những đường nét kiến trúc tháp cổ không chỉ tái hiện vẻ đẹp di sản mà còn kể câu chuyện về lịch sử, tín ngưỡng và nghệ thuật của người Chăm, đưa giá trị văn hóa xưa đến gần hơn với đời sống hôm nay.
+Ngũ Hành Sơn – Vẻ đẹp non nước và tâm linh
+Ngũ Hành Sơn nổi bật với năm ngọn núi đá vôi hùng vĩ, những hang động kỳ bí và mái chùa cổ ẩn mình giữa thiên nhiên. Hình ảnh trên khăn lụa tái hiện vẻ đẹp hài hòa giữa núi non, kiến trúc và tín ngưỡng, kể câu chuyện về vùng đất giàu bản sắc văn hóa và tâm linh của Đà Nẵng.
+Làng lụa Mã Châu – Hồn tơ xứ Quảng
+Làng lụa Mã Châu lưu giữ nghề trồng dâu, nuôi tằm, ươm tơ, dệt lụa qua nhiều thế hệ. Hình ảnh làng nghề trên khăn lụa không chỉ tôn vinh vẻ đẹp mềm mại của từng thớ tơ mà còn kể câu chuyện về bàn tay khéo léo, sự cần mẫn và nét đẹp nghề truyền thống xứ Quảng.
+Cù Lao Chàm – Sắc xanh biển đảo
+Cù Lao Chàm nổi bật với biển xanh, bãi cát trắng và hệ sinh thái phong phú, được UNESCO công nhận là Khu dự trữ sinh quyển thế giới năm 2009. Hình ảnh trên khăn lụa không chỉ tôn vinh vẻ đẹp thiên nhiên mà còn lan tỏa thông điệp bảo tồn biển đảo và phát triển du lịch bền vững.
+Cầu Rồng – Biểu tượng sức sống Đà Nẵng
+Cầu Rồng nổi bật với kiến trúc hình rồng vươn mình qua sông Hàn, biểu tượng cho sự năng động và khát vọng vươn lên của Đà Nẵng. Hình ảnh trên khăn lụa không chỉ tái hiện nét đẹp hiện đại của thành phố mà còn gửi gắm niềm tự hào về một Đà Nẵng trẻ trung, đầy sức sống.
+Lụa Mã Châu
+ Giới thiệu về lụa Mã Châu
+Nhắc đến lụa Mã Châu là nhắc đến một làng nghề dệt lụa truyền thống lâu đời gắn liền với vùng đất Duy Xuyên, Quảng Nam trước đây.
+Trải qua nhiều thế hệ, nghề trồng dâu, nuôi tằm, ươm tơ và dệt lụa đã trở thành một phần trong đời sống lao động của người dân địa phương. Những tấm lụa được tạo nên không chỉ phục vụ nhu cầu sử dụng mà còn chứa đựng kinh nghiệm, sự khéo léo và tâm huyết của những người thợ.Lụa Mã Châu mang vẻ đẹp mềm mại, thanh lịch và tinh tế. Chính những đặc điểm này đã trở thành nguồn cảm hứng để chúng mình lựa chọn lụa làm chất liệu chủ đạo cho sản phẩm.
+Nhóm chúng mình lựa chọn lụa Mã Châu không chỉ đơn thuần là lựa chọn một chất liệu may mặc, mà còn là lựa chọn một giá trị văn hóa được gìn giữ qua hàng trăm năm. Giữa thị trường có rất nhiều loại lụa với mẫu mã và mức giá khác nhau, lụa Mã Châu tạo nên dấu ấn riêng nhờ truyền thống dệt lụa lâu đời, sự khéo léo của người thợ và vẻ đẹp tinh tế của chất liệu tơ tằm.
+Lí do nhóm chúng mình chọn lụa Mã Châu là điểm dừng chân cho chất liệu khăn:
+Việc lựa chọn khăn lụa không chỉ xuất phát từ giá trị thẩm mỹ mà còn bởi đây là sản phẩm có khả năng kết hợp hài hòa giữa tính ứng dụng và giá trị văn hóa.
+Về chất liệu: Lụa mang đến cảm giác mềm mại, nhẹ nhàng, có độ óng tự nhiên và tạo nên vẻ đẹp thanh lịch.
+Về giá trị truyền thống: Chất liệu gắn liền với nghề dệt Mã Châu, góp phần quảng bá và tôn vinh làng nghề.
+Về tính ứng dụng: Khăn có thể sử dụng để quàng cổ, trang trí túi xách, làm phụ kiện thời trang hoặc quà tặng.
+Về giá trị du lịch: Khăn lụa có thể trở thành món quà lưu niệm mang dấu ấn văn hóa, giúp du khách lưu giữ những kỷ niệm về vùng đất đã ghé thăm.
+Về giá trị xanh: Nguyên liệu 100% tự nhiên, trồng dâu nuôi tằm bãi sông Thu Bồn; tơ tằm nguyên bản có khả năng phân hủy sinh học hoàn toàn, không phát thải vi nhựa.
+Về giá trị bền vững xã hội: Tạo sinh kế xanh cho nông dân, bảo tồn làng nghề truyền thống gắn với du lịch sinh thái Quảng Nam.
+Sự kết hợp giữa truyền thống và hiện đại
+Điểm đặc biệt của Vè Dệt Vân Khăn nằm ở việc sử dụng chất liệu truyền thống nhưng lựa chọn phương thức thể hiện mới mẻ.
+Thay vì chỉ giữ nguyên hình thức của một chiếc khăn lụa thông thường, chúng mình đưa những câu vè và hình ảnh địa danh lên sản phẩm, tạo nên sự kết hợp giữa nghệ thuật thủ công, văn hóa dân gian và thiết kế hiện đại.
+Nhờ đó, chiếc khăn vừa giữ được nét mềm mại, duyên dáng vốn có của lụa Mã Châu, vừa mang thêm giá trị kể chuyện và quảng bá du lịch.
+Lý do khách hàng nên chọn đến với “ Vè Dệt Vân Khăn”
+1.Giá trị truyền thống và lịch sử lâu đời
+2.Chất liệu mềm mại, thoáng mát và có tính ứng dụng cao
+3.Vẻ đẹp tinh tế, sang trọng và thanh lịch
+4.Giá trị thủ công và bản sắc riêng biệt
+5.Gắn với giá trị văn hóa cung đình và tầng lớp quý tộc xưa
+6.Có ý nghĩa trong việc bảo tồn làng nghề truyền thống
+7.Món quà mang đậm dấu ấn văn hóa địa phương
+Lời Kết:
+Vè Dệt Vân Khăn – Dệt tơ thành lụa, dệt vè thành duyên.
+Có thể một chiếc khăn chỉ là món phụ kiện nhỏ bé trong cuộc sống, nhưng với chúng mình, Vè Dệt Vân Khăn còn là nơi lưu giữ những điều đẹp đẽ của quê hương. Nơi mà sợi tơ được dệt nên từ bàn tay của người thợ Mã Châu ; là những câu vè mộc mạc chứa đựng tình cảm, ký ức và dấu ấn của bao thế hệ; là hình ảnh Hội An cổ kính, Mỹ Sơn trầm mặc, Ngũ Hành Sơn hùng vĩ, Làng lụa Mã Châu thân thương, Cù Lao Chàm xanh mát và Cầu Rồng hiện đại.
+Tất cả cùng hòa quyện trên nền lụa mềm mại, tạo nên một sản phẩm không chỉ mang giá trị thẩm mỹ mà còn chứa đựng tình yêu văn hóa và niềm tự hào về vùng đất miền Trung.
+Chúng mình mong muốn mỗi chiếc khăn được trao đi sẽ không chỉ là một món quà mà còn là một câu chuyện được kể lại, mỗi người sử dụng sẽ không chỉ cảm nhận vẻ đẹp của lụa mà còn hiểu thêm về những giá trị văn hóa, lịch sử, thiên nhiên và sản phẩm xanh đang hiện diện quanh mình.
+Mọi người hãy mang một chút mềm mại của lụa Mã Châu, gửi một chút duyên dáng của câu vè xứ Quảng, để mỗi chiếc khăn trở thành một món quà văn hóa dành tặng cho chính bạn và những người thân yêu của mình nhé!

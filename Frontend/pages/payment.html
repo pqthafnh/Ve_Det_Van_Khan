@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Thanh toán đơn hàng khăn lụa Mã Châu - Vè Dệt Vân Khăn. Phương thức thanh toán chuyển khoản VietQR, ví điện tử hoặc COD linh hoạt."
+    />
+    <title>Thanh toán đơn hàng | Vè Dệt Vân Khăn</title>
+
+    <!-- CSS Cốt lõi -->
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/variables.css" />
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/layout.css" />
+
+    <!-- Components dùng chung -->
+    <link rel="stylesheet" href="../css/components/header.css" />
+    <link rel="stylesheet" href="../css/components/footer.css" />
+    <link rel="stylesheet" href="../css/components/buttons.css" />
+    <link rel="stylesheet" href="../css/components/product-card.css" />
+    <link rel="stylesheet" href="../css/components/form.css" />
+    <link rel="stylesheet" href="../css/components/chatbot.css" />
+
+    <!-- CSS riêng trang Thanh toán -->
+    <link rel="stylesheet" href="../css/pages/payment.css" />
+  </head>
+
+  <body>
+    <!-- HEADER -->
+    <header class="header">
+      <nav class="navbar">
+        <div class="navbar-container">
+          <!-- LOGO -->
+          <div class="navbar-brand">
+            <a href="index.html">
+              <img
+                src="../assets/images/logo.png"
+                alt="Vè Dệt Vân Khăn"
+                class="logo"
+              />
+            </a>
+          </div>
+
+          <!-- MENU -->
+          <div class="navbar-menu">
+            <a href="index.html" class="navbar-item"> Trang chủ </a>
+            <a href="products.html" class="navbar-item"> Sản phẩm </a>
+            <a href="story.html" class="navbar-item"> Câu chuyện </a>
+            <a href="index.html#about" class="navbar-item"> Giới thiệu </a>
+          </div>
+
+          <!-- NAVBAR END -->
+          <div class="navbar-end">
+            <!-- SEARCH -->
+            <form class="search" action="products.html" method="GET">
+              <input
+                type="search"
+                name="q"
+                placeholder="Tìm kiếm..."
+                aria-label="Tìm kiếm sản phẩm"
+              />
+              <button type="submit" aria-label="Tìm kiếm">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                  />
+                </svg>
+              </button>
+            </form>
+
+            <!-- CART -->
+            <div class="buy">
+              <button class="buy-button" type="button" aria-label="Giỏ hàng">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
+                  />
+                </svg>
+                <span class="cart-badge">0</span>
+              </button>
+            </div>
+
+            <!-- LOGIN -->
+            <div class="login">
+              <a href="login.html" class="login-button">Đăng nhập</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="payment-page">
+      <div class="container" id="payment-main-content">
+        <!-- HEADER TIẾN TRÌNH -->
+        <div class="payment-header">
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="index.html">Trang chủ</a>
+            <span class="breadcrumb-separator">/</span>
+            <a href="products.html">Sản phẩm</a>
+            <span class="breadcrumb-separator">/</span>
+            <a href="order-form.html">Đặt hàng</a>
+            <span class="breadcrumb-separator">/</span>
+            <span>Thanh toán</span>
+          </nav>
+          <h1 class="payment-title">Thanh Toán & Xác Nhận Đơn Hàng</h1>
+
+          <!-- TIẾN TRÌNH BƯỚC -->
+          <div class="checkout-steps">
+            <div class="step-item">
+              <span class="step-num">✓</span>
+              <span>Thông tin giao hàng</span>
+            </div>
+            <div class="step-divider" style="background: var(--color-secondary);"></div>
+            <div class="step-item active">
+              <span class="step-num">2</span>
+              <span>Thanh toán & Hoàn tất</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- LAYOUT 2 CỘT -->
+        <div class="payment-grid">
+          <!-- CỘT TRÁI: CÁC PHƯƠNG THỨC THANH TOÁN -->
+          <div class="payment-methods-card">
+            <h2 class="payment-section-title">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="5" width="20" height="14" rx="2"></rect>
+                <line x1="2" y1="10" x2="22" y2="10"></line>
+              </svg>
+              Chọn phương thức thanh toán
+            </h2>
+
+            <div class="payment-options-list">
+              <!-- PHƯƠNG THỨC 1: QR NGÂN HÀNG -->
+              <div class="payment-option-item selected">
+                <div class="payment-option-header">
+                  <div class="payment-option-left">
+                    <input type="radio" name="payment_method" value="vietqr" checked />
+                    <span class="payment-method-name">Chuyển khoản Ngân hàng (Mã VietQR)</span>
+                  </div>
+                  <span class="badge-recommended">Khuyên dùng</span>
+                </div>
+                <div class="payment-option-body">
+                  <p style="font-size: 13px; color: var(--color-text-soft); margin-top: 0;">
+                    Mở ứng dụng Ngân hàng bất kỳ trên điện thoại và quét mã VietQR bên dưới để thanh toán nhanh chóng, chính xác.
+                  </p>
+                  <div class="qr-transfer-box">
+                    <div class="qr-image-wrapper">
+                      <img id="vietqr-image" src="" alt="Mã VietQR" />
+                    </div>
+                    <div class="bank-details-list">
+                      <div class="bank-detail-row">
+                        <span class="bank-label">Ngân hàng:</span>
+                        <span class="bank-val">MB Bank (Quân Đội)</span>
+                      </div>
+                      <div class="bank-detail-row">
+                        <span class="bank-label">Số tài khoản:</span>
+                        <span class="bank-val">0905123456</span>
+                        <button type="button" class="btn-copy-code" data-copy="0905123456">Sao chép</button>
+                      </div>
+                      <div class="bank-detail-row">
+                        <span class="bank-label">Chủ tài khoản:</span>
+                        <span class="bank-val">VE DET VAN KHAN</span>
+                      </div>
+                      <div class="bank-detail-row">
+                        <span class="bank-label">Số tiền:</span>
+                        <span class="bank-val" id="qr-amount-text" style="color: var(--color-primary);">0 VNĐ</span>
+                      </div>
+                      <div class="bank-detail-row">
+                        <span class="bank-label">Nội dung CK:</span>
+                        <span class="bank-val" id="qr-content-text">VDVK</span>
+                        <button type="button" class="btn-copy-code" id="btn-copy-qr-content" data-copy="VDVK">Sao chép</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- PHƯƠNG THỨC 2: VÍ MOMO -->
+              <div class="payment-option-item">
+                <div class="payment-option-header">
+                  <div class="payment-option-left">
+                    <input type="radio" name="payment_method" value="momo" />
+                    <span class="payment-method-name">Ví điện tử MoMo</span>
+                  </div>
+                </div>
+                <div class="payment-option-body">
+                  <p style="font-size: 13px; color: var(--color-text-soft); margin: 0;">
+                    Thanh toán qua Ví MoMo với số điện thoại: <strong>0905 123 456</strong> (Vè Dệt Vân Khăn). Vui lòng ghi mã đơn hàng vào lời nhắn chuyển tiền.
+                  </p>
+                </div>
+              </div>
+
+              <!-- PHƯƠNG THỨC 3: COD -->
+              <div class="payment-option-item">
+                <div class="payment-option-header">
+                  <div class="payment-option-left">
+                    <input type="radio" name="payment_method" value="cod" />
+                    <span class="payment-method-name">Thanh toán tiền mặt khi nhận hàng (COD)</span>
+                  </div>
+                </div>
+                <div class="payment-option-body">
+                  <p style="font-size: 13px; color: var(--color-text-soft); margin: 0;">
+                    Quý khách được kiểm tra chất liệu lụa tơ tằm Mã Châu và bao bì hộp quà cẩn thận trước khi thanh toán cho nhân viên bưu tá giao hàng.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <button type="button" class="btn-primary btn-finish-order" id="btn-finish-payment">
+              Xác nhận & Hoàn tất đặt hàng
+            </button>
+          </div>
+
+          <!-- CỘT PHẢI: XEM LẠI ĐƠN HÀNG -->
+          <div class="order-review-card">
+            <h2 class="summary-title">Thông tin đơn hàng</h2>
+
+            <!-- XEM TRƯỚC THÔNG TIN NGƯỜI NHẬN -->
+            <div class="customer-info-preview" id="review-customer-info">
+              <!-- Render via JS -->
+            </div>
+
+            <!-- DANH SÁCH MẶT HÀNG -->
+            <div class="items-preview-list" id="review-items-list">
+              <!-- Render via JS -->
+            </div>
+
+            <!-- TỔNG KẾT TIỀN -->
+            <div class="summary-rows">
+              <div class="summary-row">
+                <span>Mã đơn hàng:</span>
+                <strong id="review-order-id" style="color: var(--color-green-deep);">VDVK-000000</strong>
+              </div>
+              <div class="summary-row">
+                <span>Tạm tính:</span>
+                <span id="review-subtotal">0 VNĐ</span>
+              </div>
+              <div class="summary-row">
+                <span>Phí vận chuyển:</span>
+                <span id="review-shipping-fee">30.000 VNĐ</span>
+              </div>
+              <div class="summary-row discount-row" id="review-discount-row" style="display: none;">
+                <span>Giảm giá:</span>
+                <span id="review-discount">-0 VNĐ</span>
+              </div>
+              <div class="summary-row total-row">
+                <span>Tổng thanh toán:</span>
+                <span class="total-price" id="review-total-price">0 VNĐ</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- MODAL ĐẶT HÀNG THÀNH CÔNG -->
+    <div class="order-success-modal" id="success-modal" role="dialog" aria-modal="true">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content-box">
+        <div class="success-icon-badge">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </div>
+        <h2 class="modal-title">Đặt Hàng Thành Công!</h2>
+        <div class="modal-order-code" id="modal-order-code">Mã đơn: VDVK-XXXXXX</div>
+        <p style="font-size: 14.5px; color: var(--color-text-soft); line-height: 1.6;">
+          Cảm ơn bạn đã lựa chọn và đồng hành cùng <strong>Vè Dệt Vân Khăn</strong>. Chiếc khăn lụa Mã Châu gửi gắm tình yêu quê hương xứ Quảng sẽ sớm được giao tận tay bạn.
+        </p>
+        <div class="modal-poem-quote">
+          "Dệt tơ thành lụa, dệt vè thành duyên.<br />
+          Gìn giữ nét mộc mạc của câu vè dân gian trên từng thớ tơ."
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-primary" id="btn-modal-continue">Tiếp tục mua sắm</button>
+          <a href="index.html" class="btn-secondary">Về trang chủ</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <!-- BRAND -->
+          <div class="footer-brand">
+            <img src="../assets/images/logo.png" alt="Vè Dệt Vân Khăn" />
+            <p>
+              Dệt tơ thành lụa, dệt vè thành duyên. Gìn giữ nét đẹp văn hóa xứ
+              Quảng qua chất liệu lụa Mã Châu truyền thống.
+            </p>
+          </div>
+
+          <!-- LINKS -->
+          <div class="footer-links">
+            <h3>Khám phá</h3>
+            <a href="index.html">Trang chủ</a>
+            <a href="products.html">Sản phẩm</a>
+            <a href="story.html">Câu chuyện</a>
+            <a href="order-form.html">Đặt hàng</a>
+          </div>
+
+          <!-- CONTACT -->
+          <div class="footer-contact">
+            <h3>Liên hệ</h3>
+            <p>Email: vedetvankhan@gmail.com</p>
+            <p>Điện thoại: 0905 123 456</p>
+            <p>Địa chỉ: Làng lụa Mã Châu, Duy Xuyên, Quảng Nam</p>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2026 Vè Dệt Vân Khăn. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- CHATBOT ROOT -->
+    <div id="chatbot-root"></div>
+
+    <!-- JAVASCRIPT MODULES -->
+    <script type="module" src="../js/main.js"></script>
+    <script type="module" src="../js/payment.js"></script>
+  </body>
+</html>

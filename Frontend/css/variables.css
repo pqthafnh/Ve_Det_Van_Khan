@@ -1,0 +1,83 @@
+:root {
+  /* ==============================
+     MÀU NHẬN DIỆN TỪ LOGO
+     ============================== */
+
+  /* Hồng san hô */
+  --color-primary: #df5b64;
+  --color-primary-hover: #ca4854;
+  --color-primary-dark: #a93845;
+  --color-primary-soft: #f9d9d7;
+  --color-primary-light: #fff1f0;
+
+  /* Xanh lá ô-liu */
+  --color-secondary: #7b963d;
+  --color-secondary-hover: #647f2f;
+  --color-secondary-dark: #4d672c;
+  --color-secondary-soft: #eef3df;
+
+  /* Xanh rừng trong logo */
+  --color-green-deep: #355b35;
+  --color-green-dark: #28472c;
+  --color-green-light: #a5bc68;
+
+  /* Màu nền */
+  --color-background: #fffdfb;
+  --color-surface: #ffffff;
+  --color-section: #f8f5ef;
+  --color-section-green: #f1f5e9;
+  --color-footer: #2f4c35;
+
+  /* Màu chữ */
+  --color-text: #242821;
+  --color-text-soft: #656b61;
+  --color-text-light: #ffffff;
+
+  /* Viền */
+  --color-border: #e4e6dc;
+  --color-border-pink: #f2cacb;
+  --color-border-green: #cfd9bd;
+
+  /* Gradient */
+  --gradient-brand: linear-gradient(
+    135deg,
+    #7b963d 0%,
+    #a5bc68 35%,
+    #df5b64 75%,
+    #f19a9a 100%
+  );
+
+  --gradient-pink: linear-gradient(
+    135deg,
+    #df5b64,
+    #ef8589
+  );
+
+  --gradient-green: linear-gradient(
+    135deg,
+    #355b35,
+    #7b963d
+  );
+
+  /* Bóng đổ */
+  --shadow-small: 0 4px 14px rgba(53, 91, 53, 0.1);
+  --shadow-medium: 0 12px 30px rgba(53, 91, 53, 0.16);
+  --shadow-pink: 0 8px 20px rgba(223, 91, 100, 0.22);
+
+  /* Kích thước chung */
+  --container-width: 1180px;
+  --page-gutter: 40px;
+
+  /* Bo góc */
+  --radius-small: 6px;
+  --radius-medium: 14px;
+  --radius-large: 24px;
+  --radius-pill: 999px;
+
+  /* Hiệu ứng */
+  --transition: 200ms ease;
+
+  /* Font */
+  --font-main: Arial, Helvetica, sans-serif;
+  --font-display: Georgia, "Times New Roman", serif;
+}

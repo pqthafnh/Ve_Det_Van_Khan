@@ -1,0 +1,122 @@
+.btn-primary {
+  display: inline-flex;
+
+  min-height: 42px;
+  padding: 9px 22px;
+
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--color-secondary-dark);
+  border-radius: var(--radius-pill);
+
+  color: #ffffff;
+  background: var(--gradient-green);
+
+  font-size: 13px;
+  font-weight: 700;
+
+  box-shadow: 0 6px 16px rgba(53, 91, 53, 0.2);
+
+  transition:
+    border-color var(--transition),
+    background var(--transition),
+    box-shadow var(--transition),
+    transform var(--transition);
+}
+
+.btn-primary:hover {
+  border-color: var(--color-primary);
+
+  background: var(--gradient-pink);
+
+  box-shadow: var(--shadow-pink);
+
+  transform: translateY(-2px);
+}
+
+.btn-link,
+.view-all-link {
+  display: inline-flex;
+
+  align-items: center;
+  gap: 7px;
+
+  color: var(--color-secondary-dark);
+
+  font-weight: 700;
+
+  transition:
+    color var(--transition),
+    transform var(--transition);
+}
+
+.btn-link:hover,
+.view-all-link:hover {
+  color: var(--color-primary);
+
+  transform: translateX(4px);
+}
+
+
+/* =========================================================
+   CÁC BIẾN THỂ NÚT BỔ SUNG CHO TRANG CON
+   ========================================================= */
+
+.btn-secondary {
+  display: inline-flex;
+  min-height: 42px;
+  padding: 9px 22px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-border-green);
+  border-radius: var(--radius-pill);
+  color: var(--color-secondary-dark);
+  background: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(53, 91, 53, 0.08);
+  transition: all var(--transition);
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-secondary);
+  color: #ffffff;
+  background: var(--gradient-green);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(53, 91, 53, 0.2);
+}
+
+.btn-coral {
+  display: inline-flex;
+  min-height: 42px;
+  padding: 9px 22px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-pill);
+  color: #ffffff;
+  background: var(--gradient-pink);
+  font-size: 13px;
+  font-weight: 700;
+  box-shadow: 0 6px 16px rgba(223, 91, 100, 0.23);
+  transition: all var(--transition);
+}
+
+.btn-coral:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-pink);
+  filter: brightness(0.95);
+}
+
+.btn-sm {
+  min-height: 34px;
+  padding: 6px 16px;
+  font-size: 12px;
+}
+
+.btn-lg {
+  min-height: 48px;
+  padding: 12px 28px;
+  font-size: 15px;
+}

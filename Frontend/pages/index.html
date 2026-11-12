@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta
+      name="description"
+      content="Vè Dệt Vân Khăn - Gìn giữ nét đẹp văn hóa xứ Quảng qua chất liệu lụa Mã Châu và những câu vè dân gian."
+    />
+
+    <title>Trang chủ | Vè Dệt Vân Khăn</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/variables.css" />
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/layout.css" />
+
+    <!-- Components -->
+    <link rel="stylesheet" href="../css/components/header.css" />
+    <link rel="stylesheet" href="../css/components/footer.css" />
+    <link rel="stylesheet" href="../css/components/buttons.css" />
+    <link rel="stylesheet" href="../css/components/product-card.css" />
+    <link rel="stylesheet" href="../css/components/form.css" />
+    <link rel="stylesheet" href="../css/components/chatbot.css" />
+
+    <!-- Home Page -->
+    <link rel="stylesheet" href="../css/pages/home.css" />
+  </head>
+
+  <body>
+    <header class="header">
+      <nav class="navbar">
+        <div class="navbar-container">
+          <!-- LOGO -->
+          <div class="navbar-brand">
+            <a href="index.html">
+              <img
+                src="../assets/images/logo.png"
+                alt="Vè Dệt Vân Khăn"
+                class="logo"
+              />
+            </a>
+          </div>
+
+          <!-- MENU -->
+          <div class="navbar-menu">
+            <a href="index.html" class="navbar-item active"> Trang chủ </a>
+
+            <a href="products.html" class="navbar-item"> Sản phẩm </a>
+
+            <a href="story.html" class="navbar-item"> Câu chuyện </a>
+
+            <a href="lien-he.html" class="navbar-item"> Liên hệ </a>
+          </div>
+
+          <!-- NAVBAR END -->
+          <div class="navbar-end">
+            <!-- SEARCH -->
+            <form class="search" action="products.html" method="GET">
+              <input
+                type="search"
+                name="q"
+                placeholder="Tìm kiếm..."
+                aria-label="Tìm kiếm sản phẩm"
+              />
+
+              <button type="submit" aria-label="Tìm kiếm">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                  />
+                </svg>
+              </button>
+            </form>
+
+            <!-- CART -->
+            <div class="buy">
+              <button class="buy-button" type="button" aria-label="Giỏ hàng">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            <!-- LOGIN -->
+            <div class="login">
+              <button class="login-button" type="button">Đăng nhập</button>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <section class="slider-container">
+        <!-- SLIDE 1: GIỚI THIỆU -->
+        <div
+          class="slide active"
+          style="
+            background-image: url(&quot;../assets/images/banner1.jpg&quot;);
+          "
+        >
+          <div class="hero-content">
+            <div class="text-box">
+              <h1>
+                Vè Dệt
+                <span class="highlight-script">Vân Khăn</span>
+              </h1>
+
+              <p>
+                Dệt tơ thành lụa, dệt vè thành duyên.
+                <br />
+                Gìn giữ nét mộc mạc của câu vè dân gian trên từng thớ lụa.
+              </p>
+
+              <a href="products.html" class="btn-primary"> Khám phá ngay </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLIDE 2: BANNER LỤA MÃ CHÂU -->
+        <div
+          class="slide banner-art"
+          style="
+            background-image: url(&quot;../assets/images/banner2.png&quot;);
+          "
+          role="img"
+          aria-label="Lụa Mã Châu - Hồn tơ xứ Quảng"
+        ></div>
+
+        <!-- SLIDE 3: BANNER MIỀN DI SẢN -->
+        <div
+          class="slide banner-art"
+          style="
+            background-image: url(&quot;../assets/images/banner3.png&quot;);
+          "
+          role="img"
+          aria-label="Sắc màu miền di sản Quảng Nam và Đà Nẵng"
+        ></div>
+
+        <!-- SLIDER ARROWS -->
+        <button
+          class="slider-arrow prev"
+          type="button"
+          aria-label="Slide trước"
+        >
+          &#10094;
+        </button>
+
+        <button
+          class="slider-arrow next"
+          type="button"
+          aria-label="Slide tiếp theo"
+        >
+          &#10095;
+        </button>
+
+        <!-- SLIDER DOTS -->
+        <div class="slider-dots">
+          <button
+            class="dot active"
+            type="button"
+            aria-label="Chuyển đến slide 1"
+          ></button>
+
+          <button
+            class="dot"
+            type="button"
+            aria-label="Chuyển đến slide 2"
+          ></button>
+
+          <button
+            class="dot"
+            type="button"
+            aria-label="Chuyển đến slide 3"
+          ></button>
+        </div>
+
+        <!-- ĐƯỜNG CONG ĐỐI XỨNG -->
+        <div class="bottom-wave" aria-hidden="true">
+          <svg
+            viewBox="0 0 1440 90"
+            preserveAspectRatio="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="
+          M0,58
+          C240,38 480,22 720,22
+          C960,22 1200,38 1440,58
+          L1440,90
+          L0,90
+          Z
+        "
+            ></path>
+          </svg>
+        </div>
+      </section>
+      <section class="about-us-section">
+        <!-- Hình nền của section -->
+        <div class="background-image-container">
+          <!-- Tiêu đề chính nằm trên cùng, canh giữa -->
+          <h2 class="section-title">Chúng tôi là</h2>
+
+          <!-- Layout chia làm 2 cột: Trái (Text + Nút) và Phải (Video) -->
+          <div class="content-wrapper">
+            <!-- Cột trái: Văn bản giới thiệu và nút bấm -->
+            <div class="text-content">
+              <p>
+                Từ tình yêu dành cho giá trị văn hóa quê hương, Vè Dệt Vân Khăn
+                ra đời mang theo sự kết hợp giữa lụa Mã Châu truyền thống, câu
+                vè dân gian và hình ảnh các địa danh Đà Nẵng - Quảng Nam. Chúng
+                mình hướng đến bảo tồn văn hóa, tôn vinh nghề thủ công và lan
+                tỏa tinh thần du lịch xanh.
+              </p>
+              <a href="products.html" class="btn-primary">Xem sản phẩm</a>
+            </div>
+
+            <!-- Cột phải: Khu vực chứa Video -->
+            <div class="video-content">
+              <!-- Vùng chứa placeholder cho video (hoặc iframe nhúng YouTube) -->
+              <div class="video-placeholder">
+                <!-- Icon Play giả lập -->
+                <div class="play-button">
+                  <svg viewBox="0 0 24 24" width="48" height="48">
+                    <!-- Đường dẫn vẽ icon nút play màu đen -->
+                    <path d="M8 5v14l11-7z" fill="#000" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="featured-products-section">
+        <div class="section-header">
+          <h2 class="section-title">Sản phẩm nổi bật</h2>
+          <a href="products.html" class="view-all-link">xem tất cả &rarr;</a>
+        </div>
+
+        <!-- Container trống đợi JS đổ dữ liệu vào -->
+        <div id="featured-products-container" class="product-grid">
+          <p>Đang tải sản phẩm...</p>
+          <!-- Hiệu ứng loading tạm thời -->
+        </div>
+      </section>
+      <section class="core-values-section">
+        <!-- Hình nền sẽ được set trong CSS cho section này -->
+        <div class="container">
+          <!-- Phần tiêu đề chính -->
+          <div class="section-header text-center">
+            <h2 class="section-title">Điểm nổi bật của chúng tôi</h2>
+            <p class="section-subtitle">
+              Một trải nghiệm mua sắm lụa, đơn giản, tinh tế và đáng tin cậy.
+            </p>
+          </div>
+
+          <!-- Lưới chứa 4 giá trị cốt lõi (Grid 2x2) -->
+          <div class="values-grid">
+            <!-- Mục 1: Góc trên trái -->
+            <div class="value-item item-top-left">
+              <h3 class="value-title">Chất Liệu Truyền Thống.</h3>
+              <p class="value-desc">
+                100% lụa Mã Châu mang vẻ đẹp mềm mại, thanh lịch
+              </p>
+            </div>
+
+            <!-- Mục 2: Góc trên phải -->
+            <div class="value-item item-top-right">
+              <h3 class="value-title">Lan Tỏa Lối Sống Xanh</h3>
+              <p class="value-desc">
+                Thông tin sản phẩm minh bạch, dễ dàng tìm hiểu
+              </p>
+            </div>
+
+            <!-- Mục 3: Góc dưới trái -->
+            <div class="value-item item-bottom-left">
+              <h3 class="value-title">Tính Ứng Dụng Cao</h3>
+              <p class="value-desc">
+                Gợi ý sản phẩm theo nhu cầu và sở thích của bạn.
+              </p>
+            </div>
+
+            <!-- Mục 4: Góc dưới phải -->
+            <div class="value-item item-bottom-right">
+              <h3 class="value-title">Bảo Tồn Di Sản</h3>
+              <p class="value-desc">
+                Quy trình mua hàng rõ ràng, trải nghiệm thuận tiện.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <!-- BRAND -->
+          <div class="footer-brand">
+            <img src="../assets/images/logo.png" alt="Vè Dệt Vân Khăn" />
+
+            <p>
+              Dệt tơ thành lụa, dệt vè thành duyên. Gìn giữ nét đẹp văn hóa xứ
+              Quảng.
+            </p>
+          </div>
+
+          <!-- LINKS -->
+          <div class="footer-links">
+            <h3>Khám phá</h3>
+            <a href="index.html">Trang chủ</a>
+            <a href="products.html">Sản phẩm</a>
+            <a href="story.html">Câu chuyện</a>
+            <a href="contact.html">Liên hệ</a>
+          </div>
+
+          <!-- CONTACT -->
+          <div class="footer-contact">
+            <h3>Liên hệ</h3>
+            <p>Email: example@email.com</p>
+            <p>Điện thoại: Chưa cập nhật</p>
+            <p>Địa chỉ: Chưa cập nhật</p>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2026 Vè Dệt Vân Khăn. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- CHATBOT ROOT -->
+    <div id="chatbot-root"></div>
+
+    <!-- JAVASCRIPT -->
+    <script type="module" src="../js/main.js"></script>
+  </body>
+</html>
