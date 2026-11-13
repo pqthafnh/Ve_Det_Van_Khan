@@ -117,4 +117,6 @@ Tất cả cùng hòa quyện trên nền lụa mềm mại, tạo nên một s�
 
 Chúng mình mong muốn mỗi chiếc khăn được trao đi sẽ không chỉ là một món quà mà còn là một câu chuyện được kể lại. Mỗi người sử dụng sẽ không chỉ cảm nhận vẻ đẹp của lụa mà còn hiểu thêm về những giá trị văn hóa, lịch sử, thiên nhiên và sản phẩm xanh đang hiện diện quanh mình.
 
+
 Mọi người hãy mang một chút mềm mại của lụa Mã Châu, gửi một chút duyên dáng của câu vè xứ Quảng, để mỗi chiếc khăn trở thành một món quà văn hóa dành tặng cho chính bạn và những người thân yêu của mình nhé!
+

@@ -22,14 +22,15 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 18px;
-  border-radius: var(--radius-pill);
-  background: var(--color-section-green);
-  border: 1px solid var(--color-border-green);
-  color: var(--color-green-deep);
-  font-size: 13px;
+  padding: 0;
+  background: none;
+  border: none;
+  color: var(--color-secondary-dark);
+  font-size: 14.5px;
   font-weight: 700;
-  margin-bottom: 18px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
 }
 
 .story-main-title {
@@ -80,16 +81,18 @@
 }
 
 .meaning-char {
-  width: 56px;
+  min-width: 56px;
   height: 56px;
-  border-radius: 50%;
+  padding: 0 18px;
+  border-radius: var(--radius-pill);
   background: var(--gradient-brand);
   color: #ffffff;
   font-family: var(--font-display, Georgia, serif);
-  font-size: 26px;
+  font-size: 20px;
   font-weight: 700;
-  display: grid;
-  place-items: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 18px;
   box-shadow: 0 6px 16px rgba(223, 91, 100, 0.25);
 }

@@ -199,64 +199,30 @@
 }
 
 .footer-contact p {
-  position: relative;
-
-  margin: 0 0 13px;
-  padding-left: 25px;
-
-  color: rgba(255, 255, 255, 0.8);
-
+  margin: 0 0 10px;
+  color: rgba(255, 255, 255, 0.85);
   font-size: 14px;
   line-height: 1.55;
-
   overflow-wrap: anywhere;
 }
 
-/* Email */
-
-.footer-contact p:nth-of-type(1)::before {
-  position: absolute;
-
-  top: 1px;
-  left: 0;
-
+.footer-contact strong {
   color: #c1d184;
-
-  content: "✉";
-
-  font-size: 14px;
+  font-weight: 600;
+  display: inline-block;
+  min-width: 82px;
 }
 
-/* Điện thoại */
-
-.footer-contact p:nth-of-type(2)::before {
-  position: absolute;
-
-  top: 1px;
-  left: 0;
-
-  color: #c1d184;
-
-  content: "☎";
-
-  font-size: 14px;
+.footer-contact a {
+  color: #ffffff;
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, 0.3);
+  transition: color var(--transition), text-decoration-color var(--transition);
 }
 
-/* Địa chỉ */
-
-.footer-contact p:nth-of-type(3)::before {
-  position: absolute;
-
-  top: 5px;
-  left: 4px;
-
-  width: 8px;
-  height: 8px;
-
-  border: 2px solid #c1d184;
-  border-radius: 50%;
-
-  content: "";
+.footer-contact a:hover {
+  color: #c1d184;
+  text-decoration-color: #c1d184;
 }
 
 
