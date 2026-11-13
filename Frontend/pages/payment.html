@@ -9,6 +9,13 @@
     />
     <title>Thanh toán đơn hàng | Vè Dệt Vân Khăn</title>
 
+        <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,500;1,600&display=swap"
+      rel="stylesheet"
+    />
     <!-- CSS Cốt lõi -->
     <link rel="stylesheet" href="../css/reset.css" />
     <link rel="stylesheet" href="../css/variables.css" />
@@ -34,7 +41,7 @@
         <div class="navbar-container">
           <!-- LOGO -->
           <div class="navbar-brand">
-            <a href="index.html">
+            <a href="../index.html">
               <img
                 src="../assets/images/logo.png"
                 alt="Vè Dệt Vân Khăn"
@@ -45,10 +52,10 @@
 
           <!-- MENU -->
           <div class="navbar-menu">
-            <a href="index.html" class="navbar-item"> Trang chủ </a>
+            <a href="../index.html" class="navbar-item"> Trang chủ </a>
             <a href="products.html" class="navbar-item"> Sản phẩm </a>
             <a href="story.html" class="navbar-item"> Câu chuyện </a>
-            <a href="index.html#about" class="navbar-item"> Giới thiệu </a>
+            <a href="#footer" class="navbar-item"> Liên hệ </a>
           </div>
 
           <!-- NAVBAR END -->
@@ -116,7 +123,7 @@
         <!-- HEADER TIẾN TRÌNH -->
         <div class="payment-header">
           <nav class="breadcrumb" aria-label="Breadcrumb">
-            <a href="index.html">Trang chủ</a>
+            <a href="../index.html">Trang chủ</a>
             <span class="breadcrumb-separator">/</span>
             <a href="products.html">Sản phẩm</a>
             <span class="breadcrumb-separator">/</span>
@@ -163,12 +170,15 @@
                   <span class="badge-recommended">Khuyên dùng</span>
                 </div>
                 <div class="payment-option-body">
-                  <p style="font-size: 13px; color: var(--color-text-soft); margin-top: 0;">
-                    Mở ứng dụng Ngân hàng bất kỳ trên điện thoại và quét mã VietQR bên dưới để thanh toán nhanh chóng, chính xác.
+                  <p style="font-size: 13.5px; color: var(--color-text); margin-top: 0; line-height: 1.6;">
+                    <strong>Bước 1:</strong> Mở ứng dụng Ngân hàng và quét mã VietQR bên dưới (hoặc chuyển khoản theo thông tin số tài khoản).<br />
+                    <strong>Bước 2:</strong> Nhập chính xác <strong>Số tiền</strong> và <strong>Nội dung chuyển khoản</strong> để hệ thống nhận diện.<br />
+                    <strong>Bước 3:</strong> Chụp lại màn hình giao dịch và bấm <strong>"Xác nhận qua Zalo"</strong> bên dưới để cửa hàng kiểm tra & chuẩn bị gửi hàng ngay.
                   </p>
                   <div class="qr-transfer-box">
                     <div class="qr-image-wrapper">
                       <img id="vietqr-image" src="" alt="Mã VietQR" />
+                      <div class="qr-scan-hint">Quét mã bằng app ngân hàng</div>
                     </div>
                     <div class="bank-details-list">
                       <div class="bank-detail-row">
@@ -186,11 +196,12 @@
                       </div>
                       <div class="bank-detail-row">
                         <span class="bank-label">Số tiền:</span>
-                        <span class="bank-val" id="qr-amount-text" style="color: var(--color-primary);">0 VNĐ</span>
+                        <span class="bank-val" id="qr-amount-text" style="color: var(--color-primary); font-weight: 700;">0 VNĐ</span>
+                        <button type="button" class="btn-copy-code" id="btn-copy-qr-amount" data-copy="0">Sao chép</button>
                       </div>
                       <div class="bank-detail-row">
                         <span class="bank-label">Nội dung CK:</span>
-                        <span class="bank-val" id="qr-content-text">VDVK</span>
+                        <span class="bank-val" id="qr-content-text" style="font-weight: 700; color: var(--color-green-deep);">VDVK</span>
                         <button type="button" class="btn-copy-code" id="btn-copy-qr-content" data-copy="VDVK">Sao chép</button>
                       </div>
                     </div>
@@ -229,9 +240,25 @@
               </div>
             </div>
 
-            <button type="button" class="btn-primary btn-finish-order" id="btn-finish-payment">
-              Xác nhận & Hoàn tất đặt hàng
-            </button>
+            <!-- HÀNH ĐỘNG XÁC NHẬN THANH TOÁN -->
+            <div class="payment-actions-group">
+              <a
+                href="https://zalo.me/0905123456"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-zalo-confirm"
+                id="btn-confirm-zalo"
+              >
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C6.48 2 2 6.03 2 11c0 2.87 1.5 5.43 3.84 7.07-.17 1.05-.62 2.73-1.63 4.08-.12.16-.02.39.18.42 1.48.24 3.79-.1 5.49-1.28.69.14 1.4.21 2.12.21 5.52 0 10-4.03 10-9s-4.48-9-10-9z"/>
+                </svg>
+                Xác nhận qua Zalo (Gửi ảnh giao dịch)
+              </a>
+
+              <button type="button" class="btn-primary btn-finish-order" id="btn-finish-payment">
+                Hoàn tất đặt hàng
+              </button>
+            </div>
           </div>
 
           <!-- CỘT PHẢI: XEM LẠI ĐƠN HÀNG -->
@@ -290,19 +317,42 @@
         <p style="font-size: 14.5px; color: var(--color-text-soft); line-height: 1.6;">
           Cảm ơn bạn đã lựa chọn và đồng hành cùng <strong>Vè Dệt Vân Khăn</strong>. Chiếc khăn lụa Mã Châu gửi gắm tình yêu quê hương xứ Quảng sẽ sớm được giao tận tay bạn.
         </p>
+
+        <!-- KHỐI HƯỚNG DẪN XÁC NHẬN ZALO -->
+        <div class="modal-zalo-box">
+          <div class="zalo-box-header">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#0068ff">
+              <path d="M12 2C6.48 2 2 6.03 2 11c0 2.87 1.5 5.43 3.84 7.07-.17 1.05-.62 2.73-1.63 4.08-.12.16-.02.39.18.42 1.48.24 3.79-.1 5.49-1.28.69.14 1.4.21 2.12.21 5.52 0 10-4.03 10-9s-4.48-9-10-9z"/>
+            </svg>
+            <span>Xác nhận thanh toán qua Zalo</span>
+          </div>
+          <p class="zalo-box-desc">
+            Vui lòng gửi <strong>ảnh chụp màn hình chuyển khoản</strong> kèm mã đơn hàng qua Zalo để nhân viên kiểm tra và gửi hàng cho bạn ngay!
+          </p>
+          <a
+            href="https://zalo.me/0905123456"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-zalo-modal"
+            id="modal-btn-zalo"
+          >
+            Mở Zalo gửi ảnh giao dịch ngay (0905 123 456)
+          </a>
+        </div>
+
         <div class="modal-poem-quote">
           "Dệt tơ thành lụa, dệt vè thành duyên.<br />
           Gìn giữ nét mộc mạc của câu vè dân gian trên từng thớ tơ."
         </div>
         <div class="modal-actions">
           <button type="button" class="btn-primary" id="btn-modal-continue">Tiếp tục mua sắm</button>
-          <a href="index.html" class="btn-secondary">Về trang chủ</a>
+          <a href="../index.html" class="btn-secondary">Về trang chủ</a>
         </div>
       </div>
     </div>
 
     <!-- FOOTER -->
-    <footer class="footer">
+    <footer class="footer" id="footer">
       <div class="container">
         <div class="footer-content">
           <!-- BRAND -->
@@ -317,7 +367,7 @@
           <!-- LINKS -->
           <div class="footer-links">
             <h3>Khám phá</h3>
-            <a href="index.html">Trang chủ</a>
+            <a href="../index.html">Trang chủ</a>
             <a href="products.html">Sản phẩm</a>
             <a href="story.html">Câu chuyện</a>
             <a href="order-form.html">Đặt hàng</a>

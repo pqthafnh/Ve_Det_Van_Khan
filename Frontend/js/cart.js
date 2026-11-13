@@ -3,7 +3,7 @@
  * Quản lý giỏ hàng qua localStorage và đồng bộ badge, mini-cart trên toàn bộ các trang.
  */
 
-import { PRODUCTS, getProductById, formatCurrency } from "./products-data.js";
+import { PRODUCTS, getProductById, formatCurrency, getPageUrl } from "./products-data.js";
 
 const CART_STORAGE_KEY = "vdvk_cart_items";
 
@@ -15,6 +15,19 @@ export function getCart() {
     console.error("Lỗi đọc giỏ hàng:", e);
     return [];
   }
+}
+
+/**
+ * Lấy URL hình ảnh chuẩn xác theo trang hiện tại (trang chủ hay trong pages/)
+ */
+export function getCartItemImage(item) {
+  const prod = getProductById(item.id);
+  if (prod && prod.image) {
+    return prod.image;
+  }
+  const isInPages = typeof window !== "undefined" && window.location.pathname.toLowerCase().includes("/pages/");
+  const clean = (item.image || "").replace(/^(\.\.\/)+/, "").replace(/^assets\//, "assets/");
+  return isInPages ? `../${clean}` : clean;
 }
 
 export function saveCart(cart) {
@@ -121,7 +134,7 @@ export function showCartToast(message) {
       </svg>
     </div>
     <div class="toast-content">${message}</div>
-    <a href="order-form.html" class="toast-action">Xem giỏ</a>
+    <a href="${getPageUrl("order-form.html")}" class="toast-action">Xem giỏ</a>
   `;
 
   toastContainer.appendChild(toast);
@@ -214,7 +227,7 @@ export function renderMiniCart() {
           </svg>
         </div>
         <p>Giỏ hàng của bạn đang trống</p>
-        <a href="products.html" class="btn-primary" style="margin-top: 14px;">Khám phá bộ sưu tập</a>
+        <a href="${getPageUrl("products.html")}" class="btn-primary" style="margin-top: 14px;">Khám phá bộ sưu tập</a>
       </div>
     `;
     footer.innerHTML = "";
@@ -225,9 +238,9 @@ export function renderMiniCart() {
     .map(
       (item) => `
     <div class="mini-cart-item" data-id="${item.id}">
-      <img src="${item.image}" alt="${item.name}" class="mini-cart-img" />
+      <img src="${getCartItemImage(item)}" alt="${item.name}" class="mini-cart-img" />
       <div class="mini-cart-info">
-        <a href="product-detail.html?id=${item.id}" class="mini-cart-name">${item.name}</a>
+        <a href="${getPageUrl("product-detail.html")}?id=${item.id}" class="mini-cart-name">${item.name}</a>
         <div class="mini-cart-meta">${item.dimensions}</div>
         <div class="mini-cart-price">${formatCurrency(item.price)}</div>
         <div class="mini-cart-actions">
@@ -256,8 +269,8 @@ export function renderMiniCart() {
       <span class="total-amount">${formatCurrency(total)}</span>
     </div>
     <div class="mini-cart-btns">
-      <a href="order-form.html" class="btn-primary" style="width: 100%;">Tiến hành đặt hàng</a>
-      <a href="products.html" class="btn-continue-shopping">Tiếp tục chọn khăn</a>
+      <a href="${getPageUrl("order-form.html")}" class="btn-primary" style="width: 100%;">Tiến hành đặt hàng</a>
+      <a href="${getPageUrl("products.html")}" class="btn-continue-shopping">Tiếp tục chọn khăn</a>
     </div>
   `;
 

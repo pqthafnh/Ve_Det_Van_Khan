@@ -66,17 +66,38 @@ function renderProductDetail(p) {
 function initGallery(p) {
   const mainImg = document.getElementById("gallery-main-img");
   const thumbsContainer = document.getElementById("gallery-thumbs");
+  const prevBtn = document.getElementById("gallery-prev-btn");
+  const nextBtn = document.getElementById("gallery-next-btn");
   if (!mainImg || !thumbsContainer) return;
 
-  mainImg.src = p.image;
-  mainImg.alt = p.name;
-
   const images = p.gallery && p.gallery.length ? p.gallery : [p.image];
+  let currentIdx = 0;
+
+  function updateActiveImage(idx) {
+    currentIdx = (idx + images.length) % images.length;
+    mainImg.style.opacity = "0.35";
+    setTimeout(() => {
+      mainImg.src = images[currentIdx];
+      mainImg.alt = `${p.name} - Ảnh ${currentIdx + 1}`;
+      mainImg.style.opacity = "1";
+    }, 120);
+
+    thumbsContainer.querySelectorAll(".thumb-item").forEach((t, i) => {
+      if (i === currentIdx) {
+        t.classList.add("active");
+        t.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+      } else {
+        t.classList.remove("active");
+      }
+    });
+  }
+
   thumbsContainer.innerHTML = images
     .map(
       (imgSrc, idx) => `
-    <div class="thumb-item ${idx === 0 ? "active" : ""}" data-src="${imgSrc}">
-      <img src="${imgSrc}" alt="${p.name} thumbnail ${idx + 1}" />
+    <div class="thumb-item ${idx === 0 ? "active" : ""}" data-idx="${idx}" data-src="${imgSrc}">
+      <img src="${imgSrc}" alt="${p.name} góc nhìn ${idx + 1}" loading="lazy" />
+      <span class="thumb-number">${idx + 1}</span>
     </div>
   `
     )
@@ -84,11 +105,19 @@ function initGallery(p) {
 
   thumbsContainer.querySelectorAll(".thumb-item").forEach((thumb) => {
     thumb.addEventListener("click", () => {
-      thumbsContainer.querySelectorAll(".thumb-item").forEach((t) => t.classList.remove("active"));
-      thumb.classList.add("active");
-      mainImg.src = thumb.dataset.src;
+      const idx = parseInt(thumb.dataset.idx, 10);
+      updateActiveImage(idx);
     });
   });
+
+  if (prevBtn) {
+    prevBtn.addEventListener("click", () => updateActiveImage(currentIdx - 1));
+  }
+  if (nextBtn) {
+    nextBtn.addEventListener("click", () => updateActiveImage(currentIdx + 1));
+  }
+
+  updateActiveImage(0);
 }
 
 function initQuantityControls(p) {

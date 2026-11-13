@@ -15,10 +15,25 @@ body {
   background-color: var(--color-background);
 
   font-family: var(--font-main);
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 
   overflow-x: hidden;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+blockquote,
+.verse-lines,
+.product-verse-brief,
+.verse-card-poem {
+  font-family: var(--font-verse);
 }
 
 img,

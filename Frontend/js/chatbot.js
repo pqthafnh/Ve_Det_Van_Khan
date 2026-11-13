@@ -3,7 +3,7 @@
  * Hoạt động thống nhất trên tất cả các trang qua root container #chatbot-root
  */
 
-import { PRODUCTS, formatCurrency } from "./products-data.js";
+import { PRODUCTS, formatCurrency, getPageUrl } from "./products-data.js";
 import { addToCart } from "./cart.js";
 
 export function initChatbot() {
@@ -190,12 +190,12 @@ export function initChatbot() {
         <div class="bot-product-card">
           <strong>1. Khăn Lụa Mã Châu - Hồn Tơ Xứ Quảng (180x50cm)</strong>
           <p>Giá: ${formatCurrency(580000)} • Mang câu vè <em>"Ngó lên Hòn Kẽm Đá Dừng..."</em> - Rất trang trọng để biếu cha mẹ, thầy cô, đối tác ngoại giao.</p>
-          <a href="product-detail.html?id=2" class="bot-link">Xem chi tiết</a>
+          <a href="${getPageUrl("product-detail.html")}?id=2" class="bot-link">Xem chi tiết</a>
         </div>
         <div class="bot-product-card">
           <strong>2. Khăn Lụa Mã Châu - Phố Cổ Hội An (70x70cm)</strong>
           <p>Giá: ${formatCurrency(450000)} • Sắc vàng hoài niệm, phối áo dài hoặc dạo phố cực thanh lịch.</p>
-          <a href="product-detail.html?id=1" class="bot-link">Xem chi tiết</a>
+          <a href="${getPageUrl("product-detail.html")}?id=1" class="bot-link">Xem chi tiết</a>
         </div>
       `;
     }
@@ -213,7 +213,7 @@ export function initChatbot() {
         </blockquote>
         <p>${p.verseMeaning}</p>
         <div class="bot-actions">
-          <a href="product-detail.html?id=1" class="btn-primary" style="font-size:12px; padding:6px 14px;">Xem khăn Hội An</a>
+          <a href="${getPageUrl("product-detail.html")}?id=1" class="btn-primary" style="font-size:12px; padding:6px 14px;">Xem khăn Hội An</a>
           <button type="button" class="btn-primary bot-action-add-cart" data-id="1" style="font-size:12px; padding:6px 14px; background:var(--gradient-pink);">Thêm vào giỏ</button>
         </div>
       `;
@@ -230,8 +230,8 @@ export function initChatbot() {
           <li>Khăn mang câu vè hiếu đạo: <em>"Ngó lên Hòn Kẽm Đá Dừng / Thương cha nhớ mẹ quá chừng bạn ơi..."</em></li>
         </ul>
         <div class="bot-actions">
-          <a href="product-detail.html?id=2" class="btn-primary" style="font-size:12px; padding:6px 14px;">Xem khăn Mã Châu</a>
-          <a href="story.html" class="btn-link" style="font-size:12px;">Đọc câu chuyện làng nghề &rarr;</a>
+          <a href="${getPageUrl("product-detail.html")}?id=2" class="btn-primary" style="font-size:12px; padding:6px 14px;">Xem khăn Mã Châu</a>
+          <a href="${getPageUrl("story.html")}" class="btn-link" style="font-size:12px;">Đọc câu chuyện làng nghề &rarr;</a>
         </div>
       `;
     }
@@ -246,7 +246,7 @@ export function initChatbot() {
           "Ngồi buồn trách phận giận mình<br/>
           Số chi ta sớm thành đôi bạn, số chi mình lửng lơ..."
         </blockquote>
-        <p><a href="product-detail.html?id=3" class="bot-link">Xem chi tiết sản phẩm này &rarr;</a></p>
+        <p><a href="${getPageUrl("product-detail.html")}?id=3" class="bot-link">Xem chi tiết sản phẩm này &rarr;</a></p>
       `;
     }
 
@@ -260,7 +260,7 @@ export function initChatbot() {
           "Ngày xưa măng lụi, tre tàn<br/>
           Ngày nay nô nức, xóm làng vui ca..."
         </blockquote>
-        <p><a href="product-detail.html?id=4" class="bot-link">Khám phá khăn Cầu Rồng &rarr;</a></p>
+        <p><a href="${getPageUrl("product-detail.html")}?id=4" class="bot-link">Khám phá khăn Cầu Rồng &rarr;</a></p>
       `;
     }
 
@@ -269,7 +269,7 @@ export function initChatbot() {
       return `
         <p><strong>Khăn Lụa Mã Châu - Ngũ Hành Sơn Non Nước</strong> (${formatCurrency(460000)}):</p>
         <p>Tôn vinh vẻ đẹp non nước mây trời và ý chí kiên định, son sắt của người miền Trung.</p>
-        <p><a href="product-detail.html?id=5" class="bot-link">Xem chi tiết khăn Ngũ Hành Sơn &rarr;</a></p>
+        <p><a href="${getPageUrl("product-detail.html")}?id=5" class="bot-link">Xem chi tiết khăn Ngũ Hành Sơn &rarr;</a></p>
       `;
     }
 
@@ -278,7 +278,7 @@ export function initChatbot() {
       return `
         <p><strong>Khăn Lụa Mã Châu - Cù Lao Chàm Sắc Xanh</strong> (${formatCurrency(520000)}):</p>
         <p>Sản phẩm đại diện cho thông điệp <em>Du Lịch Xanh & Bảo Tồn Biển Đảo</em>, làm từ tơ tằm nguyên bản thân thiện với thiên nhiên.</p>
-        <p><a href="product-detail.html?id=6" class="bot-link">Xem chi tiết khăn Cù Lao Chàm &rarr;</a></p>
+        <p><a href="${getPageUrl("product-detail.html")}?id=6" class="bot-link">Xem chi tiết khăn Cù Lao Chàm &rarr;</a></p>
       `;
     }
 
@@ -302,7 +302,7 @@ export function initChatbot() {
         <ul style="padding-left: 16px; margin: 6px 0; font-size: 13px;">
           ${PRODUCTS.map((p) => `<li><strong>${p.name}:</strong> ${formatCurrency(p.price)} (${p.dimensions})</li>`).join("")}
         </ul>
-        <p><a href="products.html" class="bot-link">Xem danh sách đầy đủ tại Cửa Hàng &rarr;</a></p>
+        <p><a href="${getPageUrl("products.html")}" class="bot-link">Xem danh sách đầy đủ tại Cửa Hàng &rarr;</a></p>
       `;
     }
 

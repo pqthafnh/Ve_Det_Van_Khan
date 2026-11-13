@@ -3,6 +3,8 @@
  * Lưu trữ trạng thái tài khoản người dùng qua localStorage và đồng bộ header.
  */
 
+import { getPageUrl } from "./products-data.js";
+
 const USER_STORAGE_KEY = "vdvk_current_user";
 const USERS_LIST_KEY = "vdvk_registered_users";
 
@@ -120,7 +122,7 @@ export function updateHeaderAuth() {
               <strong>${currentUser.fullName}</strong>
               <small>${currentUser.email}</small>
             </div>
-            <a href="order-form.html" class="user-dropdown-item">
+            <a href="${getPageUrl("order-form.html")}" class="user-dropdown-item">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle>
                 <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
@@ -162,7 +164,7 @@ export function updateHeaderAuth() {
       }
     } else {
       container.innerHTML = `
-        <a href="login.html" class="login-button">Đăng nhập</a>
+        <a href="${getPageUrl("login.html")}" class="login-button">Đăng nhập</a>
       `;
     }
   });

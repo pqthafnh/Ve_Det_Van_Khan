@@ -3,7 +3,7 @@
  * Xử lý render giỏ hàng trong biểu mẫu thanh toán, tính toán phí ship, voucher, và lưu đơn hàng chờ thanh toán.
  */
 
-import { getCart, getCartTotal, updateQuantity, removeFromCart, formatCurrency } from "./cart.js";
+import { getCart, getCartTotal, updateQuantity, removeFromCart, formatCurrency, getCartItemImage } from "./cart.js";
 import { getCurrentUser } from "./auth.js";
 
 const PENDING_ORDER_KEY = "vdvk_pending_order";
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .map(
         (item) => `
       <div class="checkout-item" data-id="${item.id}">
-        <img src="${item.image}" alt="${item.name}" class="checkout-item-img" />
+        <img src="${getCartItemImage(item)}" alt="${item.name}" class="checkout-item-img" />
         <div class="checkout-item-info">
           <div class="checkout-item-name">${item.name}</div>
           <div class="checkout-item-dimensions">${item.dimensions}</div>

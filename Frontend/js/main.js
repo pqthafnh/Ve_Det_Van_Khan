@@ -3,7 +3,7 @@
  * Khởi tạo Header, Menu, Tìm kiếm, Giỏ hàng, Đăng nhập, Chatbot và Slider trên toàn hệ thống.
  */
 
-import { PRODUCTS, formatCurrency } from "./products-data.js";
+import { PRODUCTS, formatCurrency, getPageUrl } from "./products-data.js";
 import { initMiniCart, addToCart } from "./cart.js";
 import { updateHeaderAuth } from "./auth.js";
 import { initChatbot } from "./chatbot.js";
@@ -71,7 +71,7 @@ function initHeaderSearch() {
       const input = form.querySelector("input[name='q']");
       if (input && input.value.trim()) {
         // Cho phép form tự submit đến products.html?q=...
-        form.setAttribute("action", "products.html");
+        form.setAttribute("action", getPageUrl("products.html"));
       }
     });
   });
@@ -90,13 +90,13 @@ function initFeaturedProducts() {
     .map(
       (p) => `
     <article class="product-card">
-      <a href="product-detail.html?id=${p.id}" class="product-thumb-link">
+      <a href="${getPageUrl("product-detail.html")}?id=${p.id}" class="product-thumb-link">
         <img src="${p.image}" alt="${p.name}" class="product-image" loading="lazy" />
       </a>
       <div class="product-card-content">
         <div class="product-category">${p.category}</div>
         <h3 class="product-title">
-          <a href="product-detail.html?id=${p.id}">${p.name}</a>
+          <a href="${getPageUrl("product-detail.html")}?id=${p.id}">${p.name}</a>
         </h3>
         <p class="product-verse-brief">"${p.verse.split("\n")[0]}..."</p>
         <div class="product-price">

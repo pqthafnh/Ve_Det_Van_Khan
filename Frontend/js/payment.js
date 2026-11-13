@@ -79,8 +79,16 @@ function initPaymentMethods(order) {
   const qrAmountText = document.getElementById("qr-amount-text");
 
   const transferCode = `VDVK ${order.orderId}`;
-  if (qrTransferContent) qrTransferContent.textContent = transferCode;
-  if (qrAmountText) qrAmountText.textContent = formatCurrency(order.total);
+  if (qrTransferContent) {
+    qrTransferContent.textContent = transferCode;
+    const btnCopyContent = document.getElementById("btn-copy-qr-content");
+    if (btnCopyContent) btnCopyContent.dataset.copy = transferCode;
+  }
+  if (qrAmountText) {
+    qrAmountText.textContent = formatCurrency(order.total);
+    const btnCopyAmount = document.getElementById("btn-copy-qr-amount");
+    if (btnCopyAmount) btnCopyAmount.dataset.copy = String(order.total);
+  }
 
   if (qrImg) {
     // API tạo mã VietQR tiêu chuẩn
@@ -121,27 +129,41 @@ function initPaymentMethods(order) {
 
 function initConfirmOrder(order) {
   const finishBtn = document.getElementById("btn-finish-payment");
+  const zaloBtn = document.getElementById("btn-confirm-zalo");
   const modal = document.getElementById("success-modal");
   const continueBtn = document.getElementById("btn-modal-continue");
+  const modalZaloBtn = document.getElementById("modal-btn-zalo");
 
-  if (!finishBtn || !modal) return;
+  function finalizeOrder() {
+    clearCart();
+    localStorage.removeItem(PENDING_ORDER_KEY);
+    setText("modal-order-code", `Mã đơn hàng: ${order.orderId}`);
+    if (modal) modal.classList.add("show");
+  }
 
-  finishBtn.addEventListener("click", () => {
-    finishBtn.disabled = true;
-    finishBtn.textContent = "Đang xử lý hoàn tất đơn...";
+  // Nút Xác nhận qua Zalo
+  if (zaloBtn) {
+    zaloBtn.addEventListener("click", () => {
+      // Tự động sao chép mã đơn hàng để khách tiện dán vào Zalo
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(`Chào shop, tôi đã chuyển khoản thanh toán cho đơn hàng ${order.orderId} (Số tiền: ${formatCurrency(order.total)}). Tôi xin gửi ảnh giao dịch để shop xác nhận nhé!`);
+      }
+      setTimeout(() => {
+        finalizeOrder();
+      }, 600);
+    });
+  }
 
-    setTimeout(() => {
-      // 1. Xóa giỏ hàng
-      clearCart();
-
-      // 2. Xóa pending order khỏi localStorage
-      localStorage.removeItem(PENDING_ORDER_KEY);
-
-      // 3. Hiển thị modal chúc mừng
-      setText("modal-order-code", `Mã đơn hàng: ${order.orderId}`);
-      modal.classList.add("show");
-    }, 800);
-  });
+  // Nút Hoàn tất đặt hàng thông thường
+  if (finishBtn) {
+    finishBtn.addEventListener("click", () => {
+      finishBtn.disabled = true;
+      finishBtn.textContent = "Đang xử lý hoàn tất đơn...";
+      setTimeout(() => {
+        finalizeOrder();
+      }, 700);
+    });
+  }
 
   if (continueBtn) {
     continueBtn.addEventListener("click", () => {

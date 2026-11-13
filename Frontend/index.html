@@ -11,22 +11,30 @@
 
     <title>Trang chủ | Vè Dệt Vân Khăn</title>
 
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,500;1,600&display=swap"
+      rel="stylesheet"
+    />
+
     <!-- CSS -->
-    <link rel="stylesheet" href="../css/reset.css" />
-    <link rel="stylesheet" href="../css/variables.css" />
-    <link rel="stylesheet" href="../css/global.css" />
-    <link rel="stylesheet" href="../css/layout.css" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/layout.css" />
 
     <!-- Components -->
-    <link rel="stylesheet" href="../css/components/header.css" />
-    <link rel="stylesheet" href="../css/components/footer.css" />
-    <link rel="stylesheet" href="../css/components/buttons.css" />
-    <link rel="stylesheet" href="../css/components/product-card.css" />
-    <link rel="stylesheet" href="../css/components/form.css" />
-    <link rel="stylesheet" href="../css/components/chatbot.css" />
+    <link rel="stylesheet" href="css/components/header.css" />
+    <link rel="stylesheet" href="css/components/footer.css" />
+    <link rel="stylesheet" href="css/components/buttons.css" />
+    <link rel="stylesheet" href="css/components/product-card.css" />
+    <link rel="stylesheet" href="css/components/form.css" />
+    <link rel="stylesheet" href="css/components/chatbot.css" />
 
     <!-- Home Page -->
-    <link rel="stylesheet" href="../css/pages/home.css" />
+    <link rel="stylesheet" href="css/pages/home.css" />
   </head>
 
   <body>
@@ -37,7 +45,7 @@
           <div class="navbar-brand">
             <a href="index.html">
               <img
-                src="../assets/images/logo.png"
+                src="assets/images/logo.png"
                 alt="Vè Dệt Vân Khăn"
                 class="logo"
               />
@@ -48,17 +56,17 @@
           <div class="navbar-menu">
             <a href="index.html" class="navbar-item active"> Trang chủ </a>
 
-            <a href="products.html" class="navbar-item"> Sản phẩm </a>
+            <a href="pages/products.html" class="navbar-item"> Sản phẩm </a>
 
-            <a href="story.html" class="navbar-item"> Câu chuyện </a>
+            <a href="pages/story.html" class="navbar-item"> Câu chuyện </a>
 
-            <a href="lien-he.html" class="navbar-item"> Liên hệ </a>
+            <a href="#footer" class="navbar-item"> Liên hệ </a>
           </div>
 
           <!-- NAVBAR END -->
           <div class="navbar-end">
             <!-- SEARCH -->
-            <form class="search" action="products.html" method="GET">
+            <form class="search" action="pages/products.html" method="GET">
               <input
                 type="search"
                 name="q"
@@ -108,7 +116,7 @@
 
             <!-- LOGIN -->
             <div class="login">
-              <button class="login-button" type="button">Đăng nhập</button>
+              <a href="pages/login.html" class="login-button">Đăng nhập</a>
             </div>
           </div>
         </div>
@@ -116,15 +124,14 @@
     </header>
     <main>
       <section class="slider-container">
-        <!-- SLIDE 1: GIỚI THIỆU -->
+        <!-- SLIDE 1: GIỚI THIỆU THƯƠNG HIỆU -->
         <div
           class="slide active"
-          style="
-            background-image: url(&quot;../assets/images/banner1.jpg&quot;);
-          "
+          style="background-image: url('assets/images/banner/banner1.jpg');"
         >
           <div class="hero-content">
             <div class="text-box">
+              <span class="hero-badge">🌿 Lụa Mã Châu & Vè Dân Gian</span>
               <h1>
                 Vè Dệt
                 <span class="highlight-script">Vân Khăn</span>
@@ -133,33 +140,87 @@
               <p>
                 Dệt tơ thành lụa, dệt vè thành duyên.
                 <br />
-                Gìn giữ nét mộc mạc của câu vè dân gian trên từng thớ lụa.
+                Gìn giữ nét mộc mạc của câu vè dân gian trên từng thớ lụa tự
+                nhiên.
               </p>
 
-              <a href="products.html" class="btn-primary"> Khám phá ngay </a>
+              <div class="hero-cta-group">
+                <a href="pages/products.html" class="btn-primary">
+                  Khám phá ngay
+                </a>
+                <a href="#description" class="btn-secondary-hero">
+                  Tìm hiểu thêm
+                </a>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- SLIDE 2: BANNER LỤA MÃ CHÂU -->
         <div
-          class="slide banner-art"
-          style="
-            background-image: url(&quot;../assets/images/banner2.png&quot;);
-          "
-          role="img"
-          aria-label="Lụa Mã Châu - Hồn tơ xứ Quảng"
-        ></div>
+          class="slide"
+          style="background-image: url('assets/images/banner/banner2.jpg');"
+        >
+          <div class="hero-content">
+            <div class="text-box">
+              <span class="hero-badge">✨ Di Sản Làng Nghề Trăm Năm</span>
+              <h1>
+                Lụa Mã Châu
+                <span class="highlight-script">Hồn Tơ Xứ Quảng</span>
+              </h1>
+
+              <p>
+                100% tơ tằm nguyên bản ươm dệt bên dòng Thu Bồn phù sa.
+                <br />
+                Tôn vinh nghề dệt thủ công và lan tỏa lối sống xanh bền vững.
+              </p>
+
+              <div class="hero-cta-group">
+                <a href="pages/story.html" class="btn-primary">
+                  Đọc câu chuyện
+                </a>
+                <a href="pages/products.html" class="btn-secondary-hero">
+                  Xem bộ sưu tập
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <!-- SLIDE 3: BANNER MIỀN DI SẢN -->
         <div
-          class="slide banner-art"
-          style="
-            background-image: url(&quot;../assets/images/banner3.png&quot;);
-          "
-          role="img"
-          aria-label="Sắc màu miền di sản Quảng Nam và Đà Nẵng"
-        ></div>
+          class="slide"
+          style="background-image: url('assets/images/banner/banner3.jpg');"
+        >
+          <div class="hero-content">
+            <div class="text-box">
+              <span class="hero-badge">🏞️ 6 Danh Thắng & 6 Câu Vè</span>
+              <h1>
+                Sắc Màu
+                <span class="highlight-script">Miền Di Sản</span>
+              </h1>
+
+              <p>
+                Kết tinh vẻ đẹp Hội An, Mỹ Sơn, Cầu Rồng, Ngũ Hành Sơn trên nền
+                lụa óng ả.
+                <br />
+                Mỗi chiếc khăn là một tác phẩm văn hóa trao gửi yêu thương.
+              </p>
+
+              <div class="hero-cta-group">
+                <a href="pages/products.html" class="btn-primary">
+                  Khám phá sản phẩm
+                </a>
+                <a
+                  href="pages/story.html#verses-section"
+                  class="btn-secondary-hero"
+                >
+                  6 câu vè di sản
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <!-- SLIDER ARROWS -->
         <button
@@ -219,6 +280,107 @@
           </svg>
         </div>
       </section>
+
+      <!-- SECTION DESCRIPTION: Ý NGHĨA THƯƠNG HIỆU & GIÁ TRỊ VĂN HÓA -->
+      <section class="description-section" id="description">
+        <div class="container">
+          <div class="description-header text-center">
+            <span class="section-tag">Ý Nghĩa Thương Hiệu</span>
+            <h2 class="section-title">Vè Dệt Vân Khăn</h2>
+            <p class="section-slogan">"Dệt tơ thành lụa, dệt vè thành duyên"</p>
+            <p class="description-lead">
+              Từ tình yêu dành cho những giá trị văn hóa quê hương, chúng mình
+              mong muốn đưa những câu vè dân gian xứ Quảng đến gần hơn với đời
+              sống hiện đại. Đó là sự kết hợp giữa
+              <strong>lụa Mã Châu truyền thống</strong>,
+              <strong>câu vè mộc mạc</strong> và
+              <strong>hình ảnh danh lam thắng cảnh Đà Nẵng – Quảng Nam</strong>,
+              kết nối giữa bảo tồn di sản văn hóa và tinh thần du lịch xanh.
+            </p>
+          </div>
+
+          <div class="description-grid">
+            <!-- CỘT 1: VÈ -->
+            <div class="desc-card">
+              <div class="desc-card-badge">01</div>
+              <div class="desc-icon-circle">
+                <svg
+                  width="28"
+                  height="28"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                  <path d="M2 17l10 5 10-5"></path>
+                  <path d="M2 12l10 5 10-5"></path>
+                </svg>
+              </div>
+              <h3 class="desc-card-title">"Vè" – Hồn Dân Gian</h3>
+              <p class="desc-card-desc">
+                Là nét mộc mạc của văn hóa dân gian xứ Quảng. Lời ăn tiếng nói
+                thân thuộc với nhịp điệu rộn ràng, lưu giữ ký ức, phong tục và
+                tình cảm thiêng liêng về gia đình, quê hương.
+              </p>
+            </div>
+
+            <!-- CỘT 2: DỆT -->
+            <div class="desc-card">
+              <div class="desc-card-badge">02</div>
+              <div class="desc-icon-circle">
+                <svg
+                  width="28"
+                  height="28"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <path
+                    d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"
+                  ></path>
+                </svg>
+              </div>
+              <h3 class="desc-card-title">"Dệt" – Tinh Hoa Trăm Năm</h3>
+              <p class="desc-card-desc">
+                Là sự kết tinh từ làng nghề dệt lụa Mã Châu hơn 400 năm bên dòng
+                sông Thu Bồn phù sa. 100% tơ tằm nguyên bản được ươm tơ, dệt
+                thoi thủ công bởi đôi bàn tay khéo léo của người thợ.
+              </p>
+            </div>
+
+            <!-- CỘT 3: VÂN KHĂN -->
+            <div class="desc-card">
+              <div class="desc-card-badge">03</div>
+              <div class="desc-icon-circle">
+                <svg
+                  width="28"
+                  height="28"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <path
+                    d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                  ></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="16" y1="13" x2="8" y2="13"></line>
+                  <line x1="16" y1="17" x2="8" y2="17"></line>
+                  <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+              </div>
+              <h3 class="desc-card-title">"Vân Khăn" – Nét Đẹp Di Sản</h3>
+              <p class="desc-card-desc">
+                Gợi những đường nét, hoa văn mềm mại trên nền lụa óng ả. Nơi 6
+                bức tranh danh thắng Hội An, Mỹ Sơn, Cầu Rồng, Ngũ Hành Sơn được
+                tái hiện để mỗi chiếc khăn trở thành một món quà di sản.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
       <section class="about-us-section">
         <!-- Hình nền của section -->
         <div class="background-image-container">
@@ -236,7 +398,7 @@
                 mình hướng đến bảo tồn văn hóa, tôn vinh nghề thủ công và lan
                 tỏa tinh thần du lịch xanh.
               </p>
-              <a href="products.html" class="btn-primary">Xem sản phẩm</a>
+              <a href="pages/products.html" class="btn-primary">Xem sản phẩm</a>
             </div>
 
             <!-- Cột phải: Khu vực chứa Video -->
@@ -258,7 +420,9 @@
       <section class="featured-products-section">
         <div class="section-header">
           <h2 class="section-title">Sản phẩm nổi bật</h2>
-          <a href="products.html" class="view-all-link">xem tất cả &rarr;</a>
+          <a href="pages/products.html" class="view-all-link"
+            >xem tất cả &rarr;</a
+          >
         </div>
 
         <!-- Container trống đợi JS đổ dữ liệu vào -->
@@ -315,12 +479,12 @@
         </div>
       </section>
     </main>
-    <footer class="footer">
+    <footer class="footer" id="footer">
       <div class="container">
         <div class="footer-content">
           <!-- BRAND -->
           <div class="footer-brand">
-            <img src="../assets/images/logo.png" alt="Vè Dệt Vân Khăn" />
+            <img src="assets/images/logo.png" alt="Vè Dệt Vân Khăn" />
 
             <p>
               Dệt tơ thành lụa, dệt vè thành duyên. Gìn giữ nét đẹp văn hóa xứ
@@ -332,17 +496,17 @@
           <div class="footer-links">
             <h3>Khám phá</h3>
             <a href="index.html">Trang chủ</a>
-            <a href="products.html">Sản phẩm</a>
-            <a href="story.html">Câu chuyện</a>
-            <a href="contact.html">Liên hệ</a>
+            <a href="pages/products.html">Sản phẩm</a>
+            <a href="pages/story.html">Câu chuyện</a>
+            <a href="#footer">Liên hệ</a>
           </div>
 
           <!-- CONTACT -->
           <div class="footer-contact">
             <h3>Liên hệ</h3>
-            <p>Email: example@email.com</p>
-            <p>Điện thoại: Chưa cập nhật</p>
-            <p>Địa chỉ: Chưa cập nhật</p>
+            <p>Hotline / Zalo: 0905 123 456</p>
+            <p>Email: vedetvankhan@gmail.com</p>
+            <p>Địa chỉ: Đà Nẵng & Làng lụa Mã Châu, Duy Xuyên, Quảng Nam</p>
           </div>
         </div>
 
@@ -356,6 +520,6 @@
     <div id="chatbot-root"></div>
 
     <!-- JAVASCRIPT -->
-    <script type="module" src="../js/main.js"></script>
+    <script type="module" src="js/main.js"></script>
   </body>
 </html>
