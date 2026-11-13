@@ -1,463 +1,434 @@
 /* =========================================================
-   TRANG THANH TOÁN (PAYMENT.CSS)
-   VÈ DỆT VÂN KHĂN
+   TRANG THÔNG BÁO ĐẶT MUA & LIÊN HỆ ZALO (PAYMENT.CSS)
+   VÈ DỆT VÂN KHĂN - REFINED GREEN GLASSMORPHISM
    ========================================================= */
 
 .payment-page {
   padding-top: 110px;
   padding-bottom: 80px;
   background: var(--color-background);
+  min-height: 80vh;
 }
 
-.payment-header {
-  margin-bottom: 30px;
-}
-
-.payment-title {
-  font-family: var(--font-display, Georgia, serif);
-  font-size: clamp(26px, 3.5vw, 34px);
-  color: var(--color-green-deep);
-  margin: 0 0 10px;
-  font-weight: 700;
-}
-
-/* Layout 2 cột */
-.payment-grid {
-  display: grid;
-  grid-template-columns: 1.35fr 1fr;
-  gap: 36px;
-  align-items: flex-start;
-}
-
-.payment-methods-card {
-  padding: 32px;
-  border-radius: var(--radius-large, 24px);
-  background: #ffffff;
-  border: 1px solid var(--color-border-green);
-  box-shadow: var(--shadow-small);
-}
-
-.payment-section-title {
+/* Breadcrumb */
+.breadcrumb {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-family: var(--font-display, Georgia, serif);
-  font-size: 19px;
-  color: var(--color-green-deep);
-  margin: 0 0 20px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--color-border);
-}
-
-/* Tùy chọn phương thức thanh toán */
-.payment-options-list {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+  gap: 8px;
+  font-size: 13.5px;
+  color: var(--color-text-soft);
   margin-bottom: 24px;
 }
 
-.payment-option-item {
-  border: 1.5px solid var(--color-border);
-  border-radius: var(--radius-control, 12px);
-  overflow: hidden;
-  transition: all var(--transition);
-}
-
-.payment-option-item.selected {
-  border-color: var(--color-secondary-dark);
-  box-shadow: 0 4px 12px rgba(123, 150, 61, 0.16);
-}
-
-.payment-option-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 20px;
-  cursor: pointer;
-  background: #ffffff;
-  user-select: none;
-}
-
-.payment-option-item.selected .payment-option-header {
-  background: var(--color-section-green);
-}
-
-.payment-option-left {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.payment-method-name {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--color-text);
-}
-
-.badge-recommended {
-  padding: 3px 8px;
-  border-radius: var(--radius-pill);
-  background: var(--gradient-pink);
-  color: #ffffff;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.3px;
-}
-
-/* Chi tiết cho từng phương thức */
-.payment-option-body {
-  padding: 20px;
-  border-top: 1px solid var(--color-border-green);
-  background: #ffffff;
-  display: none;
-}
-
-.payment-option-item.selected .payment-option-body {
-  display: block;
-}
-
-/* Khối quét QR Ngân Hàng */
-.qr-transfer-box {
-  display: flex;
-  gap: 24px;
-  align-items: center;
-  padding: 18px;
-  border-radius: 16px;
-  background: var(--color-section);
-  border: 1px solid var(--color-border);
-}
-
-.qr-image-wrapper {
-  width: 150px;
-  height: 150px;
-  padding: 8px;
-  background: #ffffff;
-  border-radius: 12px;
-  border: 1px solid var(--color-border-green);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-  flex-shrink: 0;
-}
-
-.qr-image-wrapper img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.bank-details-list {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  font-size: 13px;
-}
-
-.bank-detail-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.bank-label {
+.breadcrumb a {
   color: var(--color-text-soft);
-  min-width: 100px;
+  transition: color var(--transition);
 }
 
-.bank-val {
-  font-weight: 700;
+.breadcrumb a:hover {
   color: var(--color-green-deep);
 }
 
-.btn-copy-code {
-  padding: 2px 8px;
-  border-radius: 4px;
-  border: 1px solid var(--color-border-green);
-  background: #ffffff;
-  font-size: 11px;
-  color: var(--color-secondary-dark);
-  cursor: pointer;
+.breadcrumb .current {
+  color: var(--color-green-deep);
+  font-weight: 600;
 }
 
-.btn-copy-code:hover {
-  background: var(--color-secondary-soft);
-}
-
-/* Tóm tắt hóa đơn */
-.order-review-card {
-  padding: 28px 24px;
+/* Khung thông báo chính */
+.notice-main-card {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 44px 40px;
   border-radius: var(--radius-large, 24px);
   background: #ffffff;
   border: 1px solid var(--color-border-green);
-  box-shadow: var(--shadow-small);
-  position: sticky;
-  top: 96px;
+  box-shadow: 0 16px 40px rgba(53, 91, 53, 0.1);
 }
 
-.customer-info-preview {
-  padding: 14px 16px;
-  border-radius: 12px;
-  background: var(--color-section-green);
-  border: 1px solid var(--color-border-green);
-  margin-bottom: 20px;
+/* Header thông báo */
+.notice-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.notice-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  border-radius: var(--radius-pill);
+  background: var(--color-secondary-soft);
+  color: var(--color-secondary-dark);
   font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  border: 1px solid rgba(123, 150, 61, 0.25);
+}
+
+.notice-title {
+  font-family: var(--font-display, Georgia, serif);
+  font-size: clamp(24px, 3.5vw, 32px);
+  color: var(--color-green-deep);
+  margin: 0 0 10px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.notice-subtitle {
+  font-size: 15px;
+  color: var(--color-text-soft);
+  max-width: 620px;
+  margin: 0 auto;
   line-height: 1.6;
 }
 
-.customer-info-preview strong {
+/* Hộp thông điệp */
+.notice-message-box {
+  display: flex;
+  gap: 18px;
+  padding: 22px 24px;
+  border-radius: var(--radius-medium, 16px);
+  background: var(--color-section-green);
+  border: 1px solid var(--color-border-green);
+  margin-bottom: 32px;
+}
+
+.message-icon {
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #ffffff;
   color: var(--color-green-deep);
-}
-
-.items-preview-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 20px;
-  max-height: 220px;
-  overflow-y: auto;
-}
-
-.item-preview-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 13px;
-  padding-bottom: 8px;
-  border-bottom: 1px dashed var(--color-border);
-}
-
-.item-preview-name {
-  color: var(--color-text);
-  font-weight: 500;
-}
-
-.item-preview-price {
-  font-weight: 700;
-  color: var(--color-primary);
-}
-
-/* Nhóm nút xác nhận đơn & Zalo */
-.payment-actions-group {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: 24px;
-}
-
-.btn-zalo-confirm {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  width: 100%;
-  height: 52px;
-  border-radius: var(--radius-pill);
-  background: #0068ff;
-  color: #ffffff;
-  font-weight: 700;
-  font-size: 15px;
-  box-shadow: 0 4px 16px rgba(0, 104, 255, 0.28);
-  transition: all var(--transition);
-  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(53, 91, 53, 0.1);
 }
 
-.btn-zalo-confirm:hover {
-  background: #0056d6;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 104, 255, 0.38);
-  color: #ffffff;
-}
-
-.btn-finish-order {
-  width: 100%;
-  height: 48px;
+.message-text {
+  flex: 1;
   font-size: 14.5px;
-  font-weight: 600;
-  border-radius: var(--radius-pill);
-  background: var(--color-green-deep);
+  color: var(--color-text);
+  line-height: 1.65;
 }
 
-.btn-finish-order:hover {
-  background: var(--color-green-dark);
+.message-text p {
+  margin: 0 0 8px;
 }
 
-/* Hộp Zalo trong modal */
-.modal-zalo-box {
-  margin: 18px 0;
-  padding: 16px;
-  border-radius: var(--radius-medium);
-  background: #f0f7ff;
-  border: 1px solid #cce3ff;
-  text-align: left;
+.message-text p:last-child {
+  margin: 0;
 }
 
-.zalo-box-header {
+/* Thẻ sản phẩm đang quan tâm */
+.interested-product-card {
+  padding: 18px 22px;
+  border-radius: var(--radius-medium, 16px);
+  background: #ffffff;
+  border: 1.5px dashed var(--color-secondary);
+  margin-bottom: 32px;
+}
+
+.interested-badge {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-secondary-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
+}
+
+.interested-content {
   display: flex;
+  gap: 18px;
   align-items: center;
-  gap: 8px;
+}
+
+.interested-thumb {
+  width: 80px;
+  height: 80px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 1px solid var(--color-border-green);
+  flex-shrink: 0;
+}
+
+.interested-info {
+  flex: 1;
+}
+
+.interested-title {
+  font-family: var(--font-display, Georgia, serif);
+  font-size: 17px;
+  color: var(--color-green-deep);
+  margin: 0 0 4px;
   font-weight: 700;
-  color: #0056d6;
-  font-size: 14.5px;
+}
+
+.interested-meta {
+  font-size: 13px;
+  color: var(--color-text-soft);
   margin-bottom: 6px;
 }
 
-.zalo-box-desc {
-  font-size: 13px;
-  color: var(--color-text);
-  line-height: 1.5;
-  margin: 0 0 12px;
+.interested-price {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-green-deep);
 }
 
-.btn-zalo-modal {
-  display: block;
-  text-align: center;
-  padding: 10px 18px;
-  border-radius: var(--radius-pill);
-  background: #0068ff;
-  color: #ffffff;
-  font-weight: 600;
+.interested-verse {
+  font-family: var(--font-verse, Georgia, serif);
   font-size: 13.5px;
-  text-decoration: none;
-  transition: all var(--transition);
-}
-
-.btn-zalo-modal:hover {
-  background: #0056d6;
-  color: #ffffff;
-  transform: translateY(-1px);
-}
-
-.qr-scan-hint {
-  font-size: 11px;
   color: var(--color-text-soft);
-  text-align: center;
-  margin-top: 6px;
   font-style: italic;
+  margin-top: 4px;
 }
 
-/* =========================================================
-   MODAL ĐẶT HÀNG THÀNH CÔNG
-   ========================================================= */
+/* Khung Zalo QR & Thông tin liên hệ */
+.zalo-contact-card {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 32px;
+  padding: 30px;
+  border-radius: var(--radius-large, 20px);
+  background: linear-gradient(135deg, rgba(238, 243, 223, 0.45) 0%, rgba(255, 253, 251, 0.95) 100%);
+  border: 1.5px solid var(--color-secondary);
+  box-shadow: 0 8px 24px rgba(123, 150, 61, 0.12);
+  align-items: center;
+  margin-bottom: 32px;
+}
 
-.order-success-modal {
-  position: fixed;
-  inset: 0;
-  z-index: 100000;
-  display: none;
+.zalo-card-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.qr-frame {
+  width: 200px;
+  height: 200px;
+  padding: 10px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 2px solid var(--color-border-green);
+  box-shadow: 0 6px 18px rgba(53, 91, 53, 0.12);
+  display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
 }
 
-.order-success-modal.show {
-  display: flex;
-}
-
-.modal-backdrop {
-  position: absolute;
-  inset: 0;
-  background: rgba(36, 40, 33, 0.65);
-  backdrop-filter: blur(6px);
-}
-
-.modal-content-box {
-  position: relative;
-  z-index: 2;
-  width: 520px;
-  max-width: 100%;
-  padding: 40px 32px;
-  border-radius: var(--radius-large, 24px);
-  background: #ffffff;
-  text-align: center;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
-  border: 1.5px solid var(--color-border-green);
-  animation: modal-pop 300ms ease;
-}
-
-@keyframes modal-pop {
-  from {
-    transform: scale(0.9);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-.success-icon-badge {
-  width: 68px;
-  height: 68px;
-  border-radius: 50%;
-  background: var(--gradient-green);
-  color: #ffffff;
-  display: grid;
-  place-items: center;
-  margin: 0 auto 20px;
-  box-shadow: 0 8px 24px rgba(53, 91, 53, 0.3);
-}
-
-.modal-title {
-  font-family: var(--font-display, Georgia, serif);
-  font-size: 26px;
-  color: var(--color-green-deep);
-  margin: 0 0 10px;
-}
-
-.modal-order-code {
-  display: inline-block;
-  padding: 6px 16px;
-  border-radius: var(--radius-pill);
-  background: var(--color-section-green);
-  color: var(--color-green-dark);
-  font-weight: 700;
-  font-size: 14px;
-  margin-bottom: 16px;
-}
-
-.modal-poem-quote {
-  font-family: var(--font-display, Georgia, serif);
-  font-style: italic;
-  font-size: 14.5px;
-  color: var(--color-text-soft);
-  margin: 16px 0;
-  padding: 12px;
-  background: var(--color-primary-light);
+.zalo-qr-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
   border-radius: 8px;
 }
 
-.modal-actions {
+.qr-guide {
   display: flex;
-  gap: 12px;
-  justify-content: center;
-  margin-top: 26px;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  font-size: 12.5px;
+  color: var(--color-text-soft);
+  font-weight: 500;
 }
 
-@media (max-width: 950px) {
-  .payment-grid {
-    grid-template-columns: 1fr;
+.zalo-card-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.zalo-card-title {
+  font-family: var(--font-display, Georgia, serif);
+  font-size: 22px;
+  color: var(--color-green-deep);
+  margin: 0 0 8px;
+  font-weight: 700;
+}
+
+.zalo-card-desc {
+  font-size: 14px;
+  color: var(--color-text-soft);
+  line-height: 1.6;
+  margin: 0 0 20px;
+}
+
+/* Nút bấm Zalo lớn */
+.btn-zalo-big {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  height: 52px;
+  padding: 0 28px;
+  border-radius: var(--radius-pill);
+  background: var(--gradient-green);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 8px 22px rgba(53, 91, 53, 0.3);
+  transition: all var(--transition);
+  margin-bottom: 20px;
+}
+
+.btn-zalo-big:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(53, 91, 53, 0.4);
+  filter: brightness(1.05);
+}
+
+.btn-zalo-big svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Danh sách chi tiết liên hệ */
+.contact-details-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(123, 150, 61, 0.25);
+}
+
+.contact-detail-item {
+  display: flex;
+  font-size: 13.5px;
+  gap: 8px;
+}
+
+.detail-label {
+  color: var(--color-text-soft);
+  font-weight: 600;
+  min-width: 100px;
+}
+
+.detail-val {
+  color: var(--color-text);
+}
+
+.detail-val.highlight {
+  color: var(--color-green-deep);
+  font-weight: 700;
+}
+
+/* Nút hành động phía dưới */
+.notice-bottom-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding-top: 12px;
+}
+
+.btn-link-home {
+  font-size: 14px;
+  color: var(--color-text-soft);
+  text-decoration: underline;
+  padding: 8px 14px;
+  transition: color var(--transition);
+}
+
+.btn-link-home:hover {
+  color: var(--color-green-deep);
+}
+
+/* =========================================================
+   RESPONSIVE MOBILE
+   ========================================================= */
+
+@media (max-width: 850px) {
+  .payment-page {
+    padding-top: 96px;
+    padding-bottom: 60px;
   }
 
-  .qr-transfer-box {
-    flex-direction: column;
+  .notice-main-card {
+    padding: 30px 20px;
+    border-radius: 20px;
+  }
+
+  .zalo-contact-card {
+    grid-template-columns: 1fr;
+    padding: 22px 18px;
+    gap: 22px;
     text-align: center;
   }
 
-  .bank-detail-row {
+  .zalo-card-right {
+    align-items: center;
+  }
+
+  .btn-zalo-big {
+    width: 100%;
+    font-size: 15px;
+  }
+
+  .contact-details-list {
+    text-align: left;
+    width: 100%;
+  }
+
+  .contact-detail-item {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .detail-label {
+    min-width: auto;
+  }
+
+  .notice-bottom-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .notice-bottom-actions .btn-primary,
+  .notice-bottom-actions .btn-secondary {
+    width: 100%;
+    text-align: center;
     justify-content: center;
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 480px) {
   .payment-page {
-    padding-top: 90px;
+    padding-top: 86px;
   }
 
-  .payment-methods-card,
-  .order-review-card {
-    padding: 24px 16px;
+  .notice-main-card {
+    padding: 24px 14px;
   }
 
-  .modal-actions {
+  .notice-title {
+    font-size: 22px;
+  }
+
+  .notice-message-box {
     flex-direction: column;
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .interested-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .interested-thumb {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto;
+  }
+
+  .qr-frame {
+    width: 180px;
+    height: 180px;
   }
 }

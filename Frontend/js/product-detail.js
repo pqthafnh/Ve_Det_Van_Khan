@@ -164,7 +164,7 @@ function initActionButtons(p) {
     buyNowBtn.addEventListener("click", () => {
       const qty = parseInt(input ? input.value : 1, 10) || 1;
       addToCart(p.id, qty);
-      window.location.href = "order-form.html";
+      window.location.href = `payment.html?id=${p.id}`;
     });
   }
 }

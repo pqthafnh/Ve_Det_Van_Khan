@@ -252,37 +252,113 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
   }
+}
+
+@media (max-width: 850px) {
+  .page-hero {
+    padding: 100px 16px 36px;
+  }
+
+  .page-title {
+    font-size: 28px;
+    margin-bottom: 8px;
+  }
+
+  .page-subtitle {
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+
+  .catalog-section {
+    padding: 24px 0 60px;
+  }
 
   .catalog-toolbar {
     flex-direction: column;
     align-items: stretch;
+    padding: 14px 14px;
+    margin-bottom: 24px;
+    border-radius: 18px;
+    gap: 12px;
+  }
+
+  .filter-tabs {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+    width: 100%;
+    gap: 8px;
+  }
+
+  .filter-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filter-tab {
+    flex: 0 0 auto;
+    white-space: nowrap;
+    padding: 7px 14px;
+    font-size: 12.5px;
   }
 
   .toolbar-controls {
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 10px;
   }
 
   .catalog-search {
+    width: 100%;
+  }
+
+  .catalog-search input {
+    height: 40px;
+    font-size: 13px;
+  }
+
+  .sort-select-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .sort-select {
     flex: 1;
+    height: 40px;
+    font-size: 13px;
+    padding: 0 12px;
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 24px;
   }
 }
 
 @media (max-width: 600px) {
   .page-hero {
-    padding: 110px 0 38px;
+    padding: 96px 14px 30px;
+  }
+
+  .page-title {
+    font-size: 24px;
   }
 
   .trust-grid {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 14px;
   }
 
-  .toolbar-controls {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .sort-select-wrapper {
-    justify-content: space-between;
+  .products-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    max-width: 380px;
+    margin: 0 auto;
   }
 }

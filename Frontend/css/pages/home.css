@@ -1201,39 +1201,35 @@
 @media (max-width: 600px) {
   .slider-container {
     width: 100%;
-    height: 570px;
+    min-height: 540px;
+    height: 85vh;
+    max-height: 620px;
     margin: 0;
   }
 
   .slide {
-    background-position: 58% center;
+    background-position: center center;
   }
 
   .slide::before {
     background:
       linear-gradient(
         0deg,
-        rgba(32, 63, 38, 0.9) 0%,
-        rgba(53, 91, 53, 0.59) 60%,
-        rgba(53, 91, 53, 0.16) 100%
+        rgba(22, 53, 28, 0.94) 0%,
+        rgba(35, 68, 42, 0.72) 50%,
+        rgba(40, 71, 44, 0.35) 100%
       );
   }
-
-  /*
-    Banner ngang không thể hiển thị đẹp toàn bộ trên điện thoại dọc.
-    Dùng contain để không cắt chữ và hình sản phẩm.
-  */
 
   .slide.banner-art {
     background-color: #fffaf3;
     background-position: center;
-    background-size: contain;
+    background-size: cover;
   }
 
   .hero-content {
     width: 100%;
-    padding: 130px 54px 92px 28px;
-
+    padding: 96px 18px 48px;
     align-items: flex-end;
   }
 
@@ -1242,37 +1238,38 @@
   }
 
   .text-box h1 {
-    margin-bottom: 16px;
-
-    font-size: clamp(2.25rem, 10vw, 3.2rem);
+    margin-bottom: 12px;
+    font-size: clamp(1.75rem, 7.5vw, 2.2rem);
+    line-height: 1.25;
   }
 
   .text-box p {
-    margin-bottom: 20px;
+    margin-bottom: 18px;
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
 
-    font-size: 0.9rem;
-    line-height: 1.65;
+  .hero-cta-group {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .hero-cta-group .btn-primary,
+  .hero-cta-group .btn-secondary-hero {
+    width: 100%;
+    height: 44px;
+    font-size: 13.5px;
+    text-align: center;
+    justify-content: center;
   }
 
   .slider-arrow {
-    top: 50%;
-
-    width: 38px;
-    height: 38px;
-
-    font-size: 1rem;
-  }
-
-  .slider-arrow.prev {
-    left: 9px;
-  }
-
-  .slider-arrow.next {
-    right: 9px;
+    display: none;
   }
 
   .slider-dots {
-    bottom: 46px;
+    bottom: 20px;
   }
 
   .bottom-wave {

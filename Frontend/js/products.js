@@ -109,25 +109,17 @@ document.addEventListener("DOMContentLoaded", () => {
             <span class="price-current">${formatCurrency(p.price)}</span>
             <span class="price-original">${formatCurrency(p.originalPrice)}</span>
           </div>
-          <div style="display:flex; gap:8px;">
-            <a href="product-detail.html?id=${p.id}" class="btn-secondary" style="flex:1; min-height:38px; padding:0 10px; font-size:12px;">Chi tiết</a>
-            <button type="button" class="btn-primary product-buy-button" data-id="${p.id}" style="flex:1.2;">
-              Thêm giỏ
-            </button>
+          <div style="display:flex; gap:8px; margin-top:10px;">
+            <a href="product-detail.html?id=${p.id}" class="btn-secondary" style="flex:1; min-height:38px; padding:0 8px; font-size:12px; text-align:center; justify-content:center;">Chi tiết</a>
+            <a href="payment.html?id=${p.id}" class="btn-primary product-buy-button" style="flex:1.2; min-height:38px; padding:0 8px; font-size:12px; text-align:center; justify-content:center;">
+              Liên hệ mua
+            </a>
           </div>
         </div>
       </article>
     `
       )
       .join("");
-
-    // Gắn sự kiện Thêm vào giỏ
-    container.querySelectorAll(".product-buy-button").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const id = parseInt(btn.dataset.id, 10);
-        addToCart(id, 1);
-      });
-    });
   }
 
   // Sự kiện chọn tab danh mục

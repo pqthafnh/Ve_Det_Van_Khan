@@ -322,12 +322,47 @@
 }
 
 @media (max-width: 600px) {
+  .story-hero {
+    padding: 96px 16px 32px;
+  }
+
+  .story-main-title {
+    font-size: 26px;
+    margin-bottom: 12px;
+  }
+
+  .story-intro-p {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .narrative-row {
+    gap: 20px;
+  }
+
+  .narrative-text h2 {
+    font-size: 22px;
+  }
+
   .verses-grid {
     grid-template-columns: 1fr;
+    gap: 20px;
+    max-width: 380px;
+    margin: 0 auto;
   }
 
   .conclusion-btns {
     flex-direction: column;
     align-items: stretch;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .conclusion-btns .btn-primary,
+  .conclusion-btns .btn-secondary {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    height: 44px;
   }
 }

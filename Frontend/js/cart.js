@@ -269,7 +269,7 @@ export function renderMiniCart() {
       <span class="total-amount">${formatCurrency(total)}</span>
     </div>
     <div class="mini-cart-btns">
-      <a href="${getPageUrl("order-form.html")}" class="btn-primary" style="width: 100%;">Tiến hành đặt hàng</a>
+      <a href="${getPageUrl("payment.html")}" class="btn-primary" style="width: 100%;">Tư vấn & Đặt mua qua Zalo</a>
       <a href="${getPageUrl("products.html")}" class="btn-continue-shopping">Tiếp tục chọn khăn</a>
     </div>
   `;

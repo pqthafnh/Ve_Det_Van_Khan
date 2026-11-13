@@ -1,19 +1,18 @@
 /**
  * MAIN.JS - VÈ DỆT VÂN KHĂN
- * Khởi tạo Header, Menu, Tìm kiếm, Giỏ hàng, Đăng nhập, Chatbot và Slider trên toàn hệ thống.
+ * Khởi tạo Header, Menu Mobile, Tìm kiếm, Giỏ hàng, Chatbot và Slider trên toàn hệ thống.
  */
 
 import { PRODUCTS, formatCurrency, getPageUrl } from "./products-data.js";
-import { initMiniCart, addToCart } from "./cart.js";
-import { updateHeaderAuth } from "./auth.js";
+import { initMiniCart } from "./cart.js";
 import { initChatbot } from "./chatbot.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  // 1. Khởi tạo Mini-Cart & Huy hiệu số lượng
-  initMiniCart();
+  // 1. Khởi tạo Menu Mobile (Hamburger toggle & click outside)
+  initMobileMenu();
 
-  // 2. Khởi tạo trạng thái Đăng nhập / Người dùng
-  updateHeaderAuth();
+  // 2. Khởi tạo Mini-Cart & Huy hiệu số lượng
+  initMiniCart();
 
   // 3. Khởi tạo Chatbot AI "Trợ lý Lụa Xứ Quảng"
   initChatbot();
@@ -30,6 +29,40 @@ document.addEventListener("DOMContentLoaded", () => {
   // 7. Xử lý Slider trên trang chủ (nếu có trên index.html)
   initHomeSlider();
 });
+
+/**
+ * Xử lý Menu điều hướng trên thiết bị di động
+ */
+function initMobileMenu() {
+  const toggleBtn = document.getElementById("mobile-menu-toggle");
+  const menu = document.getElementById("navbar-menu");
+  if (!toggleBtn || !menu) return;
+
+  toggleBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const isOpen = menu.classList.toggle("open");
+    toggleBtn.classList.toggle("active", isOpen);
+    toggleBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+  });
+
+  // Đóng menu khi nhấp vào bất kỳ mục liên kết nào
+  menu.querySelectorAll(".navbar-item").forEach((item) => {
+    item.addEventListener("click", () => {
+      menu.classList.remove("open");
+      toggleBtn.classList.remove("active");
+      toggleBtn.setAttribute("aria-expanded", "false");
+    });
+  });
+
+  // Đóng menu khi nhấp ra ngoài
+  document.addEventListener("click", (e) => {
+    if (!menu.contains(e.target) && !toggleBtn.contains(e.target)) {
+      menu.classList.remove("open");
+      toggleBtn.classList.remove("active");
+      toggleBtn.setAttribute("aria-expanded", "false");
+    }
+  });
+}
 
 /**
  * Đánh dấu mục active trên navbar dựa vào URL hiện tại
@@ -70,7 +103,6 @@ function initHeaderSearch() {
     form.addEventListener("submit", (e) => {
       const input = form.querySelector("input[name='q']");
       if (input && input.value.trim()) {
-        // Cho phép form tự submit đến products.html?q=...
         form.setAttribute("action", getPageUrl("products.html"));
       }
     });
@@ -94,7 +126,7 @@ function initFeaturedProducts() {
         <img src="${p.image}" alt="${p.name}" class="product-image" loading="lazy" />
       </a>
       <div class="product-card-content">
-        <div class="product-category">${p.category}</div>
+        <div class="product-category">${p.category} • ${p.dimensions}</div>
         <h3 class="product-title">
           <a href="${getPageUrl("product-detail.html")}?id=${p.id}">${p.name}</a>
         </h3>
@@ -103,22 +135,19 @@ function initFeaturedProducts() {
           <span class="price-current">${formatCurrency(p.price)}</span>
           <span class="price-original">${formatCurrency(p.originalPrice)}</span>
         </div>
-        <button type="button" class="btn-primary product-buy-button" data-id="${p.id}">
-          Thêm vào giỏ
-        </button>
+        <div style="display:flex; gap:8px; margin-top:12px;">
+          <a href="${getPageUrl("product-detail.html")}?id=${p.id}" class="btn-secondary" style="flex:1; min-height:38px; padding:0 8px; font-size:12.5px; text-align:center; justify-content:center;">
+            Chi tiết
+          </a>
+          <a href="${getPageUrl("payment.html")}?id=${p.id}" class="btn-primary product-buy-button" style="flex:1.2; min-height:38px; padding:0 8px; font-size:12.5px; text-align:center; justify-content:center;">
+            Liên hệ mua
+          </a>
+        </div>
       </div>
     </article>
   `
     )
     .join("");
-
-  // Gắn event Thêm vào giỏ
-  container.querySelectorAll(".product-buy-button").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const id = parseInt(btn.dataset.id, 10);
-      addToCart(id, 1);
-    });
-  });
 }
 
 /**
