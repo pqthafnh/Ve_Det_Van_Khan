@@ -40,8 +40,8 @@ Gươm nào gom nổi con đường đấu tranh`,
     image: `${baseImgPath}product-1.jpg`,
     gallery: [
       `${baseImgPath}product-1.jpg`,
-      `${baseBannerPath}banner1.jpg`,
-      `${baseBannerPath}banner3.jpg`
+      `${baseImgPath}product-1-pattern.jpg`,
+      `${baseImgPath}product-1-detail.jpg`
     ],
     isFeatured: true,
     rating: 5,
@@ -69,8 +69,8 @@ Nay đã nở hoa`,
     image: `${baseImgPath}product-2.jpg`,
     gallery: [
       `${baseImgPath}product-2.jpg`,
-      `${baseBannerPath}banner2.jpg`,
-      `${baseBannerPath}banner1.jpg`
+      `${baseImgPath}product-2-pattern.jpg`,
+      `${baseImgPath}product-2-detail.jpg`
     ],
     isFeatured: true,
     rating: 5,
@@ -98,8 +98,8 @@ Mỏng mỏng một lá buổi mai rừng chít`,
     image: `${baseImgPath}product-3.jpg`,
     gallery: [
       `${baseImgPath}product-3.jpg`,
-      `${baseBannerPath}banner3.jpg`,
-      `${baseBannerPath}banner2.jpg`
+      `${baseImgPath}product-3-pattern.jpg`,
+      `${baseImgPath}product-3-detail.jpg`
     ],
     isFeatured: true,
     rating: 4.9,
@@ -127,8 +127,8 @@ Hoan hô nước Việt Nam Dân Chủ Cộng Hòa muôn năm`,
     image: `${baseImgPath}product-4.jpg`,
     gallery: [
       `${baseImgPath}product-4.jpg`,
-      `${baseBannerPath}banner3.jpg`,
-      `${baseBannerPath}banner1.jpg`
+      `${baseImgPath}product-4-pattern.jpg`,
+      `${baseImgPath}product-4-detail.jpg`
     ],
     isFeatured: true,
     rating: 4.8,
@@ -154,8 +154,8 @@ Số chi ta sớm thành đôi bạn, số chi mình lửng lơ...`,
     image: `${baseImgPath}product-5.jpg`,
     gallery: [
       `${baseImgPath}product-5.jpg`,
-      `${baseBannerPath}banner1.jpg`,
-      `${baseBannerPath}banner2.jpg`
+      `${baseImgPath}product-5-pattern.jpg`,
+      `${baseImgPath}product-5-detail.jpg`
     ],
     isFeatured: false,
     rating: 4.9,
@@ -181,8 +181,8 @@ Số chi ta sớm thành đôi bạn, số chi mình lửng lơ...`,
     image: `${baseImgPath}product-6.jpg`,
     gallery: [
       `${baseImgPath}product-6.jpg`,
-      `${baseBannerPath}banner2.jpg`,
-      `${baseBannerPath}banner3.jpg`
+      `${baseImgPath}product-6-pattern.jpg`,
+      `${baseImgPath}product-6-detail.jpg`
     ],
     isFeatured: false,
     rating: 5,

@@ -27,9 +27,16 @@
   }
 }
 
+@media (max-width: 600px) {
+  :root {
+    --page-gutter: 16px;
+  }
+}
+
 @media (max-width: 540px) {
   .product-grid {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
 
   .section-header {

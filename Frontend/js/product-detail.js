@@ -117,6 +117,27 @@ function initGallery(p) {
     nextBtn.addEventListener("click", () => updateActiveImage(currentIdx + 1));
   }
 
+  // Hỗ trợ vuốt (swipe) chuyển ảnh mượt mà trên mobile
+  const galleryMainEl = document.querySelector(".gallery-main");
+  if (galleryMainEl) {
+    let touchStartX = 0;
+    galleryMainEl.addEventListener("touchstart", (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    galleryMainEl.addEventListener("touchend", (e) => {
+      const touchEndX = e.changedTouches[0].screenX;
+      const diffX = touchEndX - touchStartX;
+      if (Math.abs(diffX) > 40) {
+        if (diffX < 0) {
+          updateActiveImage(currentIdx + 1);
+        } else {
+          updateActiveImage(currentIdx - 1);
+        }
+      }
+    }, { passive: true });
+  }
+
   updateActiveImage(0);
 }
 
