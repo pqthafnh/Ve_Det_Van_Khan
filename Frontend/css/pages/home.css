@@ -324,7 +324,7 @@
 }
 
 .bottom-wave path {
-  fill: #fffdfb;
+  fill: #f8f5ef;
 }
 
 
@@ -1228,9 +1228,14 @@
   }
 
   .hero-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
     width: 100%;
-    padding: 96px 18px 48px;
-    align-items: flex-end;
+    height: 100%;
+    padding: 68px 20px 44px;
+    text-align: left;
   }
 
   .text-box {

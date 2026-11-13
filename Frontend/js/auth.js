@@ -83,7 +83,7 @@ export function loginUser(email, password) {
       id: 999,
       fullName: "Khách Quý Xứ Quảng",
       email: "demo@gmail.com",
-      phone: "0905123456",
+      phone: "0974678820",
       joinedAt: "01/01/2026"
     };
     setCurrentUser(demoUser);

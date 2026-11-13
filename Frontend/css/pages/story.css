@@ -4,15 +4,15 @@
    ========================================================= */
 
 .story-page {
-  padding-top: 110px;
-  padding-bottom: 80px;
+  padding-top: 76px;
+  padding-bottom: 70px;
 }
 
 /* Hero banner */
 .story-hero {
   position: relative;
   text-align: center;
-  padding: 40px 0 60px;
+  padding: 24px 0 45px;
   background:
     radial-gradient(circle at 50% 20%, rgba(223, 91, 100, 0.08) 0%, transparent 50%),
     radial-gradient(circle at 10% 80%, rgba(123, 150, 61, 0.1) 0%, transparent 45%);
@@ -325,8 +325,13 @@
 }
 
 @media (max-width: 600px) {
+  .story-page {
+    padding-top: 64px;
+    padding-bottom: 40px;
+  }
+
   .story-hero {
-    padding: 96px 16px 32px;
+    padding: 18px 12px 26px;
   }
 
   .story-main-title {
@@ -347,11 +352,30 @@
     font-size: 22px;
   }
 
+  .verses-header {
+    margin-bottom: 24px;
+  }
+
   .verses-grid {
     grid-template-columns: 1fr;
-    gap: 20px;
-    max-width: 380px;
-    margin: 0 auto;
+    gap: 18px;
+    max-width: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  .verse-story-card {
+    width: 100%;
+    border-radius: 16px;
+  }
+
+  .verse-card-media {
+    height: 210px;
+  }
+
+  .verse-card-body {
+    padding: 18px 16px;
   }
 
   .conclusion-btns {
