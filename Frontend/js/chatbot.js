@@ -162,10 +162,8 @@ export function initChatbot() {
     `);
   }
 
-  function handleUserQuery(rawText) {
-    const q = rawText.toLowerCase();
-
-    // Hiển thị chỉ báo typing
+  async function handleUserQuery(rawText) {
+    // 1. Hiển thị chỉ báo typing
     const typing = document.createElement("div");
     typing.className = "chat-msg bot-msg typing-indicator";
     typing.innerHTML = `
@@ -175,34 +173,71 @@ export function initChatbot() {
     messagesEl.appendChild(typing);
     messagesEl.scrollTop = messagesEl.scrollHeight;
 
-    setTimeout(() => {
+    try {
+      // 2. Gửi request đến Vercel Serverless Function /api/chat (RAG + Gemini AI)
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: rawText }),
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        typing.remove();
+        if (data && data.reply) {
+          const formattedReply = formatMarkdownToHtml(data.reply);
+          addBotMessage(formattedReply);
+          return;
+        }
+      }
+      throw new Error("Không nhận được phản hồi hợp lệ từ API");
+    } catch (err) {
+      // Fallback: nếu đang chạy tĩnh offline / chưa deploy Vercel, dùng bộ máy tri thức cục bộ
       typing.remove();
-      const response = generateBotResponse(q);
-      addBotMessage(response);
-    }, 450);
+      const localReply = generateBotResponse(rawText.toLowerCase());
+      addBotMessage(localReply);
+    }
+  }
+
+  function formatMarkdownToHtml(md) {
+    if (!md) return "";
+    let html = escapeHtml(md);
+    // In đậm **text**
+    html = html.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+    // In nghiêng *text*
+    html = html.replace(/\*(.*?)\*/g, "<em>$1</em>");
+    // Danh sách gạch đầu dòng
+    html = html.replace(/^[•\-\*]\s+(.*)$/gm, "<li>$1</li>");
+    html = html.replace(/(<li>.*<\/li>)/s, "<ul style='padding-left:18px; margin:6px 0;'>$1</ul>");
+    // Xuống dòng đoạn văn
+    html = html.replace(/\n\n/g, "</p><p>");
+    html = html.replace(/\n/g, "<br/>");
+    return `<p>${html}</p>`;
   }
 
   function generateBotResponse(q) {
     // 1. Quà tặng / Tư vấn lựa chọn
     if (q.includes("quà") || q.includes("tặng") || q.includes("tư vấn")) {
+      const p1 = PRODUCTS[2] || PRODUCTS[0];
+      const p2 = PRODUCTS[1];
       return `
         <p>Để làm quà tặng ý nghĩa, <strong>Vè Dệt Vân Khăn</strong> xin gợi ý cho bạn 2 mẫu được yêu chuộng nhất:</p>
         <div class="bot-product-card">
-          <strong>1. Khăn Lụa Mã Châu - Hồn Tơ Xứ Quảng (180x50cm)</strong>
-          <p>Giá: ${formatCurrency(580000)} • Mang câu vè <em>"Ngó lên Hòn Kẽm Đá Dừng..."</em> - Rất trang trọng để biếu cha mẹ, thầy cô, đối tác ngoại giao.</p>
-          <a href="${getPageUrl("product-detail.html")}?id=2" class="bot-link">Xem chi tiết</a>
+          <strong>1. ${p1.name} (${p1.dimensions})</strong>
+          <p>Giá: ${formatCurrency(p1.price)} • Mang câu vè hiếu đạo <em>"Ngó lên Hòn Kẽm Đá Dừng..."</em> - Rất trang trọng để biếu cha mẹ, thầy cô, đối tác.</p>
+          <a href="${getPageUrl("product-detail.html")}?id=${p1.id}" class="bot-link">Xem chi tiết</a>
         </div>
         <div class="bot-product-card">
-          <strong>2. Khăn Lụa Mã Châu - Phố Cổ Hội An (70x70cm)</strong>
-          <p>Giá: ${formatCurrency(450000)} • Sắc vàng hoài niệm, phối áo dài hoặc dạo phố cực thanh lịch.</p>
-          <a href="${getPageUrl("product-detail.html")}?id=1" class="bot-link">Xem chi tiết</a>
+          <strong>2. ${p2.name} (${p2.dimensions})</strong>
+          <p>Giá: ${formatCurrency(p2.price)} • Sắc vàng hoài niệm, phối áo dài hoặc dạo phố cực thanh lịch.</p>
+          <a href="${getPageUrl("product-detail.html")}?id=${p2.id}" class="bot-link">Xem chi tiết</a>
         </div>
       `;
     }
 
     // 2. Hội An
     if (q.includes("hội an") || q.includes("sông hoài") || q.includes("hoa giấy")) {
-      const p = PRODUCTS[0];
+      const p = PRODUCTS[1];
       return `
         <p><strong>${p.name}</strong> (${formatCurrency(p.price)}):</p>
         <blockquote class="bot-quote">
@@ -213,24 +248,24 @@ export function initChatbot() {
         </blockquote>
         <p>${p.verseMeaning}</p>
         <div class="bot-actions">
-          <a href="${getPageUrl("product-detail.html")}?id=1" class="btn-primary" style="font-size:12px; padding:6px 14px;">Xem khăn Hội An</a>
-          <button type="button" class="btn-primary bot-action-add-cart" data-id="1" style="font-size:12px; padding:6px 14px; background:var(--gradient-pink);">Thêm vào giỏ</button>
+          <a href="${getPageUrl("product-detail.html")}?id=${p.id}" class="btn-primary" style="font-size:12px; padding:6px 14px;">Xem khăn Hội An</a>
+          <button type="button" class="btn-primary bot-action-add-cart" data-id="${p.id}" style="font-size:12px; padding:6px 14px; background:var(--gradient-pink);">Thêm vào giỏ</button>
         </div>
       `;
     }
 
     // 3. Lụa Mã Châu / Hồn tơ xứ Quảng / Hòn Kẽm
     if (q.includes("mã châu") || q.includes("hòn kẽm") || q.includes("hồn tơ") || q.includes("làng nghề")) {
-      const p = PRODUCTS[1];
+      const p = PRODUCTS[2];
       return `
-        <p><strong>Lụa Mã Châu (Duy Xuyên, Quảng Nam)</strong> có bề dày truyền thống hàng trăm năm bên dòng sông Thu Bồn:</p>
+        <p><strong>Lụa Mã Châu (Duy Xuyên, Quảng Nam)</strong> có bề dày truyền thống hơn 400 năm bên dòng sông Thu Bồn:</p>
         <ul>
           <li>100% sợi tơ tằm nguyên bản, mềm mát, óng ả tự nhiên.</li>
           <li>Nhuộm màu thảo mộc an toàn, phân hủy sinh học, bảo vệ môi trường.</li>
           <li>Khăn mang câu vè hiếu đạo: <em>"Ngó lên Hòn Kẽm Đá Dừng / Thương cha nhớ mẹ quá chừng bạn ơi..."</em></li>
         </ul>
         <div class="bot-actions">
-          <a href="${getPageUrl("product-detail.html")}?id=2" class="btn-primary" style="font-size:12px; padding:6px 14px;">Xem khăn Mã Châu</a>
+          <a href="${getPageUrl("product-detail.html")}?id=${p.id}" class="btn-primary" style="font-size:12px; padding:6px 14px;">Xem khăn Mã Châu</a>
           <a href="${getPageUrl("story.html")}" class="btn-link" style="font-size:12px;">Đọc câu chuyện làng nghề &rarr;</a>
         </div>
       `;
@@ -238,15 +273,17 @@ export function initChatbot() {
 
     // 4. Mỹ Sơn
     if (q.includes("mỹ sơn") || q.includes("chăm") || q.includes("đền tháp")) {
-      const p = PRODUCTS[2];
+      const p = PRODUCTS[0];
       return `
         <p><strong>${p.name}</strong> (${formatCurrency(p.price)}):</p>
-        <p>Khắc họa quần thể di sản thế giới Chăm Pa giữa thung lũng Duy Xuyên. Câu vè tình duyên xứ Quảng:</p>
+        <p>Khắc họa quần thể di sản thế giới Chăm Pa giữa thung lũng Duy Xuyên. Câu vè tinh thần đấu tranh:</p>
         <blockquote class="bot-quote">
-          "Ngồi buồn trách phận giận mình<br/>
-          Số chi ta sớm thành đôi bạn, số chi mình lửng lơ..."
+          "Căm thù ấy càng thêm nung nấu<br/>
+          Vác xác con lên thấu tỉnh đường<br/>
+          Súng nào ngăn nổi tình thương<br/>
+          Gươm nào gom nổi con đường đấu tranh"
         </blockquote>
-        <p><a href="${getPageUrl("product-detail.html")}?id=3" class="bot-link">Xem chi tiết sản phẩm này &rarr;</a></p>
+        <p><a href="${getPageUrl("product-detail.html")}?id=${p.id}" class="bot-link">Xem chi tiết sản phẩm này &rarr;</a></p>
       `;
     }
 
@@ -260,25 +297,27 @@ export function initChatbot() {
           "Ngày xưa măng lụi, tre tàn<br/>
           Ngày nay nô nức, xóm làng vui ca..."
         </blockquote>
-        <p><a href="${getPageUrl("product-detail.html")}?id=4" class="bot-link">Khám phá khăn Cầu Rồng &rarr;</a></p>
+        <p><a href="${getPageUrl("product-detail.html")}?id=${p.id}" class="bot-link">Khám phá khăn Cầu Rồng &rarr;</a></p>
       `;
     }
 
     // 6. Ngũ Hành Sơn
     if (q.includes("ngũ hành sơn") || q.includes("non nước")) {
+      const p = PRODUCTS[5];
       return `
-        <p><strong>Khăn Lụa Mã Châu - Ngũ Hành Sơn Non Nước</strong> (${formatCurrency(460000)}):</p>
+        <p><strong>${p.name}</strong> (${formatCurrency(p.price)}):</p>
         <p>Tôn vinh vẻ đẹp non nước mây trời và ý chí kiên định, son sắt của người miền Trung.</p>
-        <p><a href="${getPageUrl("product-detail.html")}?id=5" class="bot-link">Xem chi tiết khăn Ngũ Hành Sơn &rarr;</a></p>
+        <p><a href="${getPageUrl("product-detail.html")}?id=${p.id}" class="bot-link">Xem chi tiết khăn Ngũ Hành Sơn &rarr;</a></p>
       `;
     }
 
     // 7. Cù Lao Chàm / Du lịch xanh
     if (q.includes("cù lao chàm") || q.includes("biển") || q.includes("xanh") || q.includes("môi trường")) {
+      const p = PRODUCTS[4];
       return `
-        <p><strong>Khăn Lụa Mã Châu - Cù Lao Chàm Sắc Xanh</strong> (${formatCurrency(520000)}):</p>
+        <p><strong>${p.name}</strong> (${formatCurrency(p.price)}):</p>
         <p>Sản phẩm đại diện cho thông điệp <em>Du Lịch Xanh & Bảo Tồn Biển Đảo</em>, làm từ tơ tằm nguyên bản thân thiện với thiên nhiên.</p>
-        <p><a href="${getPageUrl("product-detail.html")}?id=6" class="bot-link">Xem chi tiết khăn Cù Lao Chàm &rarr;</a></p>
+        <p><a href="${getPageUrl("product-detail.html")}?id=${p.id}" class="bot-link">Xem chi tiết khăn Cù Lao Chàm &rarr;</a></p>
       `;
     }
 
@@ -287,7 +326,7 @@ export function initChatbot() {
       return `
         <p><strong>Hướng dẫn chăm sóc lụa Mã Châu chuẩn nghệ nhân:</strong></p>
         <ol style="padding-left: 18px; margin: 8px 0; font-size: 13px;">
-          <li>Giặt tay nhẹ nhàng với nước mát và dầu gội hoặc sữa tắm dịu nhẹ.</li>
+          <li>Giặt tay nhẹ nhàng với nước mát dưới 30°C và dầu gội hoặc sữa tắm dịu nhẹ.</li>
           <li>Không vắt xoắn mạnh; dùng khăn bông thấm bớt nước thừa.</li>
           <li>Phơi nơi râm mát, thoáng gió, tránh ánh nắng mặt trời trực tiếp.</li>
           <li>Là (ủi) ở nhiệt độ thấp khi khăn còn hơi ẩm, hoặc dùng bàn ủi hơi nước.</li>
@@ -295,21 +334,22 @@ export function initChatbot() {
       `;
     }
 
-    // 9. Bảng giá
-    if (q.includes("giá") || q.includes("bảng giá") || q.includes("bao nhiêu")) {
+    // 9. Bảng giá & Mua hàng
+    if (q.includes("giá") || q.includes("bảng giá") || q.includes("bao nhiêu") || q.includes("mua") || q.includes("đặt")) {
       return `
-        <p><strong>Bảng giá 6 mẫu khăn lụa Mã Châu chính hãng:</strong></p>
+        <p><strong>Bảng giá niêm yết 6 mẫu khăn lụa Mã Châu chính hãng:</strong></p>
         <ul style="padding-left: 16px; margin: 6px 0; font-size: 13px;">
           ${PRODUCTS.map((p) => `<li><strong>${p.name}:</strong> ${formatCurrency(p.price)} (${p.dimensions})</li>`).join("")}
         </ul>
-        <p><a href="${getPageUrl("products.html")}" class="bot-link">Xem danh sách đầy đủ tại Cửa Hàng &rarr;</a></p>
+        <p style="margin-top:8px;">🌿 Quý khách có thể kết nối trực tiếp **Hotline / Zalo: 0974 678 820** để được tư vấn chọn mẫu và đặt mua thủ công nhanh nhất ạ!</p>
+        <p><a href="${getPageUrl("payment.html")}" class="bot-link">Xem hướng dẫn kết nối Zalo &rarr;</a></p>
       `;
     }
 
     // Mặc định
     return `
       <p>Cảm ơn bạn đã quan tâm đến <strong>Vè Dệt Vân Khăn</strong>!</p>
-      <p>Bạn có thể hỏi mình về <em>giá khăn</em>, <em>câu chuyện lụa Mã Châu</em>, <em>ý nghĩa 6 câu vè</em>, hoặc bấm chọn các mục gợi ý bên dưới để mình hỗ trợ ngay nhé.</p>
+      <p>Bạn có thể hỏi mình về <em>giá khăn</em>, <em>câu chuyện lụa Mã Châu</em>, <em>ý nghĩa 6 câu vè</em>, hoặc kết nối Hotline/Zalo <strong>0974 678 820</strong> để nhóm tư vấn ngay nhé.</p>
     `;
   }
 

@@ -1,0 +1,12 @@
+{
+  "name": "ve-det-van-khan",
+  "version": "1.0.0",
+  "description": "Website Vè Dệt Vân Khăn - Khăn Lụa Mã Châu & Văn Hóa Xứ Quảng",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.24.0"
+  }
+}
