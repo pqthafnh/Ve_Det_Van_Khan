@@ -150,21 +150,22 @@ Hãy đóng vai Trợ lý Lụa Xứ Quảng, dựa vào DỮ LIỆU TRÊN để
 
     // 5. THỬ GỌI GOOGLE GEMINI BẰNG DIRECT REST API TRƯỚC (NHANH & ỔN ĐỊNH NHẤT TRÊN VERCEL SERVERLESS)
     const candidateModels = [
-      "gemini-2.5-flash",
       "gemini-flash-latest",
       "gemini-flash-lite-latest",
-      "gemini-2.5-pro",
-      "gemini-2.0-flash",
-      "gemini-1.5-flash",
+      "gemini-2.5-flash",
     ];
 
     const modelErrors = [];
 
     for (const modelName of candidateModels) {
       try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 6000);
+
         const restUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
         const restResponse = await fetch(restUrl, {
           method: "POST",
+          signal: controller.signal,
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             contents: [
@@ -183,6 +184,7 @@ Hãy đóng vai Trợ lý Lụa Xứ Quảng, dựa vào DỮ LIỆU TRÊN để
           }),
         });
 
+        clearTimeout(timeoutId);
         const restData = await restResponse.json();
 
         if (restResponse.ok && restData.candidates && restData.candidates[0]?.content?.parts?.[0]?.text) {
@@ -205,7 +207,7 @@ Hãy đóng vai Trợ lý Lụa Xứ Quảng, dựa vào DỮ LIỆU TRÊN để
     try {
       const genAI = new GoogleGenerativeAI(apiKey);
       const model = genAI.getGenerativeModel({
-        model: "gemini-2.5-flash",
+        model: "gemini-flash-latest",
         systemInstruction: SYSTEM_INSTRUCTION,
       });
       const result = await model.generateContent(augmentedPrompt);
