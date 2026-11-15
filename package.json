@@ -4,9 +4,13 @@
   "description": "Website Vè Dệt Vân Khăn - Khăn Lụa Mã Châu & Văn Hóa Xứ Quảng",
   "type": "module",
   "scripts": {
+    "build": "echo 'Build OK'",
     "start": "node server.js",
     "build:sass": "sass Frontend/scss:Frontend/css --no-source-map --style=expanded",
     "watch:sass": "sass --watch Frontend/scss:Frontend/css"
+  },
+  "engines": {
+    "node": ">=18.x"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.0"
