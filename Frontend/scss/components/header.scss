@@ -1,0 +1,456 @@
+// =========================================================
+// COMPONENT: HEADER (THANH ĐIỀU HƯỚNG NỔI & MOBILE DRAWER)
+// Thiết kế Refined Green Glassmorphism & Chuẩn hóa Responsive
+// =========================================================
+
+@use '../abstracts' as *;
+
+.header {
+  position: absolute;
+  z-index: 1000;
+  top: 20px;
+  left: 50%;
+  width: min(1180px, calc(100% - 48px));
+  height: 64px;
+  transform: translateX(-50%);
+
+  @include respond-to('lg') {
+    width: calc(100% - 32px);
+  }
+
+  @include respond-to('tablet') {
+    top: 12px;
+    width: calc(100% - 20px);
+    height: 56px;
+  }
+}
+
+.navbar {
+  width: 100%;
+  height: 100%;
+
+  &-container {
+    display: grid;
+    grid-template-columns: 210px 1fr auto;
+    width: 100%;
+    height: 100%;
+    padding: 0 20px;
+    align-items: center;
+    column-gap: 24px;
+    border: 1px solid rgba(123, 150, 61, 0.3);
+    border-radius: $radius-pill;
+    background-color: rgba(255, 253, 251, 0.94);
+    box-shadow: $shadow-header;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    position: relative;
+
+    @include respond-to('lg') {
+      grid-template-columns: 170px 1fr auto;
+      column-gap: 16px;
+      padding: 0 16px;
+    }
+
+    @include respond-to('tablet') {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 14px;
+      height: 100%;
+      border-radius: $radius-pill;
+    }
+  }
+
+  // 1. LOGO BRAND
+  &-brand {
+    display: flex;
+    min-width: 0;
+    height: 100%;
+    align-items: center;
+    justify-content: flex-start;
+
+    @include respond-to('tablet') {
+      flex: 0 0 auto;
+    }
+
+    a {
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+
+    .logo {
+      display: block;
+      width: 180px;
+      height: 48px;
+      object-fit: contain;
+      object-position: left center;
+      transition: transform var(--transition, #{$transition});
+
+      &:hover {
+        transform: scale(1.02);
+      }
+
+      @include respond-to('lg') {
+        width: 150px;
+      }
+
+      @include respond-to('tablet') {
+        width: 126px;
+        height: 38px;
+      }
+
+      @include respond-to('xs') {
+        width: 110px;
+      }
+    }
+  }
+
+  // 2. MENU ĐIỀU HƯỚNG CHÍNH
+  &-menu {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    white-space: nowrap;
+
+    @include respond-to('lg') {
+      gap: 20px;
+    }
+
+    // Khi ở tablet/mobile chuyển thành dropdown panel
+    @include respond-to('tablet') {
+      position: absolute;
+      top: 64px;
+      left: 0;
+      width: 100%;
+      height: auto;
+      background: rgba(255, 253, 251, 0.98);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--color-border-green, #{$color-border-green});
+      border-radius: 20px;
+      box-shadow: 0 16px 36px rgba(53, 91, 53, 0.2);
+      padding: 16px 14px;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 6px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px);
+      transition: opacity 240ms ease, transform 240ms ease, visibility 240ms ease;
+      z-index: 1001;
+
+      &.open {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+    }
+  }
+
+  // 3. MENU ITEM
+  &-item {
+    position: relative;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    color: var(--color-text, #{$color-text});
+    font-size: 14.5px;
+    font-weight: 500;
+    line-height: 1;
+    transition: color 200ms ease, font-weight 200ms ease;
+
+    @include respond-to('lg') {
+      font-size: 13.5px;
+    }
+
+    &:hover,
+    &.active {
+      color: var(--color-green-deep, #{$color-green-deep});
+      font-weight: 700;
+
+      &::after {
+        transform: scaleX(1);
+      }
+    }
+
+    // Gạch chân xanh ngọc bích trên Desktop
+    &::after {
+      position: absolute;
+      right: 0;
+      bottom: 14px;
+      left: 0;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--gradient-green, #{$gradient-green});
+      content: "";
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 200ms ease;
+    }
+
+    @include respond-to('tablet') {
+      height: 44px;
+      padding: 0 16px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--color-text, #{$color-text});
+      transition: background 150ms ease, color 150ms ease;
+
+      &:hover,
+      &.active {
+        background-color: var(--color-secondary-soft, #{$color-secondary-soft});
+        color: var(--color-secondary-dark, #{$color-secondary-dark});
+      }
+
+      &::after {
+        display: none;
+      }
+    }
+  }
+
+  // 4. KHU VỰC BÊN PHẢI (SEARCH & CART)
+  &-end {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+
+    @include respond-to('xs') {
+      gap: 8px;
+    }
+  }
+}
+
+// 5. Ô TÌM KIẾM
+.search {
+  display: flex;
+  width: 190px;
+  height: 38px;
+  padding: 0 4px 0 14px;
+  align-items: center;
+  border: 1px solid var(--color-border-green, #{$color-border-green});
+  border-radius: $radius-pill;
+  background-color: rgba(255, 255, 255, 0.95);
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+
+  @include respond-to('lg') {
+    width: 160px;
+  }
+
+  @include respond-to('tablet') {
+    display: none;
+  }
+
+  &:focus-within {
+    border-color: var(--color-secondary, #{$color-secondary});
+    box-shadow: 0 0 0 3px rgba(123, 150, 61, 0.15);
+  }
+
+  input {
+    width: 100%;
+    min-width: 0;
+    height: 100%;
+    padding: 0 8px 0 0;
+    border: 0;
+    outline: 0;
+    color: var(--color-text, #{$color-text});
+    background-color: transparent;
+    font-size: 13px;
+
+    &::placeholder {
+      color: $color-text-muted;
+      font-size: 12.5px;
+    }
+  }
+
+  button {
+    display: grid;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    flex: 0 0 30px;
+    place-items: center;
+    border: 1px solid var(--color-border-green, #{$color-border-green});
+    border-radius: 50%;
+    color: var(--color-green-deep, #{$color-green-deep});
+    background-color: #ffffff;
+    cursor: pointer;
+    transition: all 200ms ease;
+
+    &:hover {
+      border-color: var(--color-secondary, #{$color-secondary});
+      color: #ffffff;
+      background-color: var(--color-secondary, #{$color-secondary});
+      transform: scale(1.05);
+    }
+
+    svg {
+      width: 15px;
+      height: 15px;
+    }
+  }
+}
+
+// 6. GIỎ HÀNG NÚT
+.buy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &-button {
+    position: relative;
+    display: grid;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    flex: 0 0 38px;
+    place-items: center;
+    border: 1px solid var(--color-border-green, #{$color-border-green});
+    border-radius: 50%;
+    color: var(--color-green-deep, #{$color-green-deep});
+    background-color: rgba(255, 255, 255, 0.95);
+    cursor: pointer;
+    transition: all 200ms ease;
+    box-shadow: 0 2px 8px rgba(53, 91, 53, 0.08);
+
+    @include respond-to('xs') {
+      width: 36px;
+      height: 36px;
+    }
+
+    &:hover {
+      border-color: var(--color-secondary, #{$color-secondary});
+      color: #ffffff;
+      background-color: var(--color-secondary, #{$color-secondary});
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(53, 91, 53, 0.2);
+    }
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+.cart-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: $radius-pill;
+  background: var(--gradient-green, #{$gradient-green});
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1;
+  box-shadow: 0 2px 6px rgba(53, 91, 53, 0.35);
+}
+
+// 7. HAMBURGER NÚT MOBILE
+.mobile-menu-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 1px solid var(--color-border-green, #{$color-border-green});
+  border-radius: 50%;
+  background-color: #ffffff;
+  color: var(--color-green-deep, #{$color-green-deep});
+  cursor: pointer;
+  transition: all 200ms ease;
+  box-shadow: 0 2px 6px rgba(53, 91, 53, 0.08);
+
+  @include respond-to('tablet') {
+    display: flex;
+  }
+
+  @include respond-to('xs') {
+    width: 36px;
+    height: 36px;
+  }
+
+  &:hover {
+    background-color: var(--color-secondary-soft, #{$color-secondary-soft});
+    border-color: var(--color-secondary, #{$color-secondary});
+  }
+
+  .hamburger-bar {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background-color: currentColor;
+    border-radius: 2px;
+    transition: transform 250ms ease, opacity 250ms ease;
+  }
+
+  &.active {
+    .hamburger-bar:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+    .hamburger-bar:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger-bar:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+  }
+}
+
+// 8. FORM TÌM KIẾM TRONG DROPDOWN MOBILE
+.mobile-search-form {
+  display: flex;
+  margin-top: 8px;
+  padding-top: 10px;
+  border-top: 1px solid var(--color-border, #{$color-border});
+
+  input {
+    flex: 1;
+    height: 38px;
+    padding: 0 12px;
+    border: 1px solid var(--color-border-green, #{$color-border-green});
+    border-radius: $radius-pill 0 0 $radius-pill;
+    font-size: 13px;
+    background: var(--color-background, #{$color-background});
+  }
+
+  button {
+    height: 38px;
+    padding: 0 16px;
+    border: 1px solid var(--color-secondary, #{$color-secondary});
+    border-radius: 0 $radius-pill $radius-pill 0;
+    background: var(--color-secondary, #{$color-secondary});
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+  }
+}
+
+// 9. HOTLINE ZALO LIÊN HỆ TRONG MOBILE DRAWER
+.mobile-menu-contact {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: rgba(123, 150, 61, 0.1);
+  color: var(--color-green-deep, #{$color-green-deep});
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+}

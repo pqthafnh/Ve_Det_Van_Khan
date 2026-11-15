@@ -1,23 +1,29 @@
-/* =========================================================
-   HEADER NỔI TRÊN HERO - VÈ DỆT VÂN KHĂN
-   Thiết kế Refined Green Glassmorphism & Chuẩn hóa Mobile Responsive
-   ========================================================= */
-
 .header {
   position: absolute;
   z-index: 1000;
   top: 20px;
   left: 50%;
-  width: min(1180px, calc(100% - 48px));
+  width: min(1180px, 100% - 48px);
   height: 64px;
   transform: translateX(-50%);
+}
+@media (max-width: 1024px) {
+  .header {
+    width: calc(100% - 32px);
+  }
+}
+@media (max-width: 850px) {
+  .header {
+    top: 12px;
+    width: calc(100% - 20px);
+    height: 56px;
+  }
 }
 
 .navbar {
   width: 100%;
   height: 100%;
 }
-
 .navbar-container {
   display: grid;
   grid-template-columns: 210px 1fr auto;
@@ -29,18 +35,28 @@
   border: 1px solid rgba(123, 150, 61, 0.3);
   border-radius: 999px;
   background-color: rgba(255, 253, 251, 0.94);
-  box-shadow:
-    0 10px 30px rgba(53, 91, 53, 0.14),
-    0 2px 8px rgba(53, 91, 53, 0.06);
+  box-shadow: 0 10px 30px rgba(53, 91, 53, 0.14), 0 2px 8px rgba(53, 91, 53, 0.06);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   position: relative;
 }
-
-/* =========================================================
-   LOGO
-   ========================================================= */
-
+@media (max-width: 1024px) {
+  .navbar-container {
+    grid-template-columns: 170px 1fr auto;
+    column-gap: 16px;
+    padding: 0 16px;
+  }
+}
+@media (max-width: 850px) {
+  .navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 14px;
+    height: 100%;
+    border-radius: 999px;
+  }
+}
 .navbar-brand {
   display: flex;
   min-width: 0;
@@ -48,30 +64,43 @@
   align-items: center;
   justify-content: flex-start;
 }
-
+@media (max-width: 850px) {
+  .navbar-brand {
+    flex: 0 0 auto;
+  }
+}
 .navbar-brand a {
   display: flex;
   align-items: center;
   height: 100%;
 }
-
 .navbar-brand .logo {
   display: block;
   width: 180px;
   height: 48px;
   object-fit: contain;
   object-position: left center;
-  transition: transform var(--transition);
+  transition: transform var(--transition, 200ms ease);
 }
-
 .navbar-brand .logo:hover {
   transform: scale(1.02);
 }
-
-/* =========================================================
-   MENU ĐIỀU HƯỚNG
-   ========================================================= */
-
+@media (max-width: 1024px) {
+  .navbar-brand .logo {
+    width: 150px;
+  }
+}
+@media (max-width: 850px) {
+  .navbar-brand .logo {
+    width: 126px;
+    height: 38px;
+  }
+}
+@media (max-width: 380px) {
+  .navbar-brand .logo {
+    width: 110px;
+  }
+}
 .navbar-menu {
   display: flex;
   height: 100%;
@@ -80,26 +109,63 @@
   gap: 28px;
   white-space: nowrap;
 }
-
+@media (max-width: 1024px) {
+  .navbar-menu {
+    gap: 20px;
+  }
+}
+@media (max-width: 850px) {
+  .navbar-menu {
+    position: absolute;
+    top: 64px;
+    left: 0;
+    width: 100%;
+    height: auto;
+    background: rgba(255, 253, 251, 0.98);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--color-border-green, #cfd9bd);
+    border-radius: 20px;
+    box-shadow: 0 16px 36px rgba(53, 91, 53, 0.2);
+    padding: 16px 14px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity 240ms ease, transform 240ms ease, visibility 240ms ease;
+    z-index: 1001;
+  }
+  .navbar-menu.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
 .navbar-item {
   position: relative;
   display: flex;
   height: 100%;
   align-items: center;
-  color: var(--color-text);
+  color: var(--color-text, #242821);
   font-size: 14.5px;
   font-weight: 500;
   line-height: 1;
   transition: color 200ms ease, font-weight 200ms ease;
 }
-
-.navbar-item:hover,
-.navbar-item.active {
-  color: var(--color-green-deep);
+@media (max-width: 1024px) {
+  .navbar-item {
+    font-size: 13.5px;
+  }
+}
+.navbar-item:hover, .navbar-item.active {
+  color: var(--color-green-deep, #355b35);
   font-weight: 700;
 }
-
-/* Gạch chân xanh ngọc bích */
+.navbar-item:hover::after, .navbar-item.active::after {
+  transform: scaleX(1);
+}
 .navbar-item::after {
   position: absolute;
   right: 0;
@@ -107,47 +173,67 @@
   left: 0;
   height: 2px;
   border-radius: 2px;
-  background: var(--gradient-green);
+  background: var(--gradient-green, linear-gradient(135deg, #355b35 0%, #7b963d 100%));
   content: "";
   transform: scaleX(0);
   transform-origin: center;
   transition: transform 200ms ease;
 }
-
-.navbar-item:hover::after,
-.navbar-item.active::after {
-  transform: scaleX(1);
+@media (max-width: 850px) {
+  .navbar-item {
+    height: 44px;
+    padding: 0 16px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-text, #242821);
+    transition: background 150ms ease, color 150ms ease;
+  }
+  .navbar-item:hover, .navbar-item.active {
+    background-color: var(--color-secondary-soft, #eef3df);
+    color: var(--color-secondary-dark, #4d672c);
+  }
+  .navbar-item::after {
+    display: none;
+  }
 }
-
-/* =========================================================
-   KHU VỰC BÊN PHẢI (SEARCH, CART, MOBILE BTN)
-   ========================================================= */
-
 .navbar-end {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 12px;
 }
+@media (max-width: 380px) {
+  .navbar-end {
+    gap: 8px;
+  }
+}
 
-/* Tìm kiếm */
 .search {
   display: flex;
   width: 190px;
   height: 38px;
   padding: 0 4px 0 14px;
   align-items: center;
-  border: 1px solid var(--color-border-green);
+  border: 1px solid var(--color-border-green, #cfd9bd);
   border-radius: 999px;
   background-color: rgba(255, 255, 255, 0.95);
   transition: border-color 200ms ease, box-shadow 200ms ease;
 }
-
+@media (max-width: 1024px) {
+  .search {
+    width: 160px;
+  }
+}
+@media (max-width: 850px) {
+  .search {
+    display: none;
+  }
+}
 .search:focus-within {
-  border-color: var(--color-secondary);
+  border-color: var(--color-secondary, #7b963d);
   box-shadow: 0 0 0 3px rgba(123, 150, 61, 0.15);
 }
-
 .search input {
   width: 100%;
   min-width: 0;
@@ -155,16 +241,14 @@
   padding: 0 8px 0 0;
   border: 0;
   outline: 0;
-  color: var(--color-text);
+  color: var(--color-text, #242821);
   background-color: transparent;
   font-size: 13px;
 }
-
 .search input::placeholder {
   color: #8b8f87;
   font-size: 12.5px;
 }
-
 .search button {
   display: grid;
   width: 30px;
@@ -172,33 +256,29 @@
   padding: 0;
   flex: 0 0 30px;
   place-items: center;
-  border: 1px solid var(--color-border-green);
+  border: 1px solid var(--color-border-green, #cfd9bd);
   border-radius: 50%;
-  color: var(--color-green-deep);
+  color: var(--color-green-deep, #355b35);
   background-color: #ffffff;
   cursor: pointer;
   transition: all 200ms ease;
 }
-
 .search button:hover {
-  border-color: var(--color-secondary);
+  border-color: var(--color-secondary, #7b963d);
   color: #ffffff;
-  background-color: var(--color-secondary);
+  background-color: var(--color-secondary, #7b963d);
   transform: scale(1.05);
 }
-
 .search button svg {
   width: 15px;
   height: 15px;
 }
 
-/* Giỏ hàng */
 .buy {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
 .buy-button {
   position: relative;
   display: grid;
@@ -207,23 +287,27 @@
   padding: 0;
   flex: 0 0 38px;
   place-items: center;
-  border: 1px solid var(--color-border-green);
+  border: 1px solid var(--color-border-green, #cfd9bd);
   border-radius: 50%;
-  color: var(--color-green-deep);
+  color: var(--color-green-deep, #355b35);
   background-color: rgba(255, 255, 255, 0.95);
   cursor: pointer;
   transition: all 200ms ease;
   box-shadow: 0 2px 8px rgba(53, 91, 53, 0.08);
 }
-
+@media (max-width: 380px) {
+  .buy-button {
+    width: 36px;
+    height: 36px;
+  }
+}
 .buy-button:hover {
-  border-color: var(--color-secondary);
+  border-color: var(--color-secondary, #7b963d);
   color: #ffffff;
-  background-color: var(--color-secondary);
+  background-color: var(--color-secondary, #7b963d);
   transform: translateY(-2px);
   box-shadow: 0 6px 14px rgba(53, 91, 53, 0.2);
 }
-
 .buy-button svg {
   width: 18px;
   height: 18px;
@@ -240,17 +324,13 @@
   height: 18px;
   padding: 0 4px;
   border-radius: 999px;
-  background: var(--gradient-green);
+  background: var(--gradient-green, linear-gradient(135deg, #355b35 0%, #7b963d 100%));
   color: #ffffff;
   font-size: 10px;
   font-weight: 700;
   line-height: 1;
   box-shadow: 0 2px 6px rgba(53, 91, 53, 0.35);
 }
-
-/* =========================================================
-   NÚT HAMBURGER MOBILE
-   ========================================================= */
 
 .mobile-menu-btn {
   display: none;
@@ -261,21 +341,30 @@
   width: 38px;
   height: 38px;
   padding: 0;
-  border: 1px solid var(--color-border-green);
+  border: 1px solid var(--color-border-green, #cfd9bd);
   border-radius: 50%;
   background-color: #ffffff;
-  color: var(--color-green-deep);
+  color: var(--color-green-deep, #355b35);
   cursor: pointer;
   transition: all 200ms ease;
   box-shadow: 0 2px 6px rgba(53, 91, 53, 0.08);
 }
-
-.mobile-menu-btn:hover {
-  background-color: var(--color-secondary-soft);
-  border-color: var(--color-secondary);
+@media (max-width: 850px) {
+  .mobile-menu-btn {
+    display: flex;
+  }
 }
-
-.hamburger-bar {
+@media (max-width: 380px) {
+  .mobile-menu-btn {
+    width: 36px;
+    height: 36px;
+  }
+}
+.mobile-menu-btn:hover {
+  background-color: var(--color-secondary-soft, #eef3df);
+  border-color: var(--color-secondary, #7b963d);
+}
+.mobile-menu-btn .hamburger-bar {
   display: block;
   width: 18px;
   height: 2px;
@@ -283,196 +372,53 @@
   border-radius: 2px;
   transition: transform 250ms ease, opacity 250ms ease;
 }
-
 .mobile-menu-btn.active .hamburger-bar:nth-child(1) {
   transform: translateY(6px) rotate(45deg);
 }
-
 .mobile-menu-btn.active .hamburger-bar:nth-child(2) {
   opacity: 0;
 }
-
 .mobile-menu-btn.active .hamburger-bar:nth-child(3) {
   transform: translateY(-6px) rotate(-45deg);
 }
 
-/* =========================================================
-   RESPONSIVE TABLET & MOBILE
-   ========================================================= */
-
-@media (max-width: 1024px) {
-  .header {
-    width: calc(100% - 32px);
-  }
-
-  .navbar-container {
-    grid-template-columns: 170px 1fr auto;
-    column-gap: 16px;
-    padding: 0 16px;
-  }
-
-  .navbar-brand .logo {
-    width: 150px;
-  }
-
-  .navbar-menu {
-    gap: 20px;
-  }
-
-  .navbar-item {
-    font-size: 13.5px;
-  }
-
-  .search {
-    width: 160px;
-  }
+.mobile-search-form {
+  display: flex;
+  margin-top: 8px;
+  padding-top: 10px;
+  border-top: 1px solid var(--color-border, #e4e6dc);
+}
+.mobile-search-form input {
+  flex: 1;
+  height: 38px;
+  padding: 0 12px;
+  border: 1px solid var(--color-border-green, #cfd9bd);
+  border-radius: 999px 0 0 999px;
+  font-size: 13px;
+  background: var(--color-background, #fffdfb);
+}
+.mobile-search-form button {
+  height: 38px;
+  padding: 0 16px;
+  border: 1px solid var(--color-secondary, #7b963d);
+  border-radius: 0 999px 999px 0;
+  background: var(--color-secondary, #7b963d);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
 }
 
-@media (max-width: 850px) {
-  .header {
-    top: 12px;
-    width: calc(100% - 20px);
-    height: 56px;
-  }
-
-  .navbar-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 14px;
-    height: 100%;
-    border-radius: 999px;
-  }
-
-  .navbar-brand {
-    flex: 0 0 auto;
-  }
-
-  .navbar-brand .logo {
-    width: 126px;
-    height: 38px;
-  }
-
-  /* Ẩn search trên thanh header ngang mobile */
-  .search {
-    display: none;
-  }
-
-  .mobile-menu-btn {
-    display: flex;
-  }
-
-  /* Dropdown Menu trên mobile */
-  .navbar-menu {
-    position: absolute;
-    top: 64px;
-    left: 0;
-    width: 100%;
-    height: auto;
-    background: rgba(255, 253, 251, 0.98);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid var(--color-border-green);
-    border-radius: 20px;
-    box-shadow: 0 16px 36px rgba(53, 91, 53, 0.2);
-    padding: 16px 14px;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 6px;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-8px);
-    transition: opacity 240ms ease, transform 240ms ease, visibility 240ms ease;
-    z-index: 1001;
-  }
-
-  .navbar-menu.open {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-
-  .navbar-item {
-    display: flex;
-    align-items: center;
-    height: 44px;
-    padding: 0 16px;
-    border-radius: 12px;
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--color-text);
-    transition: background 150ms ease, color 150ms ease;
-  }
-
-  .navbar-item:hover,
-  .navbar-item.active {
-    background-color: var(--color-secondary-soft);
-    color: var(--color-secondary-dark);
-  }
-
-  .navbar-item::after {
-    display: none; /* Không cần gạch chân desktop trên menu dọc mobile */
-  }
-
-  /* Search box lồng trong mobile menu */
-  .mobile-search-form {
-    display: flex;
-    margin-top: 8px;
-    padding-top: 10px;
-    border-top: 1px solid var(--color-border);
-  }
-
-  .mobile-search-form input {
-    flex: 1;
-    height: 38px;
-    padding: 0 12px;
-    border: 1px solid var(--color-border-green);
-    border-radius: 999px 0 0 999px;
-    font-size: 13px;
-    background: var(--color-background);
-  }
-
-  .mobile-search-form button {
-    height: 38px;
-    padding: 0 16px;
-    border: 1px solid var(--color-secondary);
-    border-radius: 0 999px 999px 0;
-    background: var(--color-secondary);
-    color: #ffffff;
-    font-size: 13px;
-    font-weight: 600;
-  }
-
-  /* Hotline Zalo liên hệ trong mobile menu */
-  .mobile-menu-contact {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 10px;
-    padding: 10px 14px;
-    border-radius: 12px;
-    background: rgba(123, 150, 61, 0.1);
-    color: var(--color-green-deep);
-    font-size: 13px;
-    font-weight: 600;
-    text-decoration: none;
-  }
-}
-
-@media (max-width: 380px) {
-  .navbar-brand .logo {
-    width: 110px;
-  }
-
-  .navbar-end {
-    gap: 8px;
-  }
-
-  .buy-button,
-  .mobile-menu-btn {
-    width: 36px;
-    height: 36px;
-  }
+.mobile-menu-contact {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: rgba(123, 150, 61, 0.1);
+  color: var(--color-green-deep, #355b35);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
 }

@@ -1,0 +1,30 @@
+// =========================================================
+// MAIN ENTRY: STYLE.SCSS - VÈ DỆT VÂN KHĂN
+// Kiến trúc Sass 7-1 Architecture chuẩn mực
+// =========================================================
+
+// 1. ABSTRACTS (Biến, Mixin, Hàm)
+@use 'abstracts' as *;
+
+// 2. BASE (Reset trình duyệt, Typography)
+@use 'base/reset';
+@use 'base/typography';
+
+// 3. LAYOUT (Container, Grid hệ thống)
+@use 'layout/container';
+@use 'layout/grid';
+
+// 4. COMPONENTS (Thành phần giao diện tái sử dụng)
+@use 'components/buttons';
+@use 'components/header';
+@use 'components/footer';
+@use 'components/product-card';
+@use 'components/form';
+@use 'components/chatbot';
+
+// 5. PAGES (Giao diện từng trang cụ thể)
+@use 'pages/home';
+@use 'pages/products';
+@use 'pages/product-detail';
+@use 'pages/story';
+@use 'pages/payment';

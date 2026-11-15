@@ -1,0 +1,29 @@
+// =========================================================
+// ABSTRACTS: FUNCTIONS (HÀM TIỆN ÍCH SASS)
+// Dự án: Vè Dệt Vân Khăn
+// =========================================================
+
+@use 'sass:math';
+
+// 1. CHUYỂN ĐỔI PIXEL SANG REM
+// Ví dụ: rem(16px) => 1rem
+@function rem($pixel, $base: 16px) {
+  @if not math.is-unitless($pixel) {
+    $pixel: math.div($pixel, 1px);
+  }
+  @if not math.is-unitless($base) {
+    $base: math.div($base, 1px);
+  }
+  @return math.div($pixel, $base) * 1rem;
+}
+
+// 2. CHUYỂN ĐỔI PIXEL SANG EM
+@function em($pixel, $base: 16px) {
+  @if not math.is-unitless($pixel) {
+    $pixel: math.div($pixel, 1px);
+  }
+  @if not math.is-unitless($base) {
+    $base: math.div($base, 1px);
+  }
+  @return math.div($pixel, $base) * 1em;
+}

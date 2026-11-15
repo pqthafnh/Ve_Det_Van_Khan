@@ -1,3 +1,20 @@
+h1, h2, h3 {
+  font-family: var(--font-display, Playfair Display, Cormorant Garamond, Georgia, Times New Roman, serif);
+  letter-spacing: -0.01em;
+}
+
+blockquote,
+.verse-lines,
+.product-verse-brief,
+.verse-card-poem {
+  font-family: var(--font-verse, Cormorant Garamond, Playfair Display, Georgia, serif);
+}
+
+::selection {
+  color: #ffffff;
+  background-color: var(--color-primary, #df5b64);
+}
+
 *,
 *::before,
 *::after {
@@ -10,30 +27,15 @@ html {
 
 body {
   margin: 0;
-
-  color: var(--color-text);
-  background-color: var(--color-background);
-
-  font-family: var(--font-main);
+  color: var(--color-text, #242821);
+  background-color: var(--color-background, #fffdfb);
+  font-family: var(--font-main, Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif);
   font-size: 15px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-
   overflow-x: hidden;
-}
-
-h1, h2, h3 {
-  font-family: var(--font-display);
-  letter-spacing: -0.01em;
-}
-
-blockquote,
-.verse-lines,
-.product-verse-brief,
-.verse-card-poem {
-  font-family: var(--font-verse);
 }
 
 img,
@@ -58,9 +60,4 @@ select {
 
 button {
   cursor: pointer;
-}
-
-::selection {
-  color: #ffffff;
-  background-color: var(--color-primary);
 }

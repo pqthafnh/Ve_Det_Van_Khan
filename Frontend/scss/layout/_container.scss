@@ -1,0 +1,20 @@
+// =========================================================
+// LAYOUT: CONTAINER & ALIGNMENT
+// =========================================================
+
+@use '../abstracts' as *;
+
+.container {
+  width: min(var(--container-width, #{$container-width}), calc(100% - (var(--page-gutter, #{$page-gutter}) * 2)));
+  margin-inline: auto;
+}
+
+.text-center {
+  text-align: center;
+}
+
+@include respond-to('mobile') {
+  :root {
+    --page-gutter: #{$page-gutter-mobile};
+  }
+}

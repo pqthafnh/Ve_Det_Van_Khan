@@ -1,112 +1,88 @@
 .btn-primary {
   display: inline-flex;
-
-  min-height: 42px;
-  padding: 9px 22px;
-
   align-items: center;
   justify-content: center;
-
-  border: 1px solid var(--color-secondary-dark);
-  border-radius: var(--radius-pill);
-
-  color: #ffffff;
-  background: var(--gradient-green);
-
+  min-height: 42px;
+  padding: 9px 22px;
   font-size: 13px;
   font-weight: 700;
-
+  border-radius: 999px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 200ms ease;
+  border: 1px solid var(--color-secondary-dark, #4d672c);
+  color: #ffffff;
+  background: var(--gradient-green, linear-gradient(135deg, #355b35 0%, #7b963d 100%));
   box-shadow: 0 6px 16px rgba(53, 91, 53, 0.2);
-
-  transition:
-    border-color var(--transition),
-    background var(--transition),
-    box-shadow var(--transition),
-    transform var(--transition);
 }
-
 .btn-primary:hover {
-  border-color: var(--color-primary);
-
-  background: var(--gradient-pink);
-
-  box-shadow: var(--shadow-pink);
-
+  border-color: var(--color-primary, #df5b64);
+  background: var(--gradient-pink, linear-gradient(135deg, #df5b64 0%, #ef8589 100%));
+  box-shadow: var(--shadow-pink, 0 8px 20px rgba(223, 91, 100, 0.22));
   transform: translateY(-2px);
 }
 
-.btn-link,
-.view-all-link {
-  display: inline-flex;
-
-  align-items: center;
-  gap: 7px;
-
-  color: var(--color-secondary-dark);
-
-  font-weight: 700;
-
-  transition:
-    color var(--transition),
-    transform var(--transition);
-}
-
-.btn-link:hover,
-.view-all-link:hover {
-  color: var(--color-primary);
-
-  transform: translateX(4px);
-}
-
-
-/* =========================================================
-   CÁC BIẾN THỂ NÚT BỔ SUNG CHO TRANG CON
-   ========================================================= */
-
 .btn-secondary {
   display: inline-flex;
-  min-height: 42px;
-  padding: 9px 22px;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--color-border-green);
-  border-radius: var(--radius-pill);
-  color: var(--color-secondary-dark);
-  background: #ffffff;
+  min-height: 42px;
+  padding: 9px 22px;
   font-size: 13px;
   font-weight: 700;
+  border-radius: 999px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 200ms ease;
+  border: 1px solid var(--color-border-green, #cfd9bd);
+  color: var(--color-secondary-dark, #4d672c);
+  background: #ffffff;
   box-shadow: 0 4px 12px rgba(53, 91, 53, 0.08);
-  transition: all var(--transition);
 }
-
 .btn-secondary:hover {
-  border-color: var(--color-secondary);
+  border-color: var(--color-secondary, #7b963d);
   color: #ffffff;
-  background: var(--gradient-green);
+  background: var(--gradient-green, linear-gradient(135deg, #355b35 0%, #7b963d 100%));
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(53, 91, 53, 0.2);
 }
 
 .btn-coral {
   display: inline-flex;
-  min-height: 42px;
-  padding: 9px 22px;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--color-primary);
-  border-radius: var(--radius-pill);
-  color: #ffffff;
-  background: var(--gradient-pink);
+  min-height: 42px;
+  padding: 9px 22px;
   font-size: 13px;
   font-weight: 700;
+  border-radius: 999px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 200ms ease;
+  border: 1px solid var(--color-primary, #df5b64);
+  color: #ffffff;
+  background: var(--gradient-pink, linear-gradient(135deg, #df5b64 0%, #ef8589 100%));
   box-shadow: 0 6px 16px rgba(223, 91, 100, 0.23);
-  transition: all var(--transition);
 }
-
 .btn-coral:hover {
   transform: translateY(-2px);
-  box-shadow: var(--shadow-pink);
+  box-shadow: var(--shadow-pink, 0 8px 20px rgba(223, 91, 100, 0.22));
   filter: brightness(0.95);
+}
+
+.btn-link,
+.view-all-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--color-secondary-dark, #4d672c);
+  font-weight: 700;
+  transition: color var(--transition, 200ms ease), transform var(--transition, 200ms ease);
+}
+.btn-link:hover,
+.view-all-link:hover {
+  color: var(--color-primary, #df5b64);
+  transform: translateX(4px);
 }
 
 .btn-sm {

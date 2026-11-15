@@ -1,51 +1,62 @@
-/* =========================================================
-   TRANG THÔNG BÁO ĐẶT MUA & LIÊN HỆ ZALO (PAYMENT.CSS)
-   VÈ DỆT VÂN KHĂN - REFINED GREEN GLASSMORPHISM
-   ========================================================= */
-
 .payment-page {
   padding-top: 110px;
   padding-bottom: 80px;
-  background: var(--color-background);
+  background: var(--color-background, #fffdfb);
   min-height: 80vh;
 }
+@media (max-width: 850px) {
+  .payment-page {
+    padding-top: 96px;
+    padding-bottom: 60px;
+  }
+}
+@media (max-width: 480px) {
+  .payment-page {
+    padding-top: 86px;
+  }
+}
 
-/* Breadcrumb */
 .breadcrumb {
   display: flex;
   align-items: center;
   gap: 8px;
   font-size: 13.5px;
-  color: var(--color-text-soft);
+  color: var(--color-text-soft, #656b61);
   margin-bottom: 24px;
 }
-
 .breadcrumb a {
-  color: var(--color-text-soft);
-  transition: color var(--transition);
+  color: var(--color-text-soft, #656b61);
+  transition: color var(--transition, 200ms ease);
 }
-
 .breadcrumb a:hover {
-  color: var(--color-green-deep);
+  color: var(--color-green-deep, #355b35);
 }
-
 .breadcrumb .current {
-  color: var(--color-green-deep);
+  color: var(--color-green-deep, #355b35);
   font-weight: 600;
 }
 
-/* Khung thông báo chính */
 .notice-main-card {
   max-width: 860px;
   margin: 0 auto;
   padding: 44px 40px;
   border-radius: var(--radius-large, 24px);
   background: #ffffff;
-  border: 1px solid var(--color-border-green);
+  border: 1px solid var(--color-border-green, #cfd9bd);
   box-shadow: 0 16px 40px rgba(53, 91, 53, 0.1);
 }
+@media (max-width: 850px) {
+  .notice-main-card {
+    padding: 30px 20px;
+    border-radius: 20px;
+  }
+}
+@media (max-width: 480px) {
+  .notice-main-card {
+    padding: 24px 14px;
+  }
+}
 
-/* Header thông báo */
 .notice-header {
   text-align: center;
   margin-bottom: 30px;
@@ -56,9 +67,9 @@
   align-items: center;
   gap: 6px;
   padding: 6px 16px;
-  border-radius: var(--radius-pill);
-  background: var(--color-secondary-soft);
-  color: var(--color-secondary-dark);
+  border-radius: 999px;
+  background: var(--color-secondary-soft, #eef3df);
+  color: var(--color-secondary-dark, #4d672c);
   font-size: 13px;
   font-weight: 700;
   margin-bottom: 14px;
@@ -66,31 +77,42 @@
 }
 
 .notice-title {
-  font-family: var(--font-display, Georgia, serif);
+  font-family: var(--font-display, Playfair Display, Cormorant Garamond, Georgia, Times New Roman, serif);
   font-size: clamp(24px, 3.5vw, 32px);
-  color: var(--color-green-deep);
+  color: var(--color-green-deep, #355b35);
   margin: 0 0 10px;
   font-weight: 700;
   line-height: 1.3;
 }
+@media (max-width: 480px) {
+  .notice-title {
+    font-size: 22px;
+  }
+}
 
 .notice-subtitle {
   font-size: 15px;
-  color: var(--color-text-soft);
+  color: var(--color-text-soft, #656b61);
   max-width: 620px;
   margin: 0 auto;
   line-height: 1.6;
 }
 
-/* Hộp thông điệp */
 .notice-message-box {
   display: flex;
   gap: 18px;
   padding: 22px 24px;
-  border-radius: var(--radius-medium, 16px);
-  background: var(--color-section-green);
-  border: 1px solid var(--color-border-green);
+  border-radius: var(--radius-medium, 14px);
+  background: var(--color-section-green, #f1f5e9);
+  border: 1px solid var(--color-border-green, #cfd9bd);
   margin-bottom: 32px;
+}
+@media (max-width: 480px) {
+  .notice-message-box {
+    flex-direction: column;
+    padding: 16px;
+    gap: 12px;
+  }
 }
 
 .message-icon {
@@ -99,8 +121,9 @@
   height: 44px;
   border-radius: 50%;
   background: #ffffff;
-  color: var(--color-green-deep);
+  color: var(--color-green-deep, #355b35);
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   box-shadow: 0 2px 8px rgba(53, 91, 53, 0.1);
@@ -109,31 +132,28 @@
 .message-text {
   flex: 1;
   font-size: 14.5px;
-  color: var(--color-text);
+  color: var(--color-text, #242821);
   line-height: 1.65;
 }
-
 .message-text p {
   margin: 0 0 8px;
 }
-
 .message-text p:last-child {
   margin: 0;
 }
 
-/* Thẻ sản phẩm đang quan tâm */
 .interested-product-card {
   padding: 18px 22px;
-  border-radius: var(--radius-medium, 16px);
+  border-radius: var(--radius-medium, 14px);
   background: #ffffff;
-  border: 1.5px dashed var(--color-secondary);
+  border: 1.5px dashed var(--color-secondary, #7b963d);
   margin-bottom: 32px;
 }
 
 .interested-badge {
   font-size: 12px;
   font-weight: 700;
-  color: var(--color-secondary-dark);
+  color: var(--color-secondary-dark, #4d672c);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 12px;
@@ -144,14 +164,27 @@
   gap: 18px;
   align-items: center;
 }
+@media (max-width: 480px) {
+  .interested-content {
+    flex-direction: column;
+    text-align: center;
+  }
+}
 
 .interested-thumb {
   width: 80px;
   height: 80px;
   border-radius: 12px;
   object-fit: cover;
-  border: 1px solid var(--color-border-green);
+  border: 1px solid var(--color-border-green, #cfd9bd);
   flex-shrink: 0;
+}
+@media (max-width: 480px) {
+  .interested-thumb {
+    width: 90px;
+    height: 90px;
+    margin: 0 auto;
+  }
 }
 
 .interested-info {
@@ -159,34 +192,33 @@
 }
 
 .interested-title {
-  font-family: var(--font-display, Georgia, serif);
+  font-family: var(--font-display, Playfair Display, Cormorant Garamond, Georgia, Times New Roman, serif);
   font-size: 17px;
-  color: var(--color-green-deep);
+  color: var(--color-green-deep, #355b35);
   margin: 0 0 4px;
   font-weight: 700;
 }
 
 .interested-meta {
   font-size: 13px;
-  color: var(--color-text-soft);
+  color: var(--color-text-soft, #656b61);
   margin-bottom: 6px;
 }
 
 .interested-price {
   font-size: 16px;
   font-weight: 700;
-  color: var(--color-green-deep);
+  color: var(--color-green-deep, #355b35);
 }
 
 .interested-verse {
-  font-family: var(--font-verse, Georgia, serif);
+  font-family: var(--font-verse, Cormorant Garamond, Playfair Display, Georgia, serif);
   font-size: 13.5px;
-  color: var(--color-text-soft);
+  color: var(--color-text-soft, #656b61);
   font-style: italic;
   margin-top: 4px;
 }
 
-/* Khung Zalo QR & Thông tin liên hệ */
 .zalo-contact-card {
   display: grid;
   grid-template-columns: 240px 1fr;
@@ -194,10 +226,18 @@
   padding: 30px;
   border-radius: var(--radius-large, 20px);
   background: linear-gradient(135deg, rgba(238, 243, 223, 0.45) 0%, rgba(255, 253, 251, 0.95) 100%);
-  border: 1.5px solid var(--color-secondary);
+  border: 1.5px solid var(--color-secondary, #7b963d);
   box-shadow: 0 8px 24px rgba(123, 150, 61, 0.12);
   align-items: center;
   margin-bottom: 32px;
+}
+@media (max-width: 850px) {
+  .zalo-contact-card {
+    grid-template-columns: 1fr;
+    padding: 22px 18px;
+    gap: 22px;
+    text-align: center;
+  }
 }
 
 .zalo-card-left {
@@ -213,11 +253,18 @@
   padding: 10px;
   border-radius: 16px;
   background: #ffffff;
-  border: 2px solid var(--color-border-green);
+  border: 2px solid var(--color-border-green, #cfd9bd);
   box-shadow: 0 6px 18px rgba(53, 91, 53, 0.12);
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+@media (max-width: 480px) {
+  .qr-frame {
+    width: 180px;
+    height: 180px;
+  }
 }
 
 .zalo-qr-img {
@@ -233,7 +280,7 @@
   gap: 6px;
   margin-top: 12px;
   font-size: 12.5px;
-  color: var(--color-text-soft);
+  color: var(--color-text-soft, #656b61);
   font-weight: 500;
 }
 
@@ -241,23 +288,27 @@
   display: flex;
   flex-direction: column;
 }
+@media (max-width: 850px) {
+  .zalo-card-right {
+    align-items: center;
+  }
+}
 
 .zalo-card-title {
-  font-family: var(--font-display, Georgia, serif);
+  font-family: var(--font-display, Playfair Display, Cormorant Garamond, Georgia, Times New Roman, serif);
   font-size: 22px;
-  color: var(--color-green-deep);
+  color: var(--color-green-deep, #355b35);
   margin: 0 0 8px;
   font-weight: 700;
 }
 
 .zalo-card-desc {
   font-size: 14px;
-  color: var(--color-text-soft);
+  color: var(--color-text-soft, #656b61);
   line-height: 1.6;
   margin: 0 0 20px;
 }
 
-/* Nút bấm Zalo lớn */
 .btn-zalo-big {
   display: inline-flex;
   align-items: center;
@@ -265,29 +316,32 @@
   gap: 12px;
   height: 52px;
   padding: 0 28px;
-  border-radius: var(--radius-pill);
-  background: var(--gradient-green);
+  border-radius: 999px;
+  background: var(--gradient-green, linear-gradient(135deg, #355b35 0%, #7b963d 100%));
   color: #ffffff;
   font-size: 16px;
   font-weight: 700;
   text-decoration: none;
   box-shadow: 0 8px 22px rgba(53, 91, 53, 0.3);
-  transition: all var(--transition);
+  transition: all var(--transition, 200ms ease);
   margin-bottom: 20px;
 }
-
 .btn-zalo-big:hover {
   transform: translateY(-2px);
   box-shadow: 0 12px 28px rgba(53, 91, 53, 0.4);
   filter: brightness(1.05);
 }
-
 .btn-zalo-big svg {
   width: 24px;
   height: 24px;
 }
+@media (max-width: 850px) {
+  .btn-zalo-big {
+    width: 100%;
+    font-size: 15px;
+  }
+}
 
-/* Danh sách chi tiết liên hệ */
 .contact-details-list {
   display: flex;
   flex-direction: column;
@@ -295,100 +349,58 @@
   padding-top: 16px;
   border-top: 1px solid rgba(123, 150, 61, 0.25);
 }
+@media (max-width: 850px) {
+  .contact-details-list {
+    text-align: left;
+    width: 100%;
+  }
+}
 
 .contact-detail-item {
   display: flex;
   font-size: 13.5px;
   gap: 8px;
 }
+@media (max-width: 850px) {
+  .contact-detail-item {
+    flex-direction: column;
+    gap: 2px;
+  }
+}
 
 .detail-label {
-  color: var(--color-text-soft);
+  color: var(--color-text-soft, #656b61);
   font-weight: 600;
   min-width: 100px;
 }
-
-.detail-val {
-  color: var(--color-text);
+@media (max-width: 850px) {
+  .detail-label {
+    min-width: auto;
+  }
 }
 
+.detail-val {
+  color: var(--color-text, #242821);
+}
 .detail-val.highlight {
-  color: var(--color-green-deep);
+  color: var(--color-green-deep, #355b35);
   font-weight: 700;
 }
 
-/* Nút hành động phía dưới */
 .notice-bottom-actions {
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   gap: 16px;
   flex-wrap: wrap;
   padding-top: 12px;
 }
-
-.btn-link-home {
-  font-size: 14px;
-  color: var(--color-text-soft);
-  text-decoration: underline;
-  padding: 8px 14px;
-  transition: color var(--transition);
-}
-
-.btn-link-home:hover {
-  color: var(--color-green-deep);
-}
-
-/* =========================================================
-   RESPONSIVE MOBILE
-   ========================================================= */
-
 @media (max-width: 850px) {
-  .payment-page {
-    padding-top: 96px;
-    padding-bottom: 60px;
-  }
-
-  .notice-main-card {
-    padding: 30px 20px;
-    border-radius: 20px;
-  }
-
-  .zalo-contact-card {
-    grid-template-columns: 1fr;
-    padding: 22px 18px;
-    gap: 22px;
-    text-align: center;
-  }
-
-  .zalo-card-right {
-    align-items: center;
-  }
-
-  .btn-zalo-big {
-    width: 100%;
-    font-size: 15px;
-  }
-
-  .contact-details-list {
-    text-align: left;
-    width: 100%;
-  }
-
-  .contact-detail-item {
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .detail-label {
-    min-width: auto;
-  }
-
   .notice-bottom-actions {
     flex-direction: column;
     width: 100%;
   }
-
   .notice-bottom-actions .btn-primary,
   .notice-bottom-actions .btn-secondary {
     width: 100%;
@@ -397,38 +409,13 @@
   }
 }
 
-@media (max-width: 480px) {
-  .payment-page {
-    padding-top: 86px;
-  }
-
-  .notice-main-card {
-    padding: 24px 14px;
-  }
-
-  .notice-title {
-    font-size: 22px;
-  }
-
-  .notice-message-box {
-    flex-direction: column;
-    padding: 16px;
-    gap: 12px;
-  }
-
-  .interested-content {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .interested-thumb {
-    width: 90px;
-    height: 90px;
-    margin: 0 auto;
-  }
-
-  .qr-frame {
-    width: 180px;
-    height: 180px;
-  }
+.btn-link-home {
+  font-size: 14px;
+  color: var(--color-text-soft, #656b61);
+  text-decoration: underline;
+  padding: 8px 14px;
+  transition: color var(--transition, 200ms ease);
+}
+.btn-link-home:hover {
+  color: var(--color-green-deep, #355b35);
 }

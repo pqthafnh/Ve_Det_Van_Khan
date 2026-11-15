@@ -1,0 +1,228 @@
+// =========================================================
+// COMPONENT: FOOTER (CHÂN TRANG THƯƠNG HIỆU LỤA MÃ CHÂU)
+// =========================================================
+
+@use '../abstracts' as *;
+
+.footer {
+  position: relative;
+  width: 100%;
+  margin-top: 44px;
+  padding: 46px 0 0;
+  color: #ffffff;
+  background: var(--gradient-footer, #{$gradient-footer});
+
+  // Khoảng trắng phân cách section bên trên
+  &::before {
+    position: absolute;
+    top: -44px;
+    right: 0;
+    left: 0;
+    height: 44px;
+    background-color: var(--color-background, #{$color-background});
+    content: "";
+  }
+
+  > .container {
+    width: min(1180px, calc(100% - 72px));
+    margin: 0 auto;
+
+    @include respond-to('tablet') {
+      width: calc(100% - 48px);
+    }
+
+    @include respond-to(560px) {
+      width: calc(100% - 32px);
+    }
+  }
+
+  @include respond-to('tablet') {
+    padding-top: 40px;
+  }
+
+  @include respond-to(560px) {
+    margin-top: 32px;
+    padding-top: 34px;
+
+    &::before {
+      top: -32px;
+      height: 32px;
+    }
+  }
+
+  // 1. NỘI DUNG FOOTER
+  &-content {
+    display: grid;
+    grid-template-columns: 1.35fr 0.65fr 1fr;
+    gap: 72px;
+    padding-bottom: 38px;
+
+    @include respond-to('tablet') {
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 42px;
+    }
+
+    @include respond-to(560px) {
+      grid-template-columns: 1fr;
+      gap: 30px;
+      padding-bottom: 30px;
+    }
+  }
+
+  // 2. THƯƠNG HIỆU & LOGO
+  &-brand {
+    max-width: 390px;
+
+    @include respond-to(560px) {
+      max-width: 100%;
+    }
+
+    img {
+      display: block;
+      width: 240px;
+      height: 85px;
+      margin: 0 0 16px;
+      object-fit: contain;
+      object-position: left center;
+
+      @include respond-to('tablet') {
+        width: 215px;
+        height: 78px;
+      }
+
+      @include respond-to(560px) {
+        width: 200px;
+        height: 72px;
+      }
+    }
+
+    p {
+      max-width: 335px;
+      margin: 0;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 14px;
+      line-height: 1.7;
+
+      @include respond-to(560px) {
+        max-width: 100%;
+      }
+    }
+  }
+
+  // 3. TIÊU ĐỀ CÁC CỘT LIÊN KẾT & LIÊN HỆ
+  &-links,
+  &-contact {
+    h3 {
+      position: relative;
+      margin: 0 0 22px;
+      padding-bottom: 11px;
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 700;
+
+      &::after {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 44px;
+        height: 2px;
+        border-radius: 2px;
+        background: linear-gradient(90deg, #a5bc68, #df5b64);
+        content: "";
+      }
+    }
+  }
+
+  // 4. DANH SÁCH LIÊN KẾT ĐIỀU HƯỚNG
+  &-links {
+    @include flex-column(flex-start);
+
+    a {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 11px;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 14px;
+      transition: color 200ms ease, padding-left 200ms ease, transform 200ms ease;
+
+      &::before {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        color: #ef8589;
+        content: "›";
+        opacity: 0;
+        transform: translateY(-53%);
+        transition: opacity 200ms ease, transform 200ms ease;
+      }
+
+      &:hover {
+        padding-left: 14px;
+        color: #f5b4b4;
+
+        &::before {
+          opacity: 1;
+          transform: translateY(-53%) translateX(2px);
+        }
+      }
+    }
+  }
+
+  // 5. THÔNG TIN LIÊN HỆ
+  &-contact {
+    min-width: 0;
+
+    @include respond-to('tablet') {
+      grid-column: 1 / -1;
+    }
+
+    @include respond-to(560px) {
+      grid-column: auto;
+    }
+
+    p {
+      margin: 0 0 10px;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 14px;
+      line-height: 1.55;
+      overflow-wrap: anywhere;
+    }
+
+    strong {
+      color: #c1d184;
+      font-weight: 600;
+      display: inline-block;
+      min-width: 82px;
+    }
+
+    a {
+      color: #ffffff;
+      text-decoration: underline;
+      text-decoration-color: rgba(255, 255, 255, 0.3);
+      transition: color var(--transition, #{$transition}), text-decoration-color var(--transition, #{$transition});
+
+      &:hover {
+        color: #c1d184;
+        text-decoration-color: #c1d184;
+      }
+    }
+  }
+
+  // 6. BẢN QUYỀN CHÂN TRANG
+  &-bottom {
+    @include flex-center();
+    min-height: 58px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+
+    @include respond-to(560px) {
+      min-height: 54px;
+    }
+
+    p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.62);
+      font-size: 12px;
+      text-align: center;
+    }
+  }
+}

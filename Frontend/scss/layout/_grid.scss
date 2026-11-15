@@ -1,0 +1,29 @@
+// =========================================================
+// LAYOUT: GRID & SECTION HEADERS
+// =========================================================
+
+@use '../abstracts' as *;
+
+.section-header {
+  @include flex-between(center, 24px);
+
+  @include respond-to(540px) {
+    align-items: flex-start;
+  }
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 52px;
+
+  @include respond-to(800px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  @include respond-to(540px) {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}

@@ -1,0 +1,71 @@
+// =========================================================
+// VARIABLES: CSS CUSTOM PROPERTIES TỰ ĐỘNG TỪ SASS VARIABLES
+// Vè Dệt Vân Khăn - Khăn Lụa Mã Châu
+// =========================================================
+
+@use 'abstracts' as *;
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,500;1,600&display=swap');
+
+:root {
+  // 1. MÀU SẮC NHẬN DIỆN THƯƠNG HIỆU
+  --color-primary: #{$color-primary};
+  --color-primary-hover: #{$color-primary-hover};
+  --color-primary-dark: #{$color-primary-dark};
+  --color-primary-soft: #{$color-primary-soft};
+  --color-primary-light: #{$color-primary-light};
+
+  --color-secondary: #{$color-secondary};
+  --color-secondary-hover: #{$color-secondary-hover};
+  --color-secondary-dark: #{$color-secondary-dark};
+  --color-secondary-soft: #{$color-secondary-soft};
+
+  --color-green-deep: #{$color-green-deep};
+  --color-green-dark: #{$color-green-dark};
+  --color-green-light: #{$color-green-light};
+
+  // 2. MÀU NỀN & BỀ MẶT
+  --color-background: #{$color-background};
+  --color-surface: #{$color-surface};
+  --color-section: #{$color-section};
+  --color-section-green: #{$color-section-green};
+  --color-footer: #{$color-footer};
+
+  // 3. MÀU CHỮ & ĐỌC VĂN BẢN
+  --color-text: #{$color-text};
+  --color-text-soft: #{$color-text-soft};
+  --color-text-light: #{$color-text-light};
+
+  // 4. VIỀN (BORDERS)
+  --color-border: #{$color-border};
+  --color-border-pink: #{$color-border-pink};
+  --color-border-green: #{$color-border-green};
+
+  // 5. GRADIENT NGHỆ THUẬT LỤA
+  --gradient-brand: #{$gradient-brand};
+  --gradient-pink: #{$gradient-pink};
+  --gradient-green: #{$gradient-green};
+
+  // 6. ĐỔ BÓNG
+  --shadow-small: #{$shadow-small};
+  --shadow-medium: #{$shadow-medium};
+  --shadow-pink: #{$shadow-pink};
+
+  // 7. KÍCH THƯỚC CHUNG & BỐ CỤC
+  --container-width: #{$container-width};
+  --page-gutter: #{$page-gutter};
+
+  // 8. BO GÓC
+  --radius-small: #{$radius-small};
+  --radius-medium: #{$radius-medium};
+  --radius-large: #{$radius-large};
+  --radius-pill: #{$radius-pill};
+
+  // 9. HIỆU ỨNG
+  --transition: #{$transition};
+
+  // 10. PHÔNG CHỮ TIẾNG VIỆT
+  --font-main: #{$font-main};
+  --font-display: #{$font-display};
+  --font-verse: #{$font-verse};
+}

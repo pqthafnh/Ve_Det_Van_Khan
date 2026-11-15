@@ -1,0 +1,147 @@
+// =========================================================
+// COMPONENT: PRODUCT CARD (THẺ SẢN PHẨM KHĂN LỤA)
+// =========================================================
+
+@use '../abstracts' as *;
+
+.product-card,
+.product-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 15px 15px 18px;
+  border: 1px solid var(--color-border-green, #{$color-border-green});
+  border-radius: var(--radius-card, #{$radius-card});
+  background: var(--color-surface, #{$color-surface});
+  box-shadow: $shadow-card;
+  overflow: hidden;
+  @include card-hover(-4px, 0 12px 26px rgba(0, 0, 0, 0.18));
+
+  // 1. ẢNH VUÔNG 1:1
+  img,
+  .product-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 8px;
+    object-fit: cover;
+    transition: transform $transition-normal;
+  }
+
+  &:hover {
+    img,
+    .product-image {
+      transform: scale(1.02);
+    }
+  }
+
+  // 2. BADGE HUY HIỆU
+  .product-tag-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 2;
+    padding: 4px 10px;
+    border-radius: $radius-pill;
+    background: var(--gradient-pink, #{$gradient-pink});
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    box-shadow: 0 4px 10px rgba(223, 91, 100, 0.28);
+  }
+
+  // 3. THÔNG TIN SẢN PHẨM
+  .product-card-content,
+  .product-info {
+    display: flex;
+    flex: 1;
+    padding-top: 16px;
+    flex-direction: column;
+  }
+
+  .product-category {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--color-secondary-dark, #{$color-secondary-dark});
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+
+  h3,
+  .product-title,
+  .product-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--color-text, #{$color-text});
+    line-height: 1.4;
+    margin: 0 0 6px;
+    min-height: 42px;
+    @include text-truncate(2);
+
+    a:hover {
+      color: var(--color-primary, #{$color-primary});
+    }
+  }
+
+  // 4. CÂU VÈ DỆT TRÍCH DẪN
+  .product-verse-brief {
+    font-family: var(--font-display, #{$font-display});
+    font-style: italic;
+    font-size: 12.5px;
+    color: var(--color-text-soft, #{$color-text-soft});
+    margin: 0 0 10px;
+    background-color: var(--color-section-green, #{$color-section-green});
+    padding: 6px 10px;
+    border-left: 2px solid var(--color-secondary, #{$color-secondary});
+    border-radius: 4px;
+  }
+
+  // 5. GIÁ BÁN
+  .product-price,
+  .price {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin: 0 0 14px;
+
+    .price-current {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--color-primary, #{$color-primary});
+    }
+
+    .price-original {
+      font-size: 12.5px;
+      color: #999;
+      text-decoration: line-through;
+    }
+  }
+
+  // 6. NÚT MUA HÀNG TRÊN CARD
+  .product-buy-button,
+  .btn-buy,
+  .btn-primary {
+    width: 100%;
+    min-height: 38px !important;
+    margin-top: auto;
+    padding: 6px 14px;
+    border: none !important;
+    border-radius: $radius-pill !important;
+    background: var(--gradient-green, #{$gradient-green}) !important;
+    color: #ffffff !important;
+    font-size: 13px;
+    font-weight: 700 !important;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 5px 10px rgba(36, 88, 56, 0.24);
+    transition: all var(--transition, #{$transition}) !important;
+
+    &:hover {
+      background: var(--gradient-pink, #{$gradient-pink}) !important;
+      box-shadow: var(--shadow-pink, #{$shadow-pink}) !important;
+      transform: translateY(-2px);
+    }
+  }
+}
