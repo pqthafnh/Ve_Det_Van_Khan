@@ -23,34 +23,37 @@ export function initChatbot() {
     </button>
 
     <!-- Hộp thoại Chatbot -->
-    <div class="chatbot-window" id="chatbot-window">
+    <div class="chatbot-window" id="chatbot-window" role="dialog" aria-label="Khung trò chuyện Trợ lý Lụa Xứ Quảng">
       <!-- Chatbot Header -->
       <div class="chatbot-header">
-        <div class="chatbot-header-info">
-          <div class="chatbot-avatar">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <div class="bot-info chatbot-header-info">
+          <div class="bot-avatar chatbot-avatar">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#355b35" stroke-width="2">
               <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
               <path d="M2 17l10 5 10-5"></path>
               <path d="M2 12l10 5 10-5"></path>
             </svg>
           </div>
-          <div>
+          <div class="bot-title">
             <h4 class="chatbot-title">Trợ lý Lụa Xứ Quảng</h4>
-            <span class="chatbot-status">
+            <small class="chatbot-status">
               <span class="status-dot"></span> Trực tuyến • Vè Dệt Vân Khăn
-            </span>
+            </small>
           </div>
         </div>
-        <button type="button" class="chatbot-close" id="chatbot-close" aria-label="Đóng trợ lý">&times;</button>
+        <button type="button" class="chatbot-close-btn chatbot-close" id="chatbot-close" aria-label="Đóng trợ lý">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
       </div>
 
       <!-- Chatbot Messages -->
-      <div class="chatbot-messages" id="chatbot-messages">
-        <!-- Rendered via JS -->
-      </div>
+      <div class="chatbot-messages" id="chatbot-messages"></div>
 
-      <!-- Quick Chips -->
-      <div class="chatbot-quick-chips" id="chatbot-chips">
+      <!-- Quick Chips / Suggestions -->
+      <div class="chatbot-suggestions chatbot-quick-chips" id="chatbot-chips">
         <button type="button" class="chip-btn" data-query="tư vấn quà tặng">Khăn tặng mẹ / đối tác</button>
         <button type="button" class="chip-btn" data-query="ý nghĩa khăn hội an">Ý nghĩa khăn Hội An</button>
         <button type="button" class="chip-btn" data-query="lụa mã châu">Đặc sắc lụa Mã Châu</button>
@@ -85,23 +88,41 @@ export function initChatbot() {
   const messagesEl = root.querySelector("#chatbot-messages");
   const chipsEl = root.querySelector("#chatbot-chips");
 
-  // Toggle Chatbot
-  toggleBtn.addEventListener("click", () => {
-    windowEl.classList.toggle("open");
-    if (windowEl.classList.contains("open")) {
-      input.focus();
-      if (messagesEl.children.length === 0) {
+  if (!toggleBtn || !windowEl) return;
+
+  // Toggle Chatbot (hỗ trợ cả class active lẫn open để tương thích 100% CSS)
+  toggleBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const isActive = windowEl.classList.toggle("active");
+    windowEl.classList.toggle("open", isActive);
+
+    if (isActive) {
+      setTimeout(() => input?.focus(), 150);
+      if (messagesEl && messagesEl.children.length === 0) {
         sendBotGreeting();
       }
     }
   });
 
-  closeBtn.addEventListener("click", () => {
-    windowEl.classList.remove("open");
+  // Nút đóng Chatbot
+  closeBtn?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    windowEl.classList.remove("active", "open");
+  });
+
+  // Đóng khi click bên ngoài hộp chat trên màn hình lớn
+  document.addEventListener("click", (e) => {
+    if (
+      windowEl.classList.contains("active") &&
+      !windowEl.contains(e.target) &&
+      !toggleBtn.contains(e.target)
+    ) {
+      windowEl.classList.remove("active", "open");
+    }
   });
 
   // Gửi tin nhắn từ input
-  form.addEventListener("submit", (e) => {
+  form?.addEventListener("submit", (e) => {
     e.preventDefault();
     const text = input.value.trim();
     if (!text) return;
@@ -112,17 +133,18 @@ export function initChatbot() {
   });
 
   // Bấm vào gợi ý Quick Chips
-  chipsEl.querySelectorAll(".chip-btn").forEach((chip) => {
-    chip.addEventListener("click", () => {
+  chipsEl?.querySelectorAll(".chip-btn").forEach((chip) => {
+    chip.addEventListener("click", (e) => {
+      e.stopPropagation();
       const query = chip.dataset.query;
-      addUserMessage(chip.textContent);
+      addUserMessage(chip.textContent.trim());
       handleUserQuery(query);
     });
   });
 
   function addUserMessage(text) {
     const msg = document.createElement("div");
-    msg.className = "chat-msg user-msg";
+    msg.className = "msg-row user-msg chat-msg";
     msg.innerHTML = `
       <div class="msg-bubble">${escapeHtml(text)}</div>
     `;
@@ -132,10 +154,10 @@ export function initChatbot() {
 
   function addBotMessage(htmlContent) {
     const msg = document.createElement("div");
-    msg.className = "chat-msg bot-msg";
+    msg.className = "msg-row bot-msg chat-msg";
     msg.innerHTML = `
-      <div class="bot-msg-avatar">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <div class="bot-msg-avatar bot-avatar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7b963d" stroke-width="2">
           <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
           <path d="M2 17l10 5 10-5"></path>
           <path d="M2 12l10 5 10-5"></path>
@@ -165,10 +187,12 @@ export function initChatbot() {
   async function handleUserQuery(rawText) {
     // 1. Hiển thị chỉ báo typing
     const typing = document.createElement("div");
-    typing.className = "chat-msg bot-msg typing-indicator";
+    typing.className = "msg-row bot-msg typing-indicator chat-msg";
     typing.innerHTML = `
-      <div class="bot-msg-avatar">🌿</div>
-      <div class="msg-bubble"><span></span><span></span><span></span></div>
+      <div class="bot-msg-avatar bot-avatar">🌿</div>
+      <div class="msg-bubble">
+        <span></span><span></span><span></span>
+      </div>
     `;
     messagesEl.appendChild(typing);
     messagesEl.scrollTop = messagesEl.scrollHeight;
@@ -225,15 +249,15 @@ export function initChatbot() {
       const p2 = PRODUCTS[1];
       return `
         <p>Để làm quà tặng ý nghĩa, <strong>Vè Dệt Vân Khăn</strong> xin gợi ý cho bạn 2 mẫu được yêu chuộng nhất:</p>
-        <div class="bot-product-card">
+        <div class="bot-product-card" style="margin:8px 0; padding:10px; border-radius:12px; background:rgba(123,150,61,0.08); border-left:3px solid #7b963d;">
           <strong>1. ${p1.name} (${p1.dimensions})</strong>
-          <p>Giá: ${formatCurrency(p1.price)} • Mang câu vè hiếu đạo <em>"Ngó lên Hòn Kẽm Đá Dừng..."</em> - Rất trang trọng để biếu cha mẹ, thầy cô, đối tác.</p>
-          <a href="${getPageUrl("product-detail.html")}?id=${p1.id}" class="bot-link">Xem chi tiết</a>
+          <p style="margin:4px 0;">Giá: <strong>${formatCurrency(p1.price)}</strong> • Mang câu vè hiếu đạo <em>"Ngó lên Hòn Kẽm Đá Dừng..."</em> - Rất trang trọng để biếu cha mẹ, thầy cô, đối tác.</p>
+          <a href="${getPageUrl("product-detail.html")}?id=${p1.id}" style="color:#df5b64; font-weight:600; font-size:12px;">Xem chi tiết &rarr;</a>
         </div>
-        <div class="bot-product-card">
+        <div class="bot-product-card" style="margin:8px 0; padding:10px; border-radius:12px; background:rgba(223,91,100,0.08); border-left:3px solid #df5b64;">
           <strong>2. ${p2.name} (${p2.dimensions})</strong>
-          <p>Giá: ${formatCurrency(p2.price)} • Sắc vàng hoài niệm, phối áo dài hoặc dạo phố cực thanh lịch.</p>
-          <a href="${getPageUrl("product-detail.html")}?id=${p2.id}" class="bot-link">Xem chi tiết</a>
+          <p style="margin:4px 0;">Giá: <strong>${formatCurrency(p2.price)}</strong> • Sắc vàng hoài niệm, phối áo dài hoặc dạo phố cực thanh lịch.</p>
+          <a href="${getPageUrl("product-detail.html")}?id=${p2.id}" style="color:#df5b64; font-weight:600; font-size:12px;">Xem chi tiết &rarr;</a>
         </div>
       `;
     }
@@ -243,16 +267,16 @@ export function initChatbot() {
       const p = PRODUCTS[1];
       return `
         <p><strong>${p.name}</strong> (${formatCurrency(p.price)}):</p>
-        <blockquote class="bot-quote">
+        <blockquote class="bot-quote" style="border-left:3px solid #7b963d; padding-left:10px; margin:6px 0; font-style:italic; color:#4d672c;">
           "Mảnh đất quê ta<br/>
           Quảng Nam, Đà Nẵng<br/>
           Hết ngày cay đắng<br/>
           Nay đã nở hoa"
         </blockquote>
         <p>${p.verseMeaning}</p>
-        <div class="bot-actions">
-          <a href="${getPageUrl("product-detail.html")}?id=${p.id}" class="btn-primary" style="font-size:12px; padding:6px 14px;">Xem khăn Hội An</a>
-          <button type="button" class="btn-primary bot-action-add-cart" data-id="${p.id}" style="font-size:12px; padding:6px 14px; background:var(--gradient-pink);">Thêm vào giỏ</button>
+        <div class="bot-actions" style="display:flex; gap:8px; margin-top:8px;">
+          <a href="${getPageUrl("product-detail.html")}?id=${p.id}" class="btn-primary" style="font-size:12px; padding:6px 14px; text-decoration:none;">Xem khăn Hội An</a>
+          <button type="button" class="btn-primary bot-action-add-cart" data-id="${p.id}" style="font-size:12px; padding:6px 14px; background:var(--gradient-pink, #df5b64); cursor:pointer;">Thêm vào giỏ</button>
         </div>
       `;
     }
@@ -262,14 +286,14 @@ export function initChatbot() {
       const p = PRODUCTS[2];
       return `
         <p><strong>Lụa Mã Châu (Duy Xuyên, Quảng Nam)</strong> có bề dày truyền thống hơn 400 năm bên dòng sông Thu Bồn:</p>
-        <ul>
+        <ul style="padding-left:18px; margin:6px 0; font-size:12.5px;">
           <li>100% sợi tơ tằm nguyên bản, mềm mát, óng ả tự nhiên.</li>
           <li>Nhuộm màu thảo mộc an toàn, phân hủy sinh học, bảo vệ môi trường.</li>
           <li>Khăn mang câu vè hiếu đạo: <em>"Ngó lên Hòn Kẽm Đá Dừng / Thương cha nhớ mẹ quá chừng bạn ơi..."</em></li>
         </ul>
-        <div class="bot-actions">
-          <a href="${getPageUrl("product-detail.html")}?id=${p.id}" class="btn-primary" style="font-size:12px; padding:6px 14px;">Xem khăn Mã Châu</a>
-          <a href="${getPageUrl("story.html")}" class="btn-link" style="font-size:12px;">Đọc câu chuyện làng nghề &rarr;</a>
+        <div class="bot-actions" style="display:flex; gap:8px; margin-top:8px;">
+          <a href="${getPageUrl("product-detail.html")}?id=${p.id}" class="btn-primary" style="font-size:12px; padding:6px 14px; text-decoration:none;">Xem khăn Mã Châu</a>
+          <a href="${getPageUrl("story.html")}" style="color:#7b963d; font-size:12px; align-self:center; font-weight:600;">Đọc câu chuyện làng nghề &rarr;</a>
         </div>
       `;
     }
@@ -279,14 +303,14 @@ export function initChatbot() {
       const p = PRODUCTS[0];
       return `
         <p><strong>${p.name}</strong> (${formatCurrency(p.price)}):</p>
-        <p>Khắc họa quần thể di sản thế giới Chăm Pa giữa thung lũng Duy Xuyên. Câu vè tinh thần đấu tranh:</p>
-        <blockquote class="bot-quote">
+        <p>Khắc họa quần thể di sản thế giới Chăm Pa giữa thung lũng Duy Xuyên. Câu vè tinh thần kiên cường:</p>
+        <blockquote class="bot-quote" style="border-left:3px solid #7b963d; padding-left:10px; margin:6px 0; font-style:italic;">
           "Căm thù ấy càng thêm nung nấu<br/>
           Vác xác con lên thấu tỉnh đường<br/>
           Súng nào ngăn nổi tình thương<br/>
           Gươm nào gom nổi con đường đấu tranh"
         </blockquote>
-        <p><a href="${getPageUrl("product-detail.html")}?id=${p.id}" class="bot-link">Xem chi tiết sản phẩm này &rarr;</a></p>
+        <p><a href="${getPageUrl("product-detail.html")}?id=${p.id}" style="color:#df5b64; font-weight:600; font-size:12px;">Xem chi tiết sản phẩm này &rarr;</a></p>
       `;
     }
 
@@ -296,11 +320,11 @@ export function initChatbot() {
       return `
         <p><strong>${p.name}</strong> (${formatCurrency(p.price)}):</p>
         <p>Biểu tượng cho sức trẻ, niềm tự hào và khát vọng vươn mình của miền Trung hôm nay:</p>
-        <blockquote class="bot-quote">
+        <blockquote class="bot-quote" style="border-left:3px solid #7b963d; padding-left:10px; margin:6px 0; font-style:italic;">
           "Ngày xưa măng lụi, tre tàn<br/>
           Ngày nay nô nức, xóm làng vui ca..."
         </blockquote>
-        <p><a href="${getPageUrl("product-detail.html")}?id=${p.id}" class="bot-link">Khám phá khăn Cầu Rồng &rarr;</a></p>
+        <p><a href="${getPageUrl("product-detail.html")}?id=${p.id}" style="color:#df5b64; font-weight:600; font-size:12px;">Khám phá khăn Cầu Rồng &rarr;</a></p>
       `;
     }
 
@@ -310,7 +334,7 @@ export function initChatbot() {
       return `
         <p><strong>${p.name}</strong> (${formatCurrency(p.price)}):</p>
         <p>Tôn vinh vẻ đẹp non nước mây trời và ý chí kiên định, son sắt của người miền Trung.</p>
-        <p><a href="${getPageUrl("product-detail.html")}?id=${p.id}" class="bot-link">Xem chi tiết khăn Ngũ Hành Sơn &rarr;</a></p>
+        <p><a href="${getPageUrl("product-detail.html")}?id=${p.id}" style="color:#df5b64; font-weight:600; font-size:12px;">Xem chi tiết khăn Ngũ Hành Sơn &rarr;</a></p>
       `;
     }
 
@@ -320,7 +344,7 @@ export function initChatbot() {
       return `
         <p><strong>${p.name}</strong> (${formatCurrency(p.price)}):</p>
         <p>Sản phẩm đại diện cho thông điệp <em>Du Lịch Xanh & Bảo Tồn Biển Đảo</em>, làm từ tơ tằm nguyên bản thân thiện với thiên nhiên.</p>
-        <p><a href="${getPageUrl("product-detail.html")}?id=${p.id}" class="bot-link">Xem chi tiết khăn Cù Lao Chàm &rarr;</a></p>
+        <p><a href="${getPageUrl("product-detail.html")}?id=${p.id}" style="color:#df5b64; font-weight:600; font-size:12px;">Xem chi tiết khăn Cù Lao Chàm &rarr;</a></p>
       `;
     }
 
@@ -344,8 +368,8 @@ export function initChatbot() {
         <ul style="padding-left: 16px; margin: 6px 0; font-size: 13px;">
           ${PRODUCTS.map((p) => `<li><strong>${p.name}:</strong> ${formatCurrency(p.price)} (${p.dimensions})</li>`).join("")}
         </ul>
-        <p style="margin-top:8px;">🌿 Quý khách có thể kết nối trực tiếp **Hotline / Zalo: 0974 678 820** để được tư vấn chọn mẫu và đặt mua thủ công nhanh nhất ạ!</p>
-        <p><a href="${getPageUrl("payment.html")}" class="bot-link">Xem hướng dẫn kết nối Zalo &rarr;</a></p>
+        <p style="margin-top:8px;">🌿 Quý khách có thể kết nối trực tiếp <strong>Hotline / Zalo: 0974 678 820</strong> để được tư vấn chọn mẫu và đặt mua thủ công nhanh nhất ạ!</p>
+        <p><a href="${getPageUrl("payment.html")}" style="color:#df5b64; font-weight:600; font-size:12px;">Xem hướng dẫn kết nối Zalo &rarr;</a></p>
       `;
     }
 
