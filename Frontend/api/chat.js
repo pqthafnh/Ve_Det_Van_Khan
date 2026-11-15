@@ -150,12 +150,12 @@ Hãy đóng vai Trợ lý Lụa Xứ Quảng, dựa vào DỮ LIỆU TRÊN để
 
     // 5. THỬ GỌI GOOGLE GEMINI BẰNG DIRECT REST API TRƯỚC (NHANH & ỔN ĐỊNH NHẤT TRÊN VERCEL SERVERLESS)
     const candidateModels = [
-      "gemini-1.5-flash-latest",
-      "gemini-1.5-flash",
+      "gemini-2.5-flash",
+      "gemini-flash-latest",
+      "gemini-flash-lite-latest",
+      "gemini-2.5-pro",
       "gemini-2.0-flash",
-      "gemini-2.0-flash-exp",
-      "gemini-1.5-flash-8b",
-      "gemini-1.5-pro",
+      "gemini-1.5-flash",
     ];
 
     const modelErrors = [];
@@ -205,7 +205,7 @@ Hãy đóng vai Trợ lý Lụa Xứ Quảng, dựa vào DỮ LIỆU TRÊN để
     try {
       const genAI = new GoogleGenerativeAI(apiKey);
       const model = genAI.getGenerativeModel({
-        model: "gemini-1.5-flash",
+        model: "gemini-2.5-flash",
         systemInstruction: SYSTEM_INSTRUCTION,
       });
       const result = await model.generateContent(augmentedPrompt);
@@ -214,7 +214,7 @@ Hãy đóng vai Trợ lý Lụa Xứ Quảng, dựa vào DỮ LIỆU TRÊN để
       if (botText) {
         return res.status(200).json({
           reply: botText,
-          modelUsed: "gemini-1.5-flash (sdk)",
+          modelUsed: "gemini-2.5-flash (sdk)",
           sources: relevantDocs.map((d) => d.title),
         });
       }
