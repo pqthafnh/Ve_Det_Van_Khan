@@ -1,6 +1,6 @@
 # Hướng Dẫn Triển Khai (Deploy) Website & Chatbot RAG Lên Vercel
 
-Dự án **Vè Dệt Vân Khăn** đã được thiết lập sẵn sàng 100% để triển khai lên [Vercel](https://vercel.com) hoàn toàn **Miễn Phí** chỉ với 3 bước đơn giản:
+Dự án **Vè Dệt Vân Khăn** đã được thiết lập sẵn sàng 100% để triển khai lên [Vercel](https://vercel.com) hoàn toàn **Miễn Phí**.
 
 ---
 
@@ -12,20 +12,44 @@ Dự án **Vè Dệt Vân Khăn** đã được thiết lập sẵn sàng 100% �
 
 ---
 
-## 2. Deploy lên Vercel
-1. Đăng nhập vào [Vercel.com](https://vercel.com) (có thể đăng nhập nhanh bằng tài khoản GitHub).
-2. Nhấp vào nút **"Add New..."** -> Chọn **"Project"**.
-3. Chọn Repository **`Ve_Det_Van_Khan`** của bạn từ danh sách GitHub -> Bấm **"Import"**.
-4. Tại mục **Environment Variables** (Biến môi trường), thêm biến:
-   - **Key**: `GEMINI_API_KEY`
+## 2. Thiết lập API Key trên Vercel
+Khi dự án đã được deploy trên Vercel, bạn vào Vercel Dashboard của dự án:
+1. Vào tab **Settings** -> mục **Environment Variables**.
+2. Thêm biến môi trường:
+   - **Key**: `GEMINI_API_KEY` (Hệ thống cũng tự động hỗ trợ các tên biến khác như `GOOGLE_API_KEY`, `API_KEY`).
    - **Value**: Dán mã API Key bạn đã lấy ở Bước 1.
-5. Bấm nút **"Deploy"** và đợi khoảng 30 - 60 giây.
+   - **Environment**: Tích chọn cả 3 ô (**Production**, **Preview**, **Development**).
+3. Nhấn **Save**.
+
+> [!IMPORTANT]
+> **LƯU Ý BẮT BUỘC TRÊN VERCEL:**
+> Khi thêm hoặc chỉnh sửa biến môi trường (Environment Variable), **Vercel không tự động cập nhật ngay trên bản build cũ**.
+> Bạn cần vào tab **Deployments** -> Bấm vào dấu `...` ở bản deploy mới nhất -> Chọn **Redeploy** (hoặc mỗi khi bạn push commit mới lên GitHub, Vercel sẽ tự động build lại với API Key mới).
 
 ---
 
-## 3. Hoàn tất & Kiểm tra
-- Sau khi Vercel báo **Congratulations!**, bạn sẽ nhận được một đường link website chính thức (ví dụ: `https://ve-det-van-khan.vercel.app`).
-- Bạn có thể mở web, bấm vào nút **Chatbot ở góc dưới bên phải** và đặt bất kỳ câu hỏi nào:
+## 3. Cách Kiểm Tra API Key & Chatbot Trực Tiếp
+
+### Bước 1: Kiểm tra xem Vercel đã nhận diện API Key chưa
+Truy cập trực tiếp đường link API trên trình duyệt của bạn:
+👉 `https://<tên-miền-vercel-của-bạn>/api/chat`
+
+- Nếu trả về:
+  ```json
+  {
+    "status": "online",
+    "hasApiKey": true,
+    "detectedVariable": "GEMINI_API_KEY",
+    "message": "API Key đã được Vercel nhận diện thành công!"
+  }
+  ```
+  => Chúc mừng bạn, Vercel đã nạp API Key thành công 100%!
+- Nếu trả về `"hasApiKey": false`:
+  => Bạn chưa nhấn **Redeploy** sau khi thêm biến trong Settings, hoặc bạn chỉ tích ô Development thay vì Production. Hãy vào **Deployments > ... > Redeploy**.
+
+### Bước 2: Trải nghiệm Chatbot trên giao diện website
+- Mở trang web của bạn: `https://<tên-miền-vercel-của-bạn>/`
+- Bấm vào nút **Chatbot ở góc dưới bên phải** và hỏi:
   - *"Khăn Hội An giá bao nhiêu và có ý nghĩa gì?"*
   - *"Tôi muốn mua quà tặng mẹ thì chọn mẫu nào?"*
   - *"Cách giặt khăn lụa tơ tằm như thế nào?"*
@@ -33,7 +57,8 @@ Dự án **Vè Dệt Vân Khăn** đã được thiết lập sẵn sàng 100% �
 
 ---
 
-## 4. Kiến trúc Chatbot RAG hoạt động như thế nào?
-- **Knowledge Base (`api/knowledge-base.js`)**: Lưu trữ toàn bộ dữ liệu chính xác về 6 mẫu khăn lụa, kích thước, biểu giá (400k, 250k, 150k), 6 câu vè di sản, lịch sử làng lụa Mã Châu và thông tin liên hệ Zalo 0974678820.
-- **RAG Engine (`api/rag.js`)**: Khi khách hàng đặt câu hỏi, hệ thống sẽ lọc và trích xuất đúng các tài liệu liên quan nhất trong chưa đầy 2 mili-giây.
-- **Serverless API (`api/chat.js`)**: Kết hợp ngữ cảnh đã trích xuất (RAG Context) cùng Google Gemini 1.5 Flash để sinh ra câu trả lời chuẩn xác 100%, không bịa đặt thông tin, giữ bí mật tuyệt đối API Key của bạn.
+## 4. Giải thích các cải tiến Routing Vercel vừa cập nhật
+- **Khắc phục triệt để lỗi 404 NOT_FOUND trên các trang con**: Trước đây tính năng `cleanUrls: true` trong `vercel.json` tự động cắt đuôi `.html` và chuyển hướng 308 sai thư mục `Frontend/`. Hiện tại hệ thống định tuyến đã được cấu hình toàn diện để hỗ trợ cả 2 định dạng:
+  - Có đuôi: `/pages/products.html`, `/pages/story.html`, `/pages/product-detail.html`, `/pages/payment.html`.
+  - Không đuôi: `/pages/products`, `/pages/story`, `/pages/product-detail`, `/pages/payment`, `/products`, `/story`.
+- **Độc lập hóa API Route**: Không để các rule rewrite tĩnh can thiệp vào `/api/chat`, giúp Serverless Function kết nối Gemini AI tức thì với độ trễ thấp nhất.

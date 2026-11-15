@@ -1,6 +1,6 @@
 /**
  * CHAT.JS - VERCEL SERVERLESS FUNCTION
- * Endpoint: POST /api/chat
+ * Endpoint: POST /api/chat | GET /api/chat
  * Tích hợp kiến trúc RAG (Retrieval-Augmented Generation) cùng Google Gemini API
  */
 
@@ -30,11 +30,45 @@ QUY TẮC CỐT LÕI (GROUNDING RULES):
 export default async function handler(req, res) {
   // Thiết lập CORS headers
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
   if (req.method === "OPTIONS") {
     return res.status(200).end();
+  }
+
+  // 1. ENDPOINT GET: KIỂM TRA TRẠNG THÁI & CHẨN ĐOÁN API KEY TRỰC TIẾP TRÊN TRÌNH DUYỆT
+  if (req.method === "GET") {
+    const rawKey =
+      process.env.GEMINI_API_KEY ||
+      process.env.GOOGLE_API_KEY ||
+      process.env.GEMINI_KEY ||
+      process.env.API_KEY ||
+      "";
+    const apiKey = rawKey.trim();
+
+    const activeVarName = process.env.GEMINI_API_KEY
+      ? "GEMINI_API_KEY"
+      : process.env.GOOGLE_API_KEY
+      ? "GOOGLE_API_KEY"
+      : process.env.GEMINI_KEY
+      ? "GEMINI_KEY"
+      : process.env.API_KEY
+      ? "API_KEY"
+      : "CHƯA_THIẾT_LẬP";
+
+    return res.status(200).json({
+      status: "online",
+      service: "Trợ lý Lụa Xứ Quảng - Vè Dệt Vân Khăn",
+      hasApiKey: !!apiKey,
+      detectedVariable: activeVarName,
+      keyMasked: apiKey
+        ? `${apiKey.substring(0, 4)}...${apiKey.substring(apiKey.length - 4)}`
+        : null,
+      message: apiKey
+        ? "API Key đã được Vercel nhận diện thành công! Hệ thống sẵn sàng phục vụ."
+        : "Chưa nhận diện được API Key trên Vercel. Bạn hãy vào Vercel Dashboard > Settings > Environment Variables, thêm biến GEMINI_API_KEY rồi nhấn Redeploy.",
+    });
   }
 
   if (req.method !== "POST") {
@@ -42,44 +76,55 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { message, history } = req.body || {};
+    // 2. PARSE BODY LINH HOẠT
+    let body = req.body;
+    if (typeof body === "string") {
+      try {
+        body = JSON.parse(body);
+      } catch (e) {
+        body = {};
+      }
+    }
 
+    const message = body?.message;
     if (!message || typeof message !== "string" || !message.trim()) {
       return res.status(400).json({ error: "Vui lòng nhập nội dung tin nhắn" });
     }
 
     const userQuery = message.trim();
 
-    // 1. BƯỚC RAG: Trích xuất tri thức liên quan từ Knowledge Base
+    // 3. BƯỚC RAG: Trích xuất tri thức liên quan từ Knowledge Base
     const relevantDocs = retrieveRelevantKnowledge(userQuery, 3);
     const ragContext = buildPromptContext(relevantDocs);
 
-    // 2. KIỂM TRA API KEY
-    const apiKey = process.env.GEMINI_API_KEY;
+    // 4. KIỂM TRA API KEY (HỖ TRỢ ĐA DẠNG TÊN BIẾN MÔI TRƯỜNG)
+    const rawKey =
+      process.env.GEMINI_API_KEY ||
+      process.env.GOOGLE_API_KEY ||
+      process.env.GEMINI_KEY ||
+      process.env.API_KEY ||
+      "";
+    const apiKey = rawKey.trim();
 
     if (!apiKey) {
       // Fallback thông minh khi chưa gắn API Key trên Vercel:
-      // Tổng hợp câu trả lời chuẩn xác ngay từ RAG context mà không làm sập web!
       const fallbackReply = generateOfflineRAGReply(userQuery, relevantDocs);
       return res.status(200).json({
         reply: fallbackReply,
         isDemo: true,
         sources: relevantDocs.map((d) => d.title),
+        note: "Đang trả lời bằng cơ chế RAG Offline (Chưa cấu hình GEMINI_API_KEY trên Vercel)",
       });
     }
 
-    // 3. KHỞI TẠO GOOGLE GEMINI VỚI RAG CONTEXT
+    // 5. GỌI GOOGLE GEMINI VỚI CƠ CHẾ DỰ PHÒNG MODEL (FALLBACK MODELS)
     const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-flash",
-      systemInstruction: SYSTEM_INSTRUCTION,
-      generationConfig: {
-        temperature: 0.4, // Nhiệt độ thấp để bot bám sát dữ liệu thật, không sáng tạo lung tung
-        maxOutputTokens: 600,
-      },
-    });
+    const candidateModels = [
+      "gemini-1.5-flash",
+      "gemini-2.0-flash",
+      "gemini-1.5-pro",
+    ];
 
-    // 4. GHÉP PROMPT: Câu hỏi của khách + Dữ liệu RAG tìm được
     const augmentedPrompt = `
 DỮ LIỆU TỪ CƠ SỞ TRI THỨC VÈ DỆT VÂN KHĂN (RAG CONTEXT):
 ========================================
@@ -91,26 +136,64 @@ CÂU HỎI CỦA KHÁCH HÀNG: "${userQuery}"
 Hãy đóng vai Trợ lý Lụa Xứ Quảng, dựa vào DỮ LIỆU TRÊN để trả lời một cách tự nhiên, lịch thiệp và hữu ích nhất:
 `;
 
-    const result = await model.generateContent(augmentedPrompt);
-    const response = await result.response;
-    const botText = response.text();
+    let botText = "";
+    let lastError = null;
+
+    for (const modelName of candidateModels) {
+      try {
+        const model = genAI.getGenerativeModel({
+          model: modelName,
+          systemInstruction: SYSTEM_INSTRUCTION,
+          generationConfig: {
+            temperature: 0.4,
+            maxOutputTokens: 600,
+          },
+        });
+
+        const result = await model.generateContent(augmentedPrompt);
+        const response = await result.response;
+        botText = response.text();
+        if (botText) break; // Thành công
+      } catch (err) {
+        lastError = err;
+        console.warn(`Model ${modelName} thất bại, thử model tiếp theo... Lỗi:`, err.message);
+      }
+    }
+
+    if (botText) {
+      return res.status(200).json({
+        reply: botText,
+        sources: relevantDocs.map((d) => d.title),
+      });
+    }
+
+    // Nếu tất cả các model đều gặp lỗi (ví dụ API Key sai, hết quota, hoặc chặn vùng):
+    // Thay vì trả về 500 làm sập giao diện, phản hồi bằng tri thức RAG chính xác và đính kèm cảnh báo!
+    console.error("Tất cả model Gemini đều thất bại:", lastError);
+    const fallbackReply = generateOfflineRAGReply(userQuery, relevantDocs);
 
     return res.status(200).json({
-      reply: botText,
+      reply: fallbackReply,
+      isDemo: true,
       sources: relevantDocs.map((d) => d.title),
+      warning: lastError ? lastError.message : "Không thể kết nối Gemini API lúc này",
     });
   } catch (error) {
-    console.error("Lỗi xử lý Chatbot RAG:", error);
-    return res.status(500).json({
-      error: "Không thể kết nối trợ lý AI lúc này.",
-      details: error.message,
+    console.error("Lỗi tổng quát Chatbot RAG:", error);
+    const relevantDocs = retrieveRelevantKnowledge(req.body?.message || "", 2);
+    const fallbackReply = generateOfflineRAGReply(req.body?.message || "", relevantDocs);
+
+    return res.status(200).json({
+      reply: fallbackReply,
+      isDemo: true,
+      error: error.message,
       fallbackHelp: "Quý khách có thể liên hệ trực tiếp Hotline/Zalo: 0974678820 để được hỗ trợ ngay!",
     });
   }
 }
 
 /**
- * Phản hồi dự phòng tự động trích xuất từ RAG khi chưa thiết lập GEMINI_API_KEY
+ * Phản hồi dự phòng tự động trích xuất từ RAG khi chưa có API Key hoặc Gemini bận
  */
 function generateOfflineRAGReply(query, docs) {
   if (!docs || docs.length === 0) {

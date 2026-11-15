@@ -181,18 +181,21 @@ export function initChatbot() {
         body: JSON.stringify({ message: rawText }),
       });
 
-      if (res.ok) {
-        const data = await res.json();
-        typing.remove();
-        if (data && data.reply) {
-          const formattedReply = formatMarkdownToHtml(data.reply);
-          addBotMessage(formattedReply);
-          return;
+      const data = await res.json().catch(() => null);
+      typing.remove();
+
+      if (data && data.reply) {
+        if (data.warning || data.note) {
+          console.info("[Chatbot RAG Info]:", data.warning || data.note);
         }
+        const formattedReply = formatMarkdownToHtml(data.reply);
+        addBotMessage(formattedReply);
+        return;
       }
-      throw new Error("Không nhận được phản hồi hợp lệ từ API");
+
+      throw new Error((data && data.error) || "Không nhận được phản hồi từ AI");
     } catch (err) {
-      // Fallback: nếu đang chạy tĩnh offline / chưa deploy Vercel, dùng bộ máy tri thức cục bộ
+      console.warn("Đang kích hoạt bộ máy tri thức dự phòng cục bộ:", err);
       typing.remove();
       const localReply = generateBotResponse(rawText.toLowerCase());
       addBotMessage(localReply);
