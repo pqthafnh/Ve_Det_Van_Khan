@@ -37,16 +37,16 @@ export default async function handler(req, res) {
     return res.status(200).end();
   }
 
-  // 1. ENDPOINT GET: KIỂM TRA TRẠNG THÁI & CHẨN ĐOÁN API KEY TRỰC TIẾP TRÊN TRÌNH DUYỆT
-  if (req.method === "GET") {
-    const rawKey =
-      process.env.GEMINI_API_KEY ||
-      process.env.GOOGLE_API_KEY ||
-      process.env.GEMINI_KEY ||
-      process.env.API_KEY ||
-      "";
-    const apiKey = rawKey.trim();
+  const rawKey =
+    process.env.GEMINI_API_KEY ||
+    process.env.GOOGLE_API_KEY ||
+    process.env.GEMINI_KEY ||
+    process.env.API_KEY ||
+    "";
+  const apiKey = rawKey.trim();
 
+  // 1. ENDPOINT GET: KIỂM TRA TRẠNG THÁI & CHẨN ĐOÁN TRỰC TIẾP VỚI GOOGLE GEMINI
+  if (req.method === "GET") {
     const activeVarName = process.env.GEMINI_API_KEY
       ? "GEMINI_API_KEY"
       : process.env.GOOGLE_API_KEY
@@ -57,6 +57,34 @@ export default async function handler(req, res) {
       ? "API_KEY"
       : "CHƯA_THIẾT_LẬP";
 
+    let googleDiagnosis = null;
+    if (apiKey) {
+      try {
+        const googleRes = await fetch(
+          `https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`
+        );
+        const googleData = await googleRes.json();
+        if (googleRes.ok && googleData.models) {
+          const availableModels = googleData.models
+            .filter((m) => m.supportedGenerationMethods?.includes("generateContent"))
+            .map((m) => m.name.replace("models/", ""));
+          googleDiagnosis = {
+            status: "connected",
+            count: availableModels.length,
+            supportedModels: availableModels.slice(0, 8),
+          };
+        } else {
+          googleDiagnosis = {
+            status: "error",
+            httpCode: googleRes.status,
+            error: googleData.error || googleData,
+          };
+        }
+      } catch (err) {
+        googleDiagnosis = { status: "fetch_failed", error: err.message };
+      }
+    }
+
     return res.status(200).json({
       status: "online",
       service: "Trợ lý Lụa Xứ Quảng - Vè Dệt Vân Khăn",
@@ -65,6 +93,7 @@ export default async function handler(req, res) {
       keyMasked: apiKey
         ? `${apiKey.substring(0, 4)}...${apiKey.substring(apiKey.length - 4)}`
         : null,
+      googleDiagnosis,
       message: apiKey
         ? "API Key đã được Vercel nhận diện thành công! Hệ thống sẵn sàng phục vụ."
         : "Chưa nhận diện được API Key trên Vercel. Bạn hãy vào Vercel Dashboard > Settings > Environment Variables, thêm biến GEMINI_API_KEY rồi nhấn Redeploy.",
@@ -97,17 +126,8 @@ export default async function handler(req, res) {
     const relevantDocs = retrieveRelevantKnowledge(userQuery, 3);
     const ragContext = buildPromptContext(relevantDocs);
 
-    // 4. KIỂM TRA API KEY (HỖ TRỢ ĐA DẠNG TÊN BIẾN MÔI TRƯỜNG)
-    const rawKey =
-      process.env.GEMINI_API_KEY ||
-      process.env.GOOGLE_API_KEY ||
-      process.env.GEMINI_KEY ||
-      process.env.API_KEY ||
-      "";
-    const apiKey = rawKey.trim();
-
+    // 4. KIỂM TRA NẾU CHƯA CÓ API KEY
     if (!apiKey) {
-      // Fallback thông minh khi chưa gắn API Key trên Vercel:
       const fallbackReply = generateOfflineRAGReply(userQuery, relevantDocs);
       return res.status(200).json({
         reply: fallbackReply,
@@ -116,14 +136,6 @@ export default async function handler(req, res) {
         note: "Đang trả lời bằng cơ chế RAG Offline (Chưa cấu hình GEMINI_API_KEY trên Vercel)",
       });
     }
-
-    // 5. GỌI GOOGLE GEMINI VỚI CƠ CHẾ DỰ PHÒNG MODEL (FALLBACK MODELS)
-    const genAI = new GoogleGenerativeAI(apiKey);
-    const candidateModels = [
-      "gemini-1.5-flash",
-      "gemini-2.0-flash",
-      "gemini-1.5-pro",
-    ];
 
     const augmentedPrompt = `
 DỮ LIỆU TỪ CƠ SỞ TRI THỨC VÈ DỆT VÂN KHĂN (RAG CONTEXT):
@@ -136,47 +148,90 @@ CÂU HỎI CỦA KHÁCH HÀNG: "${userQuery}"
 Hãy đóng vai Trợ lý Lụa Xứ Quảng, dựa vào DỮ LIỆU TRÊN để trả lời một cách tự nhiên, lịch thiệp và hữu ích nhất:
 `;
 
-    let botText = "";
-    let lastError = null;
+    // 5. THỬ GỌI GOOGLE GEMINI BẰNG DIRECT REST API TRƯỚC (NHANH & ỔN ĐỊNH NHẤT TRÊN VERCEL SERVERLESS)
+    const candidateModels = [
+      "gemini-1.5-flash-latest",
+      "gemini-1.5-flash",
+      "gemini-2.0-flash",
+      "gemini-2.0-flash-exp",
+      "gemini-1.5-flash-8b",
+      "gemini-1.5-pro",
+    ];
+
+    const modelErrors = [];
 
     for (const modelName of candidateModels) {
       try {
-        const model = genAI.getGenerativeModel({
-          model: modelName,
-          systemInstruction: SYSTEM_INSTRUCTION,
-          generationConfig: {
-            temperature: 0.4,
-            maxOutputTokens: 600,
-          },
+        const restUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
+        const restResponse = await fetch(restUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            contents: [
+              {
+                role: "user",
+                parts: [{ text: augmentedPrompt }],
+              },
+            ],
+            systemInstruction: {
+              parts: [{ text: SYSTEM_INSTRUCTION }],
+            },
+            generationConfig: {
+              temperature: 0.4,
+              maxOutputTokens: 600,
+            },
+          }),
         });
 
-        const result = await model.generateContent(augmentedPrompt);
-        const response = await result.response;
-        botText = response.text();
-        if (botText) break; // Thành công
+        const restData = await restResponse.json();
+
+        if (restResponse.ok && restData.candidates && restData.candidates[0]?.content?.parts?.[0]?.text) {
+          const botText = restData.candidates[0].content.parts[0].text;
+          return res.status(200).json({
+            reply: botText,
+            modelUsed: modelName,
+            sources: relevantDocs.map((d) => d.title),
+          });
+        } else {
+          const errDetail = restData.error?.message || JSON.stringify(restData);
+          modelErrors.push({ model: modelName, error: errDetail });
+        }
       } catch (err) {
-        lastError = err;
-        console.warn(`Model ${modelName} thất bại, thử model tiếp theo... Lỗi:`, err.message);
+        modelErrors.push({ model: modelName, error: err.message });
       }
     }
 
-    if (botText) {
-      return res.status(200).json({
-        reply: botText,
-        sources: relevantDocs.map((d) => d.title),
+    // 6. THỬ BẰNG GOOGLE GENERATIVE AI SDK NẾU DIRECT REST CHƯA THÀNH CÔNG
+    try {
+      const genAI = new GoogleGenerativeAI(apiKey);
+      const model = genAI.getGenerativeModel({
+        model: "gemini-1.5-flash",
+        systemInstruction: SYSTEM_INSTRUCTION,
       });
+      const result = await model.generateContent(augmentedPrompt);
+      const response = await result.response;
+      const botText = response.text();
+      if (botText) {
+        return res.status(200).json({
+          reply: botText,
+          modelUsed: "gemini-1.5-flash (sdk)",
+          sources: relevantDocs.map((d) => d.title),
+        });
+      }
+    } catch (sdkErr) {
+      modelErrors.push({ model: "sdk-fallback", error: sdkErr.message });
     }
 
-    // Nếu tất cả các model đều gặp lỗi (ví dụ API Key sai, hết quota, hoặc chặn vùng):
-    // Thay vì trả về 500 làm sập giao diện, phản hồi bằng tri thức RAG chính xác và đính kèm cảnh báo!
-    console.error("Tất cả model Gemini đều thất bại:", lastError);
+    // 7. NẾU TẤT CẢ MODEL ĐỀU BỊ LỖI (VÍ DỤ QUOTA HẾT, KEY BỊ CHẶN HOẶC MODEL KHÔNG TỒN TẠI):
+    console.error("Tất cả candidate models thất bại:", modelErrors);
     const fallbackReply = generateOfflineRAGReply(userQuery, relevantDocs);
 
     return res.status(200).json({
       reply: fallbackReply,
       isDemo: true,
       sources: relevantDocs.map((d) => d.title),
-      warning: lastError ? lastError.message : "Không thể kết nối Gemini API lúc này",
+      modelErrors,
+      warning: modelErrors[0]?.error || "Không thể kết nối Gemini API lúc này",
     });
   } catch (error) {
     console.error("Lỗi tổng quát Chatbot RAG:", error);
