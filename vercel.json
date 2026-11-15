@@ -3,6 +3,14 @@
   "cleanUrls": false,
   "rewrites": [
     {
+      "source": "/",
+      "destination": "/Frontend/index.html"
+    },
+    {
+      "source": "/index.html",
+      "destination": "/Frontend/index.html"
+    },
+    {
       "source": "/pages/products",
       "destination": "/Frontend/pages/products.html"
     },
